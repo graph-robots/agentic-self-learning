@@ -1,0 +1,5 @@
+# Numbers only: positions, orientations, distances; no predicates.
+base: ../config.yaml
+name: cube_in_tray_state
+feedback:
+  form: [state]

@@ -1,0 +1,114 @@
+/* Finding 2 (Skills): the nine dot fields, their key, and the Kimi K3 note. */
+[data-section="f2"] [data-cls="task"] { --c: var(--o3); }
+[data-section="f2"] [data-cls="humlib"] { --c: var(--o2); }
+[data-section="f2"] [data-cls="lib"] { --c: var(--o1); }
+[data-section="f2"] [data-cls="new"] { --c: var(--gen); }
+
+/* ---- the key and the takeaway, beside the fields on desktop and above them on phones */
+[data-section="f2"] .f2-body { display: grid; grid-template-columns: 224px minmax(0, 1fr); gap: 22px; align-items: start; }
+[data-section="f2"] .f2-side { display: grid; gap: 18px; align-content: start; min-width: 0; }
+[data-section="f2"] .f2-side .readout { font: 600 14px/1.5 var(--sans); padding: 2px 0 2px 14px; border-left: 2px solid var(--ink); text-wrap: pretty; }
+[data-section="f2"] .f2-side .readout b { font-weight: 800; white-space: nowrap; }
+[data-section="f2"] .f2-key { display: grid; gap: 14px; padding: 16px; border-radius: var(--r-panel); border: 1px solid var(--line); font-size: 13px; line-height: 1.4; color: var(--ink); }
+[data-section="f2"] .f2-key p { margin: 0; }
+[data-section="f2"] .f2-key-fence { display: flex; gap: 8px; align-items: flex-start; }
+[data-section="f2"] .f2-key-fence svg { margin-top: 2px; }
+[data-section="f2"] .f2-key-sub { font: 700 11px/1.3 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px !important; }
+[data-section="f2"] .f2-key-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+[data-section="f2"] .f2-key-list li { display: flex; gap: 8px; align-items: baseline; }
+[data-section="f2"] .f2-key-scale { display: grid; gap: 6px; padding-top: 12px; border-top: 1px dashed var(--line); color: var(--muted); }
+[data-section="f2"] .f2-key-scale b { color: var(--ink); font-weight: 700; }
+[data-section="f2"] .f2-key-scale .bignum-s { font-size: 19px; margin-right: 2px; }
+[data-section="f2"] i.f2-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); flex: none; transform: translateY(1px); }
+[data-section="f2"] svg.f2-ring { width: 14px; height: 14px; flex: none; overflow: visible; }
+[data-section="f2"] svg.f2-ring circle { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 3 2.2; }
+[data-section="f2"] svg.f2-ring.hot circle { stroke: var(--cause); stroke-width: 2; stroke-dasharray: none; }
+[data-section="f2"] .f2-key-short { display: none; }
+@media (max-width: 860px) {
+  [data-section="f2"] .f2-body { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  [data-section="f2"] .f2-key { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 18px; }
+  [data-section="f2"] .f2-key > .k, [data-section="f2"] .f2-key-fence, [data-section="f2"] .f2-key-scale { grid-column: 1 / -1; }
+}
+/* phones: the four swatches as a 2×2 grid and one line, so the first field shows on the first screen of the stage */
+@media (max-width: 600px) {
+  [data-section="f2"] .f2-side { gap: 14px; }
+  [data-section="f2"] .f2-key { padding: 12px; gap: 8px 12px; font-size: 12.5px; }
+  [data-section="f2"] .f2-key-group, [data-section="f2"] .f2-key-list { display: contents; }
+  [data-section="f2"] .f2-key > .k, [data-section="f2"] .f2-key-fence, [data-section="f2"] .f2-key-sub, [data-section="f2"] .f2-key .f2-key-scale { display: none; }
+  [data-section="f2"] .f2-key-short { display: flex; gap: 8px; align-items: center; grid-column: 1 / -1; color: var(--muted); padding-top: 8px; border-top: 1px dashed var(--line); }
+  [data-section="f2"] .f2-key-short b { color: var(--ink); font-weight: 700; }
+  [data-section="f2"] .f2-side .readout { font-size: 13.5px; padding-left: 12px; }
+}
+
+/* ---- the fields */
+[data-section="f2"] .f2-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; grid-auto-rows: 1fr; gap: 10px; }
+/* the order cue runs down the grid's right edge, so the growing crescents read as a trend without the key */
+[data-section="f2"] .f2-order {
+  grid-column: 4; grid-row: 1 / span 3; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 10px 0; font: 600 11.5px/1 var(--sans); color: var(--muted);
+}
+[data-section="f2"] .f2-order span { writing-mode: vertical-rl; white-space: nowrap; }
+[data-section="f2"] .f2-order i { flex: 1; min-height: 24px; width: 1px; background: var(--faint); position: relative; }
+[data-section="f2"] .f2-order i::after {
+  content: ""; position: absolute; left: 50%; bottom: -2px; transform: translateX(-50%);
+  border: 4px solid transparent; border-top: 6px solid var(--faint); border-bottom: 0;
+}
+[data-section="f2"] .f2-field {
+  margin: 0; padding: 12px 10px 10px; border-radius: var(--r-panel); background: var(--stage-inset); border: 1px solid transparent;
+  display: grid; justify-items: center; align-content: start; gap: 8px; min-width: 0; transition: border-color var(--t-fog);
+}
+[data-section="f2"] .f2-field.human { border: 1px dashed var(--line); }
+[data-section="f2"] .f2-field.hot { border-color: var(--cause); }
+[data-section="f2"] .f2-field svg { display: block; overflow: visible; max-width: 100%; height: auto; cursor: help; }
+[data-section="f2"] .f2-field figcaption { display: grid; justify-items: center; gap: 2px; color: var(--ink); text-align: center; }
+[data-section="f2"] .f2-cap-main { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 0 10px; }
+[data-section="f2"] .f2-field figcaption b { font: 700 14px/1.3 var(--sans); }
+[data-section="f2"] .f2-field .bignum-s { font-size: 22px; white-space: nowrap; }
+[data-section="f2"] .f2-field .f2-from { color: var(--muted); }
+[data-section="f2"] .f2-unit { font: 500 12.5px/1 var(--sans); color: var(--muted); margin-left: 6px; white-space: nowrap; }
+[data-section="f2"] .f2-note { font-size: 12.5px; line-height: 1.35; color: var(--muted); }
+[data-section="f2"] .f2-see { font: 600 12.5px/1.3 var(--sans); color: var(--cause); text-decoration: none; }
+[data-section="f2"] .f2-see:hover { text-decoration: underline; }
+[data-section="f2"] .f2-see .short { display: none; }
+
+[data-section="f2"] .fence { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 4 3; transition: opacity var(--t-fog); }
+[data-section="f2"] circle.dot { fill: var(--c); transition: opacity var(--t-fog); }
+[data-section="f2"] .f2-band { fill: none; stroke: var(--cause); stroke-width: 2.5; transition: opacity var(--t-fog), stroke-width var(--t-fog); }
+[data-section="f2"] .f2-field.hot .f2-band { stroke-width: 3.5; }
+/* --o1 is under 3:1 on the stage, so the dots Kimi K3 is called out for get a --cause outline; the fill still matches the key */
+[data-section="f2"] .f2-field.kimi circle.dot[data-cls="lib"], [data-section="f2"] .f2-pair.kimi circle.dot[data-cls="lib"] { stroke: var(--cause); stroke-width: 1; }
+[data-section="f2"] #f2-stage[data-own="true"] .f2-fields circle.dot:not([data-cls="new"]) { opacity: 0.12; }
+[data-section="f2"] #f2-stage[data-own="true"] .f2-fields .fence { opacity: 0.3; }
+[data-section="f2"] #f2-stage[data-own="true"] .f2-fields .f2-band { opacity: 0.12; }
+[data-section="f2"] .stage-foot { display: grid; gap: 6px; }
+[data-section="f2"] .drawer .paperfig { max-width: 560px; }
+
+/* ---- the Kimi K3 note */
+[data-section="f2"] .f2-callout {
+  display: grid; gap: 12px; padding: 18px 20px; border: 1px solid var(--line); border-left: 3px solid var(--cause);
+  border-radius: var(--r-panel); background: var(--card); transition: background var(--t-fog); outline: none;
+}
+[data-section="f2"] .f2-callout.hot { background: var(--cause-wash); }
+[data-section="f2"] .f2-callout .eyebrow { display: flex; align-items: center; gap: 8px; color: var(--cause); }
+[data-section="f2"] .f2-callout-text { font: 600 16px/1.55 var(--sans); color: var(--ink); text-wrap: pretty; }
+[data-section="f2"] .f2-pairs { min-width: 0; }
+[data-section="f2"] .f2-pairs svg { display: block; overflow: visible; }
+[data-section="f2"] .f2-ph { font: 600 11.5px var(--sans); fill: var(--muted); }
+[data-section="f2"] .f2-pl { font: 600 12.5px var(--sans); fill: var(--ink); }
+[data-section="f2"] .f2-pair.kimi .f2-pl { font-weight: 800; fill: var(--cause); }
+[data-section="f2"] .f2-pair-hl { fill: var(--cause-wash); }
+
+@media (max-width: 600px) {
+  [data-section="f2"] .f2-fields { grid-template-columns: repeat(2, minmax(0, 1fr)) auto; grid-template-rows: auto; gap: 8px; }
+  [data-section="f2"] .f2-order { grid-column: 3; grid-row: 2 / span 4; }
+  [data-section="f2"] .f2-field { padding: 10px 6px 10px; gap: 6px; }
+  [data-section="f2"] .f2-field.human { grid-column: 1 / -1; grid-template-columns: auto minmax(0, 1fr); align-items: center; justify-items: start; column-gap: 14px; padding-inline: 10px; }
+  [data-section="f2"] .f2-cap-main { flex-direction: column; align-items: center; }
+  [data-section="f2"] .f2-field.human figcaption, [data-section="f2"] .f2-field.human .f2-cap-main { justify-items: start; align-items: flex-start; text-align: left; }
+  [data-section="f2"] .f2-field figcaption b { font-size: 13px; }
+  [data-section="f2"] .f2-field .bignum-s { font-size: 19px; }
+  /* one caption line, so every row of the matrix keeps the same height */
+  [data-section="f2"] .f2-see .long { display: none; }
+  [data-section="f2"] .f2-see .short { display: inline; }
+  [data-section="f2"] .f2-callout { padding: 14px 14px; }
+}

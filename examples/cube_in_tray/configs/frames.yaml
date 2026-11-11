@@ -1,0 +1,5 @@
+# Space as positions and orientations (object and hand frames), without the declared parts.
+base: ../config.yaml
+name: cube_in_tray_frames
+feedback:
+  spatial: frames

@@ -1,0 +1,107 @@
+{
+  "version": 3,
+  "meta": {
+    "name": "red_cube_to_tray",
+    "description": "Find the red cube and the tray by name, grasp the cube from above along its box axes, lift it only as high as the tray walls need and check it rides with the hand, carry it over the tray, lower and release it near the tray floor, send the arm home so the robot is clear of the cube, then check it landed inside. A failed pick gets one retry; a failed place goes straight to the check, since the cube may already be in the tray and the step budget leaves no room for a second pick-and-place."
+  },
+  "nodes": {
+    "perceive": {"type": "subgraph", "ref": "perceive_sg"},
+    "pick": {"type": "subgraph", "ref": "pick_sg",
+             "inputs": {"cube": {"$ref": "perceive.cube"}, "tray": {"$ref": "perceive.tray"}}},
+    "pick_again": {"type": "subgraph", "ref": "pick_sg",
+                   "inputs": {"cube": {"$ref": "perceive.cube"}, "tray": {"$ref": "perceive.tray"}}},
+    "place": {"type": "subgraph", "ref": "place_sg",
+              "inputs": {"cube": {"$ref": "perceive.cube"}, "tray": {"$ref": "perceive.tray"}}},
+    "verify": {"type": "subgraph", "ref": "verify_sg",
+               "inputs": {"cube": {"$ref": "perceive.cube"}, "tray": {"$ref": "perceive.tray"}}},
+    "done": {"type": "end", "status": "success"},
+    "abort": {"type": "end", "status": "failure",
+              "recovery": [{"tool": "robot.open_gripper", "inputs": {}}]}
+  },
+  "edges": [["START", "perceive"]],
+  "conditional_edges": {
+    "perceive": {"router_field": "exit",
+                 "mapping": {"ok": "pick", "failed": "abort"}},
+    "pick": {"router_field": "exit",
+             "mapping": {"held": "place", "failed": "pick_again"}},
+    "pick_again": {"router_field": "exit",
+                   "mapping": {"held": "place", "failed": "abort"}},
+    "place": {"router_field": "exit",
+              "mapping": {"placed": "verify", "failed": "verify"}},
+    "verify": {"router_field": "exit",
+               "mapping": {"in_tray": "done", "failed": "abort"}}
+  },
+  "subgraphs": {
+    "perceive_sg": {
+      "skill": "generated",
+      "inputs": {},
+      "outputs": {"cube": {"$ref": "find.cube"}, "tray": {"$ref": "find.tray"}},
+      "nodes": {
+        "find": {"type": "script", "script": "scripts/perceive/find.py", "inputs": {}},
+        "ok": {"type": "noop"}
+      },
+      "edges": [["START", "find"], ["find", "ok"], ["ok", "END"]],
+      "conditional_edges": {},
+      "exit": {"router_field": null, "success_values": ["ok"]},
+      "on_error": "failed"
+    },
+    "pick_sg": {
+      "skill": "generated",
+      "inputs": {"cube": "str", "tray": "str"},
+      "outputs": {"grip": {"$ref": "close.position"}, "lifted": {"$ref": "lift.lifted_m"}},
+      "nodes": {
+        "reset": {"type": "script", "script": "scripts/pick/reset.py",
+                  "inputs": {"cube": {"$ref": "in.cube"}}},
+        "approach": {"type": "script", "script": "scripts/pick/approach.py",
+                     "inputs": {"cube": {"$ref": "in.cube"}}},
+        "descend": {"type": "script", "script": "scripts/pick/descend.py",
+                    "inputs": {"cube": {"$ref": "in.cube"}, "grasp": {"$ref": "approach.grasp"}}},
+        "close": {"type": "script", "script": "scripts/pick/close.py",
+                  "inputs": {"width": {"$ref": "approach.width"}}},
+        "lift": {"type": "script", "script": "scripts/pick/lift.py",
+                 "inputs": {"cube": {"$ref": "in.cube"}, "tray": {"$ref": "in.tray"}}},
+        "held": {"type": "noop"}
+      },
+      "edges": [["START", "reset"], ["reset", "approach"], ["approach", "descend"],
+                ["descend", "close"], ["close", "lift"], ["lift", "held"], ["held", "END"]],
+      "conditional_edges": {},
+      "exit": {"router_field": null, "success_values": ["held"]},
+      "on_error": "failed"
+    },
+    "place_sg": {
+      "skill": "generated",
+      "inputs": {"cube": "str", "tray": "str"},
+      "outputs": {"cube_z": {"$ref": "release.cube_z"}},
+      "nodes": {
+        "carry": {"type": "script", "script": "scripts/place/carry.py",
+                  "inputs": {"cube": {"$ref": "in.cube"}, "tray": {"$ref": "in.tray"}}},
+        "lower": {"type": "script", "script": "scripts/place/lower.py",
+                  "inputs": {"cube": {"$ref": "in.cube"}, "tray": {"$ref": "in.tray"}}},
+        "release": {"type": "script", "script": "scripts/place/release.py",
+                    "inputs": {"cube": {"$ref": "in.cube"}}},
+        "placed": {"type": "noop"}
+      },
+      "edges": [["START", "carry"], ["carry", "lower"], ["lower", "release"],
+                ["release", "placed"], ["placed", "END"]],
+      "conditional_edges": {},
+      "exit": {"router_field": null, "success_values": ["placed"]},
+      "on_error": "failed"
+    },
+    "verify_sg": {
+      "skill": "generated",
+      "inputs": {"cube": "str", "tray": "str"},
+      "outputs": {"inside": {"$ref": "check.inside"}},
+      "nodes": {
+        "clear": {"type": "script", "script": "scripts/verify/clear.py",
+                  "inputs": {"cube": {"$ref": "in.cube"}}},
+        "check": {"type": "script", "script": "scripts/verify/check.py",
+                  "inputs": {"cube": {"$ref": "in.cube"}, "tray": {"$ref": "in.tray"}}},
+        "in_tray": {"type": "noop"}
+      },
+      "edges": [["START", "clear"], ["clear", "check"], ["check", "in_tray"], ["in_tray", "END"]],
+      "conditional_edges": {},
+      "exit": {"router_field": null, "success_values": ["in_tray"]},
+      "on_error": "failed"
+    }
+  }
+}

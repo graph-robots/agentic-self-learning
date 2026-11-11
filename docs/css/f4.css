@@ -1,0 +1,146 @@
+/* Finding 4: the side view written four ways, its report, and the study's dot table. */
+/* the lens keys wear the dot table's ramp: outcome is the baseline, then world → frames → parts */
+[data-section="f4"] .lens [data-key="outcome"] .key { background: var(--ctx); }
+[data-section="f4"] .lens [data-key="world"] .key { background: var(--o1); }
+[data-section="f4"] .lens [data-key="frames"] .key { background: var(--o2); }
+[data-section="f4"] .lens [data-key="parts"] .key { background: var(--o3); }
+[data-section="f4"] .stage-nums { gap: 6px 26px; }
+[data-section="f4"] .stage-nums .ladder { flex-wrap: nowrap; }
+[data-section="f4"] .stage-nums .ladder .numlabel { flex-basis: 100%; }
+/* "+ Part annotations" fits a phone's 2×2 switch only as "+ Parts" (the button keeps the full name for readers) */
+[data-section="f4"] .lens .short { display: none; }
+
+/* ---- the side view */
+[data-section="f4"] .sideview { margin: 0; display: grid; gap: 10px; min-width: 0; }
+[data-section="f4"] .scene-box { position: relative; min-width: 0; }
+[data-section="f4"] svg.scene { display: block; width: 100%; overflow: visible; }
+[data-section="f4"] .scene .board { stroke: var(--muted); stroke-width: 2; }
+[data-section="f4"] .scene .board-face, [data-section="f4"] .scene .table-face { fill: url(#hatch-ctx); }
+[data-section="f4"] .scene .table { stroke: var(--muted); stroke-width: 1.5; }
+[data-section="f4"] .scene .shank { fill: var(--muted); }
+[data-section="f4"] .scene .wrench { fill: var(--stage-inset); stroke: var(--ink); stroke-width: 1.3; stroke-linejoin: round; transition: stroke var(--t-fog), fill var(--t-fog); }
+[data-section="f4"] .scene .ring { fill: none; stroke: var(--ink); stroke-width: 2.4; transition: stroke var(--t-fog); }
+[data-section="f4"] .scene[data-lens="outcome"] .wrench { stroke: var(--ctx); fill: none; }
+[data-section="f4"] .scene[data-lens="outcome"] .ring { stroke: var(--ctx); }
+[data-section="f4"] .scene[data-lens="outcome"] .table { stroke: var(--ctx); }
+
+/* the goal, the same under every format: the ring should be around the shank */
+[data-section="f4"] .scene .goal-band { fill: var(--ok-band); }
+/* annotations: each shown under the format that first states it (data-show) */
+[data-section="f4"] .scene .ann[data-fog] { display: none; }
+[data-section="f4"] .scene .ann:focus { outline: none; }
+[data-section="f4"] .scene .ann:focus-visible .lab-mono { fill: var(--cause); }
+[data-section="f4"] .scene .lab-mono { font: 500 11px var(--mono); fill: var(--ink); }
+[data-section="f4"] .scene .lab-note { font: 500 10.5px var(--sans); fill: var(--muted); }
+[data-section="f4"] .scene .lab, [data-section="f4"] .scene text.lab-note, [data-section="f4"] .scene text.lab-mono,
+[data-section="f4"] .scene .axis-name { paint-order: stroke; stroke: var(--card); stroke-width: 3px; stroke-linejoin: round; }
+[data-section="f4"] .scene .inset ~ text, [data-section="f4"] .scene .inset ~ .axis-halo { stroke: var(--stage-inset); }
+[data-section="f4"] .scene .leader { fill: none; stroke: var(--muted); stroke-width: 0.9; }
+[data-section="f4"] .scene .head-ink { fill: var(--ink); }
+[data-section="f4"] .scene .head-cause { fill: var(--cause); }
+[data-section="f4"] .scene .centre-dot { fill: var(--ink); stroke: var(--card); stroke-width: 1.5; }
+[data-section="f4"] .scene .origin-dot { fill: var(--card); stroke: var(--ink); stroke-width: 1.4; }
+[data-section="f4"] .scene .delta { stroke: var(--ink); stroke-width: 1.4; stroke-dasharray: 5 4; }
+[data-section="f4"] .scene .delta.cause { stroke: var(--cause); }
+[data-section="f4"] .scene .contact { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+[data-section="f4"] .scene .long-axis { stroke: var(--cause); stroke-width: 1.6; }
+[data-section="f4"] .scene .axis-ink { stroke: var(--ink); stroke-width: 1.4; }
+[data-section="f4"] .scene .axis-cause { stroke: var(--cause); stroke-width: 1.6; }
+[data-section="f4"] .scene .axis-halo { stroke: var(--card); stroke-width: 5; stroke-linecap: round; }
+[data-section="f4"] .scene .axis-name { font: 500 10.5px var(--mono); fill: var(--ink); }
+[data-section="f4"] .scene [data-key="hook_frame"] .axis-name { fill: var(--cause); }
+[data-section="f4"] .scene .axis-out { fill: var(--card); stroke: currentColor; stroke-width: 1.3; color: var(--ink); }
+[data-section="f4"] .scene .axis-dot { fill: var(--ink); }
+[data-section="f4"] .scene .axis-cross { stroke: var(--ink); stroke-width: 1.3; stroke-linecap: round; }
+[data-section="f4"] .scene [data-key="hook_frame"] .axis-out { stroke: var(--cause); }
+[data-section="f4"] .scene [data-key="hook_frame"] .axis-cross { stroke: var(--cause); }
+[data-section="f4"] .scene .part { fill: none; stroke: var(--cause); stroke-width: 2; }
+[data-section="f4"] .scene .dim-line, [data-section="f4"] .scene .dim-tick { stroke: var(--ink); stroke-width: 1; }
+[data-section="f4"] .scene .dim-ext { stroke: var(--muted); stroke-width: 0.8; stroke-dasharray: 2 2; }
+[data-section="f4"] .scene .inset { fill: var(--stage-inset); stroke: var(--line); }
+[data-section="f4"] .scene .shank.part-line { fill: var(--muted); stroke: var(--cause); stroke-width: 1.2; }
+[data-section="f4"] .scene .ring-edge { stroke: var(--cause); stroke-width: 3; stroke-linecap: round; }
+[data-section="f4"] .scene .normal { stroke: var(--cause); stroke-width: 1.4; }
+[data-section="f4"] .scene .angle { fill: var(--cause-wash); stroke: var(--cause); stroke-width: 1.2; }
+[data-section="f4"] .scene .badge { fill: var(--ink); }
+[data-section="f4"] .scene .badge-n { font: 600 11.5px var(--num); fill: var(--bg); }
+[data-section="f4"] .scene .geo-label { font: 500 11.5px var(--sans); fill: var(--muted); paint-order: stroke; stroke: var(--card); stroke-width: 3px; stroke-linejoin: round; }
+[data-section="f4"] .scene .inset ~ .geo-label { font-size: 11px; stroke: var(--stage-inset); }
+[data-section="f4"] .scene .ref-line { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 3; }
+/* a report line under the pointer lights its annotation, and the other way round */
+[data-section="f4"] .scene .ann.pulse .lab-mono { fill: var(--cause); }
+[data-section="f4"] .scene .ann.pulse .dim-line, [data-section="f4"] .scene .ann.pulse .dim-tick { stroke: var(--cause); stroke-width: 1.8; }
+[data-section="f4"] .scene .ann.pulse .part { stroke-width: 3; }
+[data-section="f4"] .scene .ann.pulse .leader { stroke: var(--cause); }
+[data-section="f4"] .scene .ann.pulse .centre-dot { fill: var(--cause); }
+[data-section="f4"] .scene .ann.pulse .delta { stroke-width: 2; }
+@keyframes f4-in { from { opacity: 0; } }
+@keyframes f4-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+[data-section="f4"] .scene .ann.enter { animation: f4-in var(--t-fog) var(--ease); }
+@media (prefers-reduced-motion: no-preference) {
+  [data-section="f4"] .scene .ann.enter .dim-line { stroke-dasharray: 1; animation: f4-draw 300ms var(--ease) both; }
+}
+
+/* the clip's last frame, cropped to the hook and the wrench: beside the drawing when there is room, in its empty top
+   corner when not (the drawing sets the width) */
+[data-section="f4"] .endframe-wrap { position: absolute; left: 0; top: 0; width: 112px; display: grid; gap: 3px; pointer-events: none; }
+[data-section="f4"] .sideview.side .endframe-wrap { left: auto; right: 0; width: 216px; }
+/* the frame is 640×480; the crop is its x 220–460, y 96–276 */
+[data-section="f4"] .endframe-crop { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 7px; border: 1px solid var(--line); background: var(--soft); }
+[data-section="f4"] .endframe-crop .endframe { position: absolute; left: -91.667%; top: -53.333%; width: 266.667%; max-width: none; height: auto; }
+[data-section="f4"] .endframe-cap { font: 500 10.5px/1.2 var(--sans); color: var(--muted); }
+/* pointers sit on the frame's pixels: the hook's lower half at (295, 135), the wrench's middle at (320, 215) */
+[data-section="f4"] .ptr { position: absolute; display: flex; align-items: center; transform: translate(-5px, -50%); }
+[data-section="f4"] .ptr-hook { left: 31.25%; top: 21.67%; }
+[data-section="f4"] .ptr-wrench { left: 41.67%; top: 66.11%; }
+[data-section="f4"] .ptr::before { content: ""; flex: none; width: 10px; height: 10px; box-sizing: border-box; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(14, 17, 22, 0.7); }
+[data-section="f4"] .ptr b { position: relative; margin-left: 9px; padding: 3px 6px; border-radius: 999px; font: 600 10.5px/1 var(--sans); color: #e9eef5; background: rgba(14, 17, 22, 0.84); white-space: nowrap; }
+[data-section="f4"] .ptr b::before { content: ""; position: absolute; right: 100%; top: 50%; width: 9px; border-top: 1.5px solid #fff; }
+[data-section="f4"] .scene-key { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: 12.5px; color: var(--muted); }
+[data-section="f4"] .scene-key[hidden], [data-section="f4"] .scene-key li[data-fog] { display: none; }
+[data-section="f4"] .scene-key li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; }
+[data-section="f4"] .scene-key .n { display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: var(--ink); color: var(--bg); font: 600 11px/1 var(--num); flex: none; }
+[data-section="f4"] .scene-key code { color: var(--ink); }
+
+/* ---- the report */
+[data-section="f4"] .read-col { display: grid; gap: 8px; align-content: start; min-width: 0; }
+[data-section="f4"] pre.report { max-height: 384px; }
+[data-section="f4"] pre.report .elide { display: block; padding: 3px 6px; margin: 4px 0; font: italic 500 12px/1.4 var(--sans); color: var(--muted); border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); }
+/* the outcome format has no end-of-episode block: the fog stands where it would be, its words on a solid pill */
+[data-section="f4"] pre.report .elide.none {
+  font-style: normal; padding: 16px 10px; border: 0; border-radius: 6px; color: var(--ink);
+  background: repeating-linear-gradient(135deg, var(--fog-ink) 0 1px, var(--fog-bg) 1px 6px);
+}
+[data-section="f4"] pre.report .elide.none b { display: inline-block; padding: 4px 10px; border-radius: 999px; font-weight: 600; background: var(--stage-inset); border: 1px solid var(--line); }
+[data-section="f4"] .todo { grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px; }
+[data-section="f4"] .todo[hidden] { display: none; }
+[data-section="f4"] .todo p { font-size: var(--fs-small); line-height: 1.45; }
+[data-section="f4"] .todo-mark { width: 22px; height: 22px; border-radius: 6px; background: repeating-linear-gradient(135deg, var(--fog-ink) 0 1px, var(--fog-bg) 1px 5px); border: 1px solid var(--fog-ink); }
+/* nothing left to derive: the mark loses its fog */
+[data-section="f4"] .todo.plain .todo-mark { background: var(--card); border-color: var(--line); }
+
+/* ---- the study's dot table */
+[data-section="f4"] .dots-box { position: relative; min-width: 0; display: grid; gap: 6px; }
+[data-section="f4"] svg.dots { display: block; width: 100%; overflow: visible; }
+[data-section="f4"] .dots .band { fill: transparent; }
+[data-section="f4"] .dots .band.on { fill: var(--cause-wash); }
+[data-section="f4"] .dots .head { font: 600 11.5px var(--sans); fill: var(--muted); }
+[data-section="f4"] .dots .head.overall, [data-section="f4"] .dots .rowlab.overall { fill: var(--ink); font-weight: 800; }
+[data-section="f4"] .dots .rowlab { font: 600 12.5px var(--sans); fill: var(--muted); }
+[data-section="f4"] .dots .rowlab.on, [data-section="f4"] .dots .head.on { fill: var(--ink); font-weight: 800; }
+[data-section="f4"] .dots .split { stroke: var(--line); }
+[data-section="f4"] .dots .dot { stroke: var(--card); stroke-width: 2; }
+[data-section="f4"] .dots .dot.zero { fill: var(--card); stroke: var(--muted); stroke-width: 1; }
+[data-section="f4"] .dots .val { font: 600 15px var(--num); fill: var(--muted); font-variant-numeric: tabular-nums; }
+[data-section="f4"] .dots .cell.on .val { fill: var(--ink); }
+[data-section="f4"] .dots .hit { fill: transparent; cursor: pointer; }
+
+@media (max-width: 600px) {
+  [data-section="f4"] pre.report { max-height: 220px; }
+  [data-section="f4"] .stage-nums { margin-left: 0; width: 100%; justify-content: space-between; }
+  [data-section="f4"] .lens { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
+}
+@media (max-width: 430px) {
+  [data-section="f4"] .lens .long { display: none; }
+  [data-section="f4"] .lens .short { display: inline; }
+}

@@ -1,0 +1,149 @@
+/* Hero (DESIGN_SPEC §3.1): the question beside what RSI means, the paper and the answer, then one run's first and kept
+   programs side by side with the held-out result over them, the steps both ran, and the rounds in between; then the
+   study in one paragraph. At 1280×900 the definition, the answer, the result and the clips' upper half sit above the
+   fold. */
+[data-section="hero"] { padding-block: 40px 88px; }
+
+/* ---- title block: on wide screens the definition takes the empty space right of the question */
+[data-section="hero"] .hero-title { display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 12px; }
+[data-section="hero"] .papertitle { font: 700 clamp(18px, 1.9vw, 24px)/1.3 var(--sans); letter-spacing: -0.01em; max-width: 40ch; text-wrap: balance; }
+[data-section="hero"] .authors { margin-top: 2px; font-size: clamp(15px, 1.2vw, 16.5px); line-height: 1.6; max-width: 80ch; }
+[data-section="hero"] .authors span { white-space: nowrap; }
+[data-section="hero"] .authors sup { color: var(--muted); }
+[data-section="hero"] .affils { color: var(--muted); font-size: 14.5px; display: flex; flex-wrap: wrap; gap: 2px 16px; }
+[data-section="hero"] .affils span { white-space: nowrap; }
+[data-section="hero"] .links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+[data-section="hero"] .hero-def { font: 500 var(--fs-lede)/1.55 var(--sans); color: var(--muted); max-width: 40ch; margin-top: 8px; text-wrap: pretty; }
+[data-section="hero"] .hero-def b { color: var(--ink); font-weight: 800; }
+[data-section="hero"] .thesis {
+  font: 700 22px/1.4 var(--sans); letter-spacing: -0.01em; text-wrap: balance; max-width: 44ch; margin-top: 10px;
+  border-left: 3px solid var(--seen); padding-left: 18px;
+}
+@media (min-width: 861px) {
+  [data-section="hero"] .hero-title { grid-template-columns: max-content minmax(0, 1fr); column-gap: clamp(32px, 4.5vw, 64px); }
+  [data-section="hero"] .hero-title > * { grid-column: 1 / -1; }
+  [data-section="hero"] .hero-title h1 { grid-column: 1; grid-row: 1; }
+  [data-section="hero"] .hero-title .hero-def { grid-column: 2; grid-row: 1; align-self: end; margin: 0 0 4px; }
+  [data-section="hero"] .papertitle { max-width: none; }
+}
+
+/* ---- the film card */
+[data-section="hero"] .hero-film { margin-top: 28px; gap: 16px; }
+[data-section="hero"] .hero-film .stage-head { justify-content: space-between; align-items: flex-end; }
+[data-section="hero"] .hero-ask { display: grid; gap: 4px; }
+[data-section="hero"] .hero-task { font: 600 17px/1.35 var(--sans); max-width: 46ch; }
+[data-section="hero"] .hero-task b { font-weight: 800; }
+/* the held-out result where C1 puts result numerals: each numeral under its clip's round */
+[data-section="hero"] .hero-film .hero-result { display: grid; grid-template-columns: auto auto auto; align-items: end; column-gap: 12px; row-gap: 6px; }
+[data-section="hero"] .hero-num { display: inline-flex; align-items: baseline; gap: 6px; }
+[data-section="hero"] .hero-num-k { font: 500 12px var(--mono); color: var(--muted); }
+[data-section="hero"] .hero-result .arrow { font: 600 26px/1 var(--num); color: var(--faint); align-self: center; }
+[data-section="hero"] .hero-num-foot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 4px 10px; }
+[data-section="hero"] .hero-num-foot .numlabel { margin: 0; }
+
+[data-section="hero"] .hero-film .pair { gap: 10px; }
+[data-section="hero"] .hero-film .clip { transition: box-shadow var(--t-fog); }
+[data-section="hero"] .hero-film .clip.linked { box-shadow: 0 0 0 2px var(--card), 0 0 0 4px var(--cause); }
+/* 16:9 on wide screens: the hook, the wrench and the gripper stay in frame, the arm bases are trimmed */
+@media (min-width: 601px) {
+  [data-section="hero"] .hero-film .clip { aspect-ratio: 16 / 9; }
+  [data-section="hero"] .hero-film .clip video { object-position: 50% 30%; }
+}
+/* the outcome, on the frame once the release step is over; the pill matches .clip-tag */
+[data-section="hero"] .hero-outcome {
+  position: absolute; z-index: 2; right: 8px; top: 8px; display: inline-flex; gap: 6px; align-items: center;
+  font: 600 11.5px/1 var(--mono); letter-spacing: 0.4px; text-transform: uppercase; padding: 6px 8px; border-radius: 7px;
+  background: rgba(14, 17, 22, 0.84); color: #e9eef5; border: 1px solid rgba(255, 255, 255, 0.12); white-space: nowrap;
+  opacity: 0; transition: opacity var(--t-fog);
+}
+[data-section="hero"] .clip.hero-done .hero-outcome { opacity: 1; }
+[data-section="hero"] .hero-outcome svg.glyph { width: 12px; height: 12px; --sw: 3; }
+[data-section="hero"] .hero-outcome.fail svg.glyph { color: #fb8b46; }
+[data-section="hero"] .hero-outcome.ok svg.glyph { color: #6fd39a; }
+[data-section="hero"] .hero-pair-cap { display: none; }
+
+/* ---- the step strip: one play control, the strip's own key, then the chips with a ✓ row per program */
+[data-section="hero"] .hero-steps { display: grid; gap: 10px; padding-top: 2px; }
+[data-section="hero"] .hero-steps-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+[data-section="hero"] .hero-play { min-height: 32px; padding: 6px 12px 6px 10px; }
+[data-section="hero"] .hero-steps-head .hero-key { margin-left: auto; }
+[data-section="hero"] .hero-key { font-size: 12.5px; gap: 4px 14px; }
+[data-section="hero"] .hero-hatch {
+  display: inline-block; width: 14px; height: 12px; border-radius: 3px; border: 1px solid var(--fog-ink); flex: none;
+  background: repeating-linear-gradient(135deg, var(--fog-ink) 0 1px, var(--fog-bg) 1px 4px);
+}
+[data-section="hero"] .k { font-kerning: none; }   /* Manrope's kerning swallows the space after an uppercase L */
+
+/* the lead-in is named once, over it; its own label inside the chip would repeat that */
+[data-section="hero"] #hero-ribbon .lane-still .chip-label { display: none; }
+[data-section="hero"] .hero-row-k { font: 500 10.5px var(--mono); fill: var(--muted); }
+[data-section="hero"] .hero-row-line { stroke: var(--line); stroke-width: 1; stroke-dasharray: 1 3; stroke-linecap: round; }
+[data-section="hero"] .hero-st .hero-pending { fill: var(--card); stroke: var(--ctx); stroke-width: 1.3; transition: opacity var(--t-fog); }
+[data-section="hero"] .hero-st .hero-done { opacity: 0; transition: opacity var(--t-fog); }
+[data-section="hero"] .hero-st.done .hero-done { opacity: 1; }
+[data-section="hero"] .hero-st.done .hero-pending { opacity: 0; }
+
+/* ---- the film line: who and what, with the key to its marks, beside the five rounds */
+[data-section="hero"] .hero-film-line {
+  display: grid; grid-template-columns: minmax(0, 14rem) minmax(0, 1fr); gap: 14px 40px; align-items: center;
+  padding-top: 18px; border-top: 1px dashed var(--line);
+}
+[data-section="hero"] .hero-strip-label { display: grid; gap: 6px; font-size: var(--fs-small); line-height: 1.4; color: var(--muted); }
+[data-section="hero"] .hero-strip-label .k { color: var(--ink); line-height: 1.4; }
+[data-section="hero"] .hero-strip-label .k > span { display: inline-block; }   /* breaks only between its two parts */
+[data-section="hero"] .hero-strip-label .hero-key { margin-top: 4px; gap: 4px 12px; }
+[data-section="hero"] .hero-phone-only { display: none; }
+[data-section="hero"] .hero-lg-pencil { width: 16px; height: 16px; flex: none; }
+[data-section="hero"] .hero-lg-pencil circle, [data-section="hero"] .rounds .pencils .pencil-hit { fill: var(--cause); }
+[data-section="hero"] .hero-lg-pencil use, [data-section="hero"] .rounds .pencils use { color: #fff; }
+[data-section="hero"] .rounds .hero-lineage-label { font: 600 11px var(--sans); fill: var(--cause); paint-order: stroke; stroke: var(--card); stroke-width: 3px; stroke-linejoin: round; }
+/* the readout under the strip already says what a round or an edit was, so the strip shows no tooltip of its own */
+[data-section="hero"] .hero-film-line > .tip { display: none; }
+
+[data-section="hero"] .hero-film #hero-readout { border-top: 1px dashed var(--line); padding-top: 14px; }
+[data-section="hero"] #hero-readout code { font: 500 var(--fs-mono) var(--mono); }
+[data-section="hero"] .hero-goto { margin-left: 8px; font-weight: 700; color: var(--link); white-space: nowrap; }
+[data-section="hero"] .hero-film .figcap { margin-top: -10px; }
+[data-section="hero"].hero-merged .hero-n6 { display: none; }
+
+/* ---- the study in one paragraph */
+[data-section="hero"] .hero-text { margin-top: 56px; align-items: start; }
+[data-section="hero"] .hero-words { max-width: 64ch; }
+[data-section="hero"] .lead { font-size: var(--fs-lede); line-height: 1.6; }
+/* a spec sheet beside the paragraph; a 3-up row once the columns stack */
+[data-section="hero"] .stats { display: grid; border-top: 1px solid var(--line); }
+[data-section="hero"] .stat { display: grid; grid-template-columns: 4.6rem minmax(0, 1fr); align-items: baseline; gap: 12px; padding: 14px 0 12px; border-bottom: 1px solid var(--line); }
+[data-section="hero"] .stat b { font: 600 var(--fs-num-l)/1 var(--num); letter-spacing: 0.01em; font-variant-numeric: tabular-nums; }
+[data-section="hero"] .stat > span { font-size: 14.5px; color: var(--muted); line-height: 1.35; }
+
+@media (max-width: 860px) {
+  [data-section="hero"] .hero-film-line { grid-template-columns: minmax(0, 1fr); }
+  [data-section="hero"] .hero-text { margin-top: 40px; }
+  [data-section="hero"] .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 0; }
+  [data-section="hero"] .stat { display: block; padding: 0 14px; border-bottom: 0; border-left: 1px solid var(--line); }
+  [data-section="hero"] .stat:first-child { border-left: 0; padding-left: 0; }
+  [data-section="hero"] .stat b { display: block; }
+  [data-section="hero"] .stat > span { display: block; font-size: 13.5px; margin-top: 6px; }
+}
+@media (max-width: 600px) {
+  [data-section="hero"] { padding-block: 32px 56px; }
+  [data-section="hero"] .hero-film { margin-top: 24px; }
+  [data-section="hero"] .hero-film .stage-head { align-items: flex-start; }
+  [data-section="hero"] .hero-film .hero-result { margin-left: 0; }
+  [data-section="hero"] .hero-num-foot { justify-content: flex-start; }
+  [data-section="hero"] .hero-result .bignum { font-size: 40px; }
+  [data-section="hero"] .hero-film .pair { gap: 6px; }
+  /* a 171 px frame: zoom on the hook and the wrench, so on-the-hook and beside-the-hook can be told apart */
+  [data-section="hero"] .hero-film .clip video { transform: scale(1.8); transform-origin: 46% 24%; }
+  [data-section="hero"] .clip-tag .hero-tag-more { display: none; }
+  [data-section="hero"] .hero-outcome { font-size: 10px; padding: 4px 6px; right: 6px; top: 6px; gap: 4px; }
+  [data-section="hero"] .hero-outcome svg.glyph { width: 10px; height: 10px; }
+  [data-section="hero"] .hero-pair-cap { display: grid; margin-top: -10px; }
+  [data-section="hero"] .hero-pair-cap p { font-size: 12.5px; line-height: 1.35; color: var(--muted); }
+  [data-section="hero"] .hero-steps-head .hero-key { margin-left: 0; }
+  [data-section="hero"] .hero-phone-only { display: inline; }
+  [data-section="hero"] .hero-n6 { display: none; }
+  [data-section="hero"] .thesis { font-size: 19px; padding-left: 14px; }
+  [data-section="hero"] .stat { padding: 0 10px; }
+  [data-section="hero"] .stat b { font-size: 36px; }
+}

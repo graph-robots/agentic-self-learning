@@ -1,0 +1,5 @@
+# Per motion: every tool call that stepped the simulation, labelled by tool, never by node.
+base: ../config.yaml
+name: cube_in_tray_motion
+feedback:
+  granularity: motion

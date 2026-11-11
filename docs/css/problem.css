@@ -1,0 +1,139 @@
+/* Part 1 (DESIGN_SPEC §3.2): three failure cards, the summary of their ✕ / ◆ patterns, the Figure 1 drawer. */
+
+/* ---- the reading key under the lede: the ribbon's pieces, taught once */
+[data-section="problem"] .sechead .lede .glyph { width: 13px; height: 13px; vertical-align: -1px; }
+[data-section="problem"] .problem-key { gap: 8px 18px; margin-top: 4px; }
+[data-section="problem"] .problem-key svg { width: 22px; height: 14px; flex: none; overflow: visible; }
+[data-section="problem"] .key-chip rect { fill: var(--card); stroke: var(--muted); stroke-width: 1; }
+[data-section="problem"] .key-chip.still rect { fill: url(#fog); stroke: var(--fog-ink); }
+[data-section="problem"] .key-arc path { fill: none; stroke: var(--cause); stroke-width: 1.5; stroke-linecap: round; }
+
+/* ---- a card: head, then the run (7: clip, ribbon, controls, readout) beside the diagram and words (5). The readout sits
+   under the controls on wide screens, which keeps the two columns about the same height on all three cards. */
+[data-section="problem"] .case { gap: 18px; }
+[data-section="problem"] .case-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+[data-section="problem"] .case-n { font: 600 40px/0.8 var(--num); color: var(--faint); opacity: 0.6; font-variant-numeric: tabular-nums; align-self: center; }
+[data-section="problem"] .case-head .eyebrow { color: var(--ink); }
+[data-section="problem"] .case-head .try { margin-left: auto; }
+[data-section="problem"] .case-grid { gap: 22px 30px; }
+[data-section="problem"] .case-media, [data-section="problem"] .case-geo { display: grid; gap: 14px; align-content: start; grid-template-columns: minmax(0, 1fr); }
+[data-section="problem"] .case-media > *, [data-section="problem"] .case-geo > * { min-width: 0; }
+[data-section="problem"] .case-media .controls { margin-top: 2px; }
+[data-section="problem"] .btn .glyph { width: 13px; height: 13px; }
+[data-section="problem"] .nowrap { white-space: nowrap; }
+
+/* ---- the diagram panel */
+[data-section="problem"] .geo { margin: 0; gap: 8px; }
+[data-section="problem"] .geo > .k { margin-bottom: 2px; }
+[data-section="problem"] .geo .figcap { font-size: var(--fs-micro); }
+[data-section="problem"] .geo-key { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: var(--fs-micro); color: var(--muted); }
+[data-section="problem"] .geo-key .legend-item { display: inline-flex; align-items: center; gap: 6px; }
+[data-section="problem"] .geo-key svg { width: 20px; height: 13px; flex: none; overflow: visible; }
+[data-section="problem"] .geo-key svg.key-ring { width: 17px; height: 17px; }
+[data-section="problem"] .key-ring ellipse { fill: none; stroke: var(--ink); stroke-width: 1.8; }
+[data-section="problem"] .key-ring circle { fill: var(--ink); }
+[data-section="problem"] .key-trail path { fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-linecap: round; }
+[data-section="problem"] .key-axis path { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 4 3; }
+[data-section="problem"] .key-ghost path { stroke: var(--ghost); stroke-width: 3; stroke-linecap: round; }
+[data-section="problem"] .key-cable path { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+[data-section="problem"] .key-then path { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 3; }
+[data-section="problem"] .key-goal rect { fill: var(--ok-band); stroke: var(--ok); stroke-width: 1.2; stroke-dasharray: 3 2; }
+
+/* the rail, with the shank's axis, the ring's centre, its distance off that axis and the "then falls" cue over it */
+[data-section="problem"] .rail-box { position: relative; }
+[data-section="problem"] svg.rail-over { position: absolute; left: 0; top: 0; width: 100%; overflow: visible; pointer-events: none; }
+[data-section="problem"] .rail-over .axis-guide { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 4 3; opacity: 0.75; }
+[data-section="problem"] .rail-over .ring-centre { fill: var(--ink); stroke: var(--stage-inset); stroke-width: 1.5; }
+[data-section="problem"] .rail-over .geo-dim .ext { stroke-dasharray: 2 2; stroke-width: 1; }
+[data-section="problem"] .rail-over .geo-dim text { stroke: var(--stage-inset); }
+[data-section="problem"] .rail-over .fall path { fill: none; stroke: var(--muted); stroke-width: 1.4; stroke-dasharray: 3 3; }
+[data-section="problem"] .rail-over .fall text { font-weight: 600; }
+
+/* the syringe: the lid section across the panel, the tilt dial under it beside the caption */
+[data-section="problem"] .syr-dial { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 14px; align-items: center; }
+[data-section="problem"] .syr-dial svg.gauge { width: 112px; }
+[data-section="problem"] .syr-dial .numlabel { margin: 0; }
+[data-section="problem"] svg.tape { margin-top: -4px; }
+
+/* the cable map */
+[data-section="problem"] svg.cablemap { display: block; width: 100%; overflow: visible; }
+[data-section="problem"] .cm-goal { fill: var(--ok-band); stroke: var(--ok); stroke-width: 1.2; stroke-dasharray: 4 3; }
+[data-section="problem"] .cm-fit { fill: var(--ctx); stroke: var(--muted); stroke-width: 1; }
+[data-section="problem"] .cm-peg { fill: var(--ink); }
+[data-section="problem"] .cm-peg-ring { fill: var(--stage-inset); stroke: var(--ink); stroke-width: 1.2; }
+[data-section="problem"] .cm-spring path { fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-linecap: round; }
+[data-section="problem"] .cm-spring path.head { fill: var(--ink); stroke: none; }
+[data-section="problem"] .cm-spring path.lead { stroke: var(--muted); stroke-width: 0.8; }
+[data-section="problem"] .cm-spring text { font: 600 11.5px var(--sans); fill: var(--ink); paint-order: stroke; stroke: var(--stage-inset); stroke-width: 3px; stroke-linejoin: round; }
+[data-section="problem"] .cm-cable { fill: none; stroke: var(--ink); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+[data-section="problem"] .cm-then { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 3; stroke-linejoin: round; }
+[data-section="problem"] .cm-end { fill: var(--ink); stroke: var(--stage-inset); stroke-width: 1.5; }
+[data-section="problem"] .cm-label { font: 500 10.5px var(--mono); fill: var(--muted); paint-order: stroke; stroke: var(--stage-inset); stroke-width: 3px; stroke-linejoin: round; }
+[data-section="problem"] .case-note code { font-size: 0.92em; color: var(--ink); }
+
+/* ---- what you see / where it was decided: once the reader plays, scrubs or asks, the block under the playhead's
+   mark gains a 3 px left rule in its mark's colour. The opening frame lights neither, on every card. */
+[data-section="problem"] .case-text { margin: 0; display: grid; gap: 10px; }
+[data-section="problem"] .case-text > div { position: relative; overflow: hidden; padding: 11px 14px 12px; border: 1px solid var(--line); border-radius: var(--r-panel); }
+[data-section="problem"] .case-text > div::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: transparent; transition: background var(--t-fog); }
+[data-section="problem"] .case-text dt { display: flex; align-items: center; gap: 7px; font: 700 12px/1.2 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+[data-section="problem"] .case-text dd { margin: 6px 0 0; font-size: 15px; line-height: 1.55; color: var(--ink); }
+[data-section="problem"] .case[data-at="seen"] .row-seen::before { background: var(--seen); }
+[data-section="problem"] .case[data-at="cause"] .row-cause::before { background: var(--cause); }
+[data-section="problem"] .case .readout { min-height: 2.9em; }
+
+/* the cable's wash flashes when asked where it was decided */
+@keyframes problem-wash { 0%, 100% { opacity: 1; } 35% { opacity: 0.25; } 70% { opacity: 1; } }
+[data-section="problem"] .cause-wash.flash { animation: problem-wash 900ms var(--ease) 1; }
+
+/* ---- the summary in the header: three patterns side by side, each naming the card that shows it */
+[data-section="problem"] .case-summary { display: grid; gap: 12px; margin-top: 12px; }
+[data-section="problem"] .case-summary .k .glyph { width: 12px; height: 12px; vertical-align: -1px; }
+[data-section="problem"] .case-summary .cols-3 { align-items: stretch; }
+[data-section="problem"] figure.mini { margin: 0; display: grid; gap: 10px; align-content: start; padding: 16px 18px 18px; border: 1px solid var(--line); border-radius: var(--r-card); background: var(--card); }
+[data-section="problem"] figure.mini figcaption { font-size: 14px; color: var(--ink); line-height: 1.45; }
+[data-section="problem"] figure.mini figcaption b { font-weight: 700; display: block; }
+[data-section="problem"] .mini-to { display: inline-flex; align-items: baseline; gap: 8px; justify-self: start; font: 700 12px/1.2 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+[data-section="problem"] .mini-to:hover { text-decoration: underline; }
+[data-section="problem"] .mini-n { font: 600 22px/0.8 var(--num); letter-spacing: 0; color: var(--faint); font-variant-numeric: tabular-nums; }
+[data-section="problem"] svg.ribbon-mini { display: block; width: 100%; overflow: visible; }
+[data-section="problem"] .mini-chip { fill: var(--card); stroke: var(--muted); stroke-width: 1; }
+[data-section="problem"] .mini-still { fill: url(#fog); stroke: var(--fog-ink); stroke-width: 1; }
+
+/* ---- the drawer's three panels */
+[data-section="problem"] .drawer-body .cols-3 { gap: 12px; }
+
+/* one column under 860 px, in the reading order of §3.2: clip, ribbon, controls, then the diagram, the readout and the
+   words (the columns dissolve, so their items line up in the card's own grid) */
+@media (max-width: 860px) {
+  [data-section="problem"] .case-grid { gap: 14px; }
+  [data-section="problem"] .case-media, [data-section="problem"] .case-geo { display: contents; }
+  [data-section="problem"] .case-grid .geo { order: 1; }
+  [data-section="problem"] .case-grid .case-note { order: 2; }
+  [data-section="problem"] .case-grid .readout { order: 3; }
+  [data-section="problem"] .case-grid .case-text { order: 4; }
+  [data-section="problem"] .case-grid .said { order: 5; }
+  [data-section="problem"] .case-grid .case-more { order: 6; }
+}
+@media (max-width: 600px) {
+  [data-section="problem"] .case-head { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 6px 10px; }
+  [data-section="problem"] .case-head .try { grid-column: 1 / -1; margin-left: 0; }
+  [data-section="problem"] .case-n { font-size: 30px; }
+  [data-section="problem"] .case-media .controls .btn.cause { flex-basis: 100%; justify-content: center; }
+}
+
+/* the syringe's carry, as outlines laid over the lid section */
+[data-section="problem"] .key-box { position: relative; }
+[data-section="problem"] svg.key-over { position: absolute; left: 0; top: 0; width: 100%; overflow: visible; pointer-events: none; }
+[data-section="problem"] .key-over .onion { fill: none; stroke: var(--seen); stroke-width: 1.2; opacity: 0.4; }
+[data-section="problem"] .key-over .path { fill: none; stroke: var(--seen); stroke-width: 1; stroke-dasharray: 2 3; opacity: 0.55; }
+[data-section="problem"] .key-bar rect { fill: var(--card); stroke: var(--seen); stroke-width: 1.5; }
+[data-section="problem"] .key-bar.onion rect { fill: none; stroke-width: 1.2; opacity: 0.4; }
+[data-section="problem"] .key-bar.idle rect { fill: none; stroke: var(--muted); stroke-dasharray: 3 2; }
+/* the syringe not followed: an outline behind, so it never reads as part of the followed one */
+[data-section="problem"] svg.keyhole .bar.idle { fill: none; stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 2; }
+
+/* the hook in the Tool Hanging clip: a fixed callout over the video, white with a dark edge on any frame */
+[data-section="problem"] .hook-callout { position: absolute; inset: 0; pointer-events: none; }
+[data-section="problem"] .hook-callout .ring { position: absolute; border-radius: 50%; border: 1.5px solid #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(0, 0, 0, 0.35); }
+[data-section="problem"] .hook-callout .label { position: absolute; transform: translateY(-50%); font: 700 12.5px/1 var(--sans); color: #fff; text-shadow: 0 0 3px rgba(0, 0, 0, 0.85), 0 0 1px rgba(0, 0, 0, 0.9); }

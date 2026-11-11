@@ -1,0 +1,5 @@
+# Space as world positions of whole objects only: no orientations, no parts.
+base: ../config.yaml
+name: cube_in_tray_positions
+feedback:
+  spatial: positions

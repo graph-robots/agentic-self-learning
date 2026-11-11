@@ -1,0 +1,5 @@
+# Predicates only: inside, rests on, grasped, came into contact; no numbers.
+base: ../config.yaml
+name: cube_in_tray_relations
+feedback:
+  form: [relations]

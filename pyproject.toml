@@ -1,0 +1,72 @@
+[project]
+name = "agentic-self-learning"
+version = "0.1.0"
+description = "A coding agent writes a graph-as-policy, runs it in RoboSimStudio, reads structured simulation feedback, and improves it."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Apache-2.0" }
+dependencies = [
+  # The simulator with its task documents, evaluator and GaP connector.
+  "robosimstudio[gap]",
+  # The graph runtime the policy is written for.
+  "graph-as-policy",
+  "graph-as-policy-core",
+  "numpy>=1.26",
+  "pydantic>=2",
+  "pyyaml>=6",
+  # Stills for the visual feedback form, read from the episode's recorded video.
+  "imageio[ffmpeg]",
+]
+
+[project.urls]
+Homepage = "https://github.com/graph-robots/agentic-self-learning"
+RoboSimStudio = "https://github.com/robosimstudio/robosimstudio"
+graph-as-policy = "https://github.com/graph-robots/graph-as-policy"
+
+[project.scripts]
+asl-run = "asl.__main__:main"
+asl-rollout = "asl.__main__:rollout"
+asl-feedback = "asl.feedback.__main__:main"
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+# The revisions the example was measured on. graph-as-policy is the fork and
+# revision RoboSimStudio itself pins, so the two resolve to one copy.
+[tool.uv.sources]
+robosimstudio = { git = "https://github.com/robosimstudio/robosimstudio.git", rev = "87b5e32c8a79c343e4583fcb42bb8eddfb39b83f" }
+graph-as-policy = { git = "https://github.com/KeplerC/graph-as-policy.git", rev = "09e45f8de27bc1a29629382ed7c2b9b4b384b3d6" }
+graph-as-policy-core = { git = "https://github.com/KeplerC/graph-as-policy.git", rev = "09e45f8de27bc1a29629382ed7c2b9b4b384b3d6", subdirectory = "gap-core" }
+
+[tool.uv]
+# The same overrides RoboSimStudio's own lock uses. graph-as-policy's own
+# dependencies include its LIBERO simulation stack, which this project never
+# imports: RoboSimStudio is the simulator here. mujoco follows Newton's pin.
+override-dependencies = [
+  "PyOpenGL>=3.1.7",
+  "libero; sys_platform == 'never'",
+  "robosuite; sys_platform == 'never'",
+  "gym; sys_platform == 'never'",
+  "bddl; sys_platform == 'never'",
+  "mujoco~=3.15.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["asl"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+# A delivered policy is kept exactly as the agent wrote it.
+extend-exclude = ["examples/*/policy"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]

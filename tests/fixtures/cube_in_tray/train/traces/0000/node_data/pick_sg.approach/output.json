@@ -1,0 +1,18 @@
+{
+  "grasp": {
+    "position": {
+      "x": 0.5900657773017883,
+      "y": -0.2003234624862671,
+      "z": 0.7699595093727112
+    },
+    "rotation": {
+      "w": -0.0,
+      "x": -0.24099592184952065,
+      "y": 0.9705261282685284,
+      "z": 0.0
+    }
+  },
+  "width": 0.03999999910593033,
+  "heading_deg": 118.19432062823098,
+  "note": "hover err 0.001 m, wrist off by 0.005 rad, heading 118.2 deg, width 0.040 m, grasp z 0.770; tried ['118deg/rotation: err 0.000m 0.000rad cost 3.88', '118deg/rotation_flipped: err 0.191m 1.571rad cost 107.46', '28deg/rotation: err 0.000m 0.000rad cost 5.58', '28deg/rotation_flipped: err 0.000m 0.000rad cost 5.95']"
+}

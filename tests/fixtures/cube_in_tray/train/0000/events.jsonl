@@ -1,0 +1,2 @@
+{"schema": "robosimstudio.capture.v1", "event": "episode_start", "step": 0, "sim_time": 0.0}
+{"schema": "robosimstudio.capture.v1", "event": "episode_end", "step": 1201, "sim_time": 20.01666666666681}

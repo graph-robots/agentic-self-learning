@@ -1,0 +1,268 @@
+/* The loop (Part 2 opener): the stepper and the round strip in a bar that stays under the page's rail while the stage
+   scrolls, so a step's changes are on screen wherever the reader is; under it the machine on the left, the round's
+   Run and Read panels on the right, the Edit panel across the foot of the stage. On a phone everything stacks. */
+
+[data-section="loop"] .loop-body {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 18px 28px; align-items: start;
+}
+[data-section="loop"] .loop-body > * { min-width: 0; }
+[data-section="loop"] .loop-figure { grid-column: 1; grid-row: 1; align-self: start; margin: 0; display: grid; gap: 12px; }
+[data-section="loop"] .loop-side { grid-column: 2; grid-row: 1; display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+[data-section="loop"] .loop-side > * { min-width: 0; }
+[data-section="loop"] .loop-edit { grid-column: 1 / -1; }
+
+/* ---- the machine */
+[data-section="loop"] svg.loop-machine { display: block; width: 100%; overflow: visible; }
+[data-section="loop"] .loop-machine text { font-family: var(--sans); }
+[data-section="loop"] .loop-line { fill: none; stroke: var(--muted); stroke-width: 1.5; }
+[data-section="loop"] .loop-chev { fill: none; stroke: var(--muted); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+[data-section="loop"] .loop-arrow .loop-line, [data-section="loop"] .loop-arrow .loop-chev { transition: stroke var(--t-fog); }
+[data-section="loop"] .loop-arrow.lit .loop-line, [data-section="loop"] .loop-arrow.lit .loop-chev { stroke: var(--cause); stroke-width: 2.2; }
+[data-section="loop"] .station-box { fill: var(--card); stroke: var(--line); stroke-width: 1; transition: fill var(--t-fog), stroke var(--t-fog); }
+[data-section="loop"] .station-disc { fill: var(--soft); stroke: var(--line); transition: fill var(--t-fog), stroke var(--t-fog); }
+[data-section="loop"] .loop-icon { color: var(--ink); overflow: visible; }
+[data-section="loop"] .loop-icon .icon-stroke { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+[data-section="loop"] .loop-icon .icon-fill { fill: currentColor; }
+[data-section="loop"] .station-name { font: 800 15px var(--sans); fill: var(--ink); letter-spacing: -0.01em; }
+[data-section="loop"] .station-cap { font: 500 12.5px var(--sans); fill: var(--muted); }
+[data-section="loop"] .station.lit .station-box, [data-section="loop"] .station.hot .station-box {
+  stroke: var(--cause); stroke-width: 1.5; fill: color-mix(in srgb, var(--cause) 9%, var(--card));
+}
+[data-section="loop"] .station.lit .station-disc, [data-section="loop"] .station.hot .station-disc { fill: var(--cause); stroke: var(--cause); }
+[data-section="loop"] .station.lit .loop-icon, [data-section="loop"] .station.hot .loop-icon { color: #fff; }
+[data-section="loop"] .station.lit .station-name, [data-section="loop"] .station.hot .station-name { fill: var(--cause); }
+[data-section="loop"] .knob { cursor: pointer; outline: none; }
+[data-section="loop"] .knob-box { fill: var(--card); stroke: var(--line); stroke-width: 1; transition: stroke var(--t-fog); }
+[data-section="loop"] .knob-badge { fill: var(--ink); transition: fill var(--t-fog); }
+[data-section="loop"] .knob-n { font: 600 12.5px var(--num); fill: var(--bg); }
+[data-section="loop"] .knob-label { font: 700 11.5px var(--sans); fill: var(--ink); transition: fill var(--t-fog); }
+[data-section="loop"] .knob:hover .knob-box, [data-section="loop"] .knob:focus-visible .knob-box { stroke: var(--cause); stroke-width: 1.5; }
+[data-section="loop"] .knob:focus-visible .knob-box { stroke-width: 2; }
+[data-section="loop"] .knob:hover .knob-badge, [data-section="loop"] .knob:focus-visible .knob-badge { fill: var(--cause); }
+[data-section="loop"] .knob:hover .knob-label, [data-section="loop"] .knob:focus-visible .knob-label { fill: var(--cause); }
+[data-section="loop"] .loop-k { font: 600 58px var(--num); fill: var(--ink); font-variant-numeric: tabular-nums; }
+[data-section="loop"] .loop-k-eyebrow { font: 700 11px var(--sans); letter-spacing: 0.12em; fill: var(--muted); }
+[data-section="loop"] .loop-k-sub { font: 600 12.5px var(--sans); fill: var(--muted); }
+[data-section="loop"] .loop-machine.narrow .loop-k { font-size: 50px; }
+[data-section="loop"] .loop-machine.narrow .station-name { font-size: 14px; }
+[data-section="loop"] .loop-machine.narrow .station-cap { font-size: 12px; }
+
+/* ---- the stepper and the round strip: one bar, laid on the same two columns as the stage under it */
+[data-section="loop"] .loop-try { margin-bottom: -10px; }
+[data-section="loop"] .loop-control {
+  position: sticky; top: 44px; z-index: 6; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 8px 28px; align-items: center; background: var(--card); margin-inline: -28px; padding: 8px 28px;
+  border-bottom: 1px solid var(--line);
+}
+[data-section="loop"] .loop-control > * { min-width: 0; }
+[data-section="loop"] .loop-strip-key { gap: 4px 14px; font-size: var(--fs-micro); line-height: 1.3; margin-top: -4px; }
+[data-section="loop"] .loop-strip-key span { gap: 5px; }
+[data-section="loop"] .loop-strip-key svg { width: 12px; height: 12px; flex: none; overflow: visible; }
+[data-section="loop"] .loop-strip-key svg.sw-wide { width: 30px; }
+[data-section="loop"] .loop-strip-key .sw-ok { fill: var(--ok); }
+[data-section="loop"] .loop-strip-key .sw-fail { fill: var(--card); stroke: var(--seen); stroke-width: 1.4; }
+[data-section="loop"] .loop-strip-key .sw-x { color: var(--seen); --sw: 3; }
+[data-section="loop"] .loop-strip-key .sw-pencil { color: var(--cause); }
+[data-section="loop"] .loop-strip-key .sw-revert { fill: none; stroke: var(--muted); stroke-width: 1.3; stroke-dasharray: 3 2; }
+[data-section="loop"] .loop-strip-key .sw-lineage { fill: none; stroke: var(--cause); stroke-width: 1.3; stroke-dasharray: 3 2; }
+[data-section="loop"] .stepper { display: flex; align-items: center; gap: 10px; min-width: 0; }
+[data-section="loop"] .loop-step { width: 38px; min-height: 38px; padding: 0; justify-content: center; flex: none; }
+[data-section="loop"] .loop-step svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+[data-section="loop"] .loop-step:disabled { opacity: 0.35; cursor: default; border-color: var(--line); }
+[data-section="loop"] .stepper output { flex: none; min-width: 9.5em; display: grid; line-height: 1.2; }
+[data-section="loop"] .stepper output b { font: 800 15px/1.2 var(--sans); }
+[data-section="loop"] .stepper output span { font: 600 12.5px/1.3 var(--sans); color: var(--muted); }
+[data-section="loop"] input[type="range"] {
+  flex: 1 1 auto; min-width: 0; margin: 0; height: 28px; background: transparent; cursor: pointer; -webkit-appearance: none; appearance: none;
+}
+[data-section="loop"] input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: var(--line); }
+[data-section="loop"] input[type="range"]::-moz-range-track { height: 4px; border-radius: 2px; background: var(--line); }
+[data-section="loop"] input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 18px; height: 18px; margin-top: -7px; border-radius: 50%;
+  background: var(--cause); border: 3px solid var(--card); box-shadow: 0 0 0 1px var(--cause);
+}
+[data-section="loop"] input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--cause); border: 3px solid var(--card); box-shadow: 0 0 0 1px var(--cause); }
+[data-section="loop"] input[type="range"]:focus-visible { outline: 2px solid var(--cause); outline-offset: 2px; border-radius: 6px; }
+
+/* ---- the three panels */
+[data-section="loop"] .loop-panel { transition: box-shadow var(--t-fog); box-shadow: inset 0 0 0 1px transparent; }
+[data-section="loop"] .loop-panel.lit { box-shadow: inset 3px 0 0 var(--cause), inset 0 0 0 1px color-mix(in srgb, var(--cause) 30%, transparent); }
+[data-section="loop"] .loop-ph { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+[data-section="loop"] .loop-ph .k { color: var(--ink); }
+[data-section="loop"] .loop-ph-icon { display: inline-flex; width: 22px; height: 22px; border-radius: 50%; align-items: center; justify-content: center; background: var(--card); border: 1px solid var(--line); flex: none; transition: background var(--t-fog), border-color var(--t-fog); }
+[data-section="loop"] .loop-ph-icon .loop-icon { width: 12px; height: 12px; }
+[data-section="loop"] .loop-panel.lit .loop-ph-icon { background: var(--cause); border-color: var(--cause); }
+[data-section="loop"] .loop-panel.lit .loop-ph-icon .loop-icon { color: #fff; }
+[data-section="loop"] .loop-ph-sub { font: 500 13px/1.3 var(--sans); color: var(--muted); }
+
+/* Run: one row per training episode */
+[data-section="loop"] .loop-eps { display: grid; grid-template-columns: 20px auto minmax(0, 1fr) auto auto; gap: 2px 12px; position: relative; }
+[data-section="loop"] .loop-ep {
+  grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; align-items: center;
+  padding: 4px 8px; border-radius: 7px; border: 1px solid transparent; outline: none;
+}
+[data-section="loop"] .loop-ep:hover, [data-section="loop"] .loop-ep:focus-visible { border-color: var(--line); background: var(--card); }
+[data-section="loop"] .loop-ep-dot { width: 18px; height: 18px; display: block; overflow: visible; }
+[data-section="loop"] .loop-ep-dot .ep[data-ok="true"] { fill: var(--ok); }
+[data-section="loop"] .loop-ep-dot .ep[data-ok="false"] { fill: var(--card); stroke: var(--seen); stroke-width: 1.6; }
+[data-section="loop"] .loop-ep-dot .ep-x { color: var(--seen); --sw: 2.6; }
+[data-section="loop"] .loop-ep-layout { font-size: 12px; color: var(--muted); white-space: nowrap; }
+[data-section="loop"] .loop-ep-how { font: 600 13.5px/1.35 var(--sans); color: var(--ink); min-width: 0; }
+[data-section="loop"] .loop-ep-how code { font-size: 12px; font-weight: 500; }
+[data-section="loop"] .loop-ep-head { padding-block: 0; }
+[data-section="loop"] .loop-ep-head span { font: 700 10.5px/1.2 var(--sans); letter-spacing: 0.07em; text-transform: uppercase; color: var(--faint); }
+[data-section="loop"] .loop-ep-near { font: 500 12px/1.3 var(--sans); color: var(--muted); white-space: nowrap; text-align: right; }
+[data-section="loop"] .loop-ep-head span:nth-child(4) { text-align: right; }
+[data-section="loop"] .loop-ep-near-k { display: none; }
+[data-section="loop"] .loop-ep-near b { font-size: 11.5px; color: var(--ink); }
+[data-section="loop"] .loop-ep-drawn { font: 600 11.5px/1.3 var(--sans); color: var(--muted); white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; }
+[data-section="loop"] .loop-ep-drawn i { width: 14px; height: 2px; background: var(--ink); border-radius: 1px; }
+
+/* Read: the numeral beside the rail */
+[data-section="loop"] .loop-read { display: grid; grid-template-columns: minmax(0, 0.36fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+[data-section="loop"] .loop-num { display: grid; align-content: start; gap: 6px; padding-top: 4px; }
+[data-section="loop"] .loop-num .bignum { white-space: nowrap; }
+[data-section="loop"] .loop-unit { font: 600 0.45em var(--num); color: var(--muted); letter-spacing: 0.02em; }
+[data-section="loop"] .loop-rev { display: block; font: 600 18px/1.1 var(--num); color: var(--muted); letter-spacing: 0.02em; margin-top: 2px; }
+[data-section="loop"] .bignum.loop-allhung { font-size: var(--fs-num-m); line-height: 1.05; }
+[data-section="loop"] .loop-num .numlabel { margin: 0; }
+[data-section="loop"] .loop-closest-why { font-size: var(--fs-micro); line-height: 1.4; }
+[data-section="loop"] .loop-closest-why:empty { display: none; }
+[data-section="loop"] .loop-railbox { margin: 0; display: grid; gap: 6px; padding: 8px 10px 6px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; position: relative; }
+/* the drawn layout's own closest approach, beside its ring: the numeral beside the rail is the median of all four */
+[data-section="loop"] .loop-ring-label {
+  position: absolute; left: 0; top: 0; padding: 1px 4px; border-radius: 4px; background: var(--card); white-space: nowrap;
+  font: 600 12px/1.25 var(--sans); color: var(--ink); pointer-events: none;
+}
+[data-section="loop"] .loop-ring-label[hidden] { display: none; }
+[data-section="loop"] svg.rail .trail { stroke-width: 1.8; }
+[data-section="loop"] svg.rail polyline.ghost { stroke-width: 1.6; }
+[data-section="loop"] .loop-railbox figcaption { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; }
+[data-section="loop"] .loop-key { display: inline-flex; align-items: center; gap: 6px; }
+[data-section="loop"] .loop-key[hidden] { display: none; }
+[data-section="loop"] .loop-key .mono { color: var(--ink); }
+[data-section="loop"] i.loop-sw-path, [data-section="loop"] i.loop-sw-ghost { display: inline-block; width: 16px; height: 2px; border-radius: 1px; background: var(--ink); flex: none; }
+[data-section="loop"] i.loop-sw-ghost { height: 3px; background: var(--ghost); }
+[data-section="loop"] svg.loop-sw-ring { width: 17px; height: 11px; flex: none; overflow: visible; }
+[data-section="loop"] .loop-railbox svg.glyph { width: 12px; height: 12px; }
+[data-section="loop"] svg.loop-sw-ring ellipse { fill: none; stroke: var(--ink); stroke-width: 2; }
+[data-section="loop"] svg.loop-sw-ring.ghost ellipse { stroke: var(--ghost); stroke-width: 2.4; }
+[data-section="loop"] .loop-key-layout { flex-basis: 100%; }
+
+/* Edit: the revert banner, the agent's words beside the size of every edit, then the program */
+[data-section="loop"] .loop-revert {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px 12px;
+  border-radius: 8px; border: 1px dashed var(--muted); background: var(--card); font-size: var(--fs-small); line-height: 1.5;
+}
+[data-section="loop"] .loop-revert[hidden] { display: none; }
+[data-section="loop"] .loop-revert-icon { width: 18px; height: 18px; color: var(--ink); margin-top: 1px; }
+[data-section="loop"] .loop-revert-why { font-size: 11.5px; line-height: 1.5; color: var(--muted); margin-top: 4px; overflow-wrap: anywhere; }
+[data-section="loop"] .loop-edit-top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 16px 28px; align-items: start; }
+[data-section="loop"] .loop-words { display: grid; gap: 10px; min-width: 0; }
+[data-section="loop"] .loop-words blockquote.said { background: var(--card); }
+[data-section="loop"] .loop-words [hidden] { display: none; }
+[data-section="loop"] .loop-stop { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; padding: 12px 14px; border-left: 3px solid var(--ok); background: var(--card); border-radius: 0 var(--r-panel) var(--r-panel) 0; font-size: 14px; line-height: 1.55; }
+[data-section="loop"] .loop-stop svg.glyph { width: 16px; height: 16px; margin-top: 2px; }
+[data-section="loop"] .loop-stop-h { font-weight: 700; }
+[data-section="loop"] .loop-sizes { margin: 0; display: grid; gap: 8px; }
+[data-section="loop"] .loop-size-rows { display: grid; gap: 4px; position: relative; }
+[data-section="loop"] .loop-size { display: grid; grid-template-columns: 4.4em minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 2px 4px; border-radius: 6px; outline: none; }
+[data-section="loop"] .loop-size:hover, [data-section="loop"] .loop-size:focus-visible { background: var(--card); }
+[data-section="loop"] .loop-size-k { font: 600 12px/1.2 var(--sans); color: var(--muted); }
+[data-section="loop"] .loop-size-bar { height: 10px; display: block; }
+[data-section="loop"] .loop-size-bar i { display: block; height: 100%; min-width: 3px; border-radius: 0 4px 4px 0; background: var(--ctx); transition: background var(--t-fog); }
+/* a dropped edit is drawn the way the round strip draws a revert: outlined, dashed, struck through */
+[data-section="loop"] .loop-size.dropped .loop-size-bar i { position: relative; background: none; border: 1px dashed var(--ctx); }
+[data-section="loop"] .loop-size.dropped .loop-size-bar i::after {
+  content: ""; position: absolute; left: -4px; right: -4px; top: 50%; height: 1.5px; margin-top: -0.75px; border-radius: 1px; background: var(--muted);
+}
+[data-section="loop"] .loop-size-n { font-size: 11.5px; color: var(--muted); text-align: right; white-space: nowrap; display: inline-flex; gap: 6px; align-items: center; justify-content: flex-end; }
+[data-section="loop"] .loop-size-tag { font: 500 10px/1.2 var(--mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); border: 1px dashed var(--muted); border-radius: 4px; padding: 1px 4px; }
+[data-section="loop"] .loop-size.on .loop-size-k, [data-section="loop"] .loop-size.on .loop-size-n { color: var(--ink); font-weight: 700; }
+[data-section="loop"] .loop-size.on .loop-size-bar i { background: var(--ink); }
+[data-section="loop"] .loop-size.on.dropped .loop-size-bar i { background: none; border-color: var(--ink); }
+[data-section="loop"] .loop-size.on.dropped .loop-size-bar i::after { background: var(--ink); }
+[data-section="loop"] .loop-size.on .loop-size-tag { color: var(--ink); border-color: var(--ink); font-weight: 600; }
+/* the outline says which chip a pencil belongs to, where the badge sits in the gap between two chips */
+[data-section="loop"] #loop-program .chip:has(.edit-badge) .chip-box { stroke: var(--cause); stroke-width: 1.5; }
+[data-section="loop"] .loop-prog-cap { font-size: var(--fs-small); line-height: 1.45; color: var(--muted); margin-top: 4px; }
+[data-section="loop"] .loop-prog-cap b { color: var(--ink); }
+[data-section="loop"] .loop-prog-cap code { color: var(--ink); }
+[data-section="loop"] .loop-prog-key { gap: 6px 18px; font-size: 12.5px; }
+[data-section="loop"] .loop-key-pencil { width: 14px; height: 14px; flex: none; }
+[data-section="loop"] .loop-key-pencil circle { fill: var(--cause); }
+[data-section="loop"] .loop-key-pencil use { color: #fff; }
+[data-section="loop"] i.loop-sw-gen { width: 18px; height: 12px; border-radius: 3px; background: var(--gen); }
+
+/* ---- the six findings at a glance, between the run and the tasks: numeral, loop glyph, claim; a row links to its
+   finding. Two columns read down, one on a phone. */
+[data-section="loop"] .loop-index { display: grid; gap: 12px; }
+[data-section="loop"] .loop-index-rows {
+  list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(3, auto); grid-auto-flow: column; column-gap: 28px;
+}
+[data-section="loop"] .loop-index-rows li { min-width: 0; border-top: 1px solid var(--line); }
+[data-section="loop"] .loop-index-row {
+  display: grid; grid-template-columns: 1.4em 28px minmax(0, 1fr) auto; gap: 12px; align-items: center; height: 100%;
+  padding: 12px 8px; color: var(--ink); text-decoration: none; border-radius: 8px; transition: background var(--t-fog);
+}
+[data-section="loop"] .loop-index-row::after { content: "→"; font-weight: 600; color: var(--muted); }
+[data-section="loop"] .loop-index-row:hover { background: var(--soft); }
+[data-section="loop"] .loop-index-row:hover::after { color: var(--ink); }
+[data-section="loop"] .loop-index-row:focus-visible { outline: 2px solid var(--cause); outline-offset: -2px; }
+[data-section="loop"] .loop-index-n { font: 600 30px/0.9 var(--num); color: var(--faint); font-variant-numeric: tabular-nums; }
+[data-section="loop"] .loop-index-words { display: grid; gap: 3px; min-width: 0; }
+[data-section="loop"] .loop-index-k { font: 700 11.5px/1.2 var(--sans); letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+[data-section="loop"] .loop-index-claim { font: 700 15px/1.35 var(--sans); text-wrap: pretty; }
+
+/* ---- the tasks */
+[data-section="loop"] .loop-tasks { display: grid; gap: 14px; }
+[data-section="loop"] .loop-tasks-head { display: grid; gap: 4px; }
+[data-section="loop"] .loop-task-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+[data-section="loop"] .loop-task { margin: 0; display: grid; gap: 6px; align-content: start; cursor: default; }
+[data-section="loop"] .loop-task[tabindex] { cursor: pointer; }
+[data-section="loop"] .loop-task-img { position: relative; border-radius: 9px; overflow: hidden; aspect-ratio: 4 / 3; background: var(--stage); border: 1px solid var(--line); }
+[data-section="loop"] .loop-task img { display: block; width: 100%; height: 100%; object-fit: cover; }
+[data-section="loop"] .loop-task-img img + img { position: absolute; inset: 0; opacity: 0; transition: opacity 250ms; }
+[data-section="loop"] .loop-task-state {
+  position: absolute; left: 6px; bottom: 6px; padding: 3px 7px; border-radius: 6px; background: rgba(14, 17, 22, 0.78);
+  color: #e9eef5; font: 500 10px/1.2 var(--mono); letter-spacing: 0.04em; text-transform: uppercase;
+}
+[data-section="loop"] .loop-task-state::after { content: "start"; }
+[data-section="loop"] .loop-task:hover .loop-task-img img + img, [data-section="loop"] .loop-task:focus-visible .loop-task-img img + img,
+[data-section="loop"] .loop-task[aria-pressed="true"] .loop-task-img img + img { opacity: 1; }
+[data-section="loop"] .loop-task:hover .loop-task-state::after, [data-section="loop"] .loop-task:focus-visible .loop-task-state::after,
+[data-section="loop"] .loop-task[aria-pressed="true"] .loop-task-state::after { content: "goal"; }
+[data-section="loop"] .loop-task figcaption { display: flex; justify-content: space-between; gap: 6px; align-items: baseline; padding: 0 2px; }
+[data-section="loop"] .loop-task figcaption b { font-size: 13px; line-height: 1.25; color: var(--ink); }
+[data-section="loop"] .loop-task figcaption small { font-size: 11px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { [data-section="loop"] .loop-task-img img + img { transition: none; } }
+
+/* ---- under 860 px: one column; the stepper stays on screen while the panels scroll under it */
+@media (max-width: 860px) {
+  [data-section="loop"] .loop-index-rows { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-auto-flow: row; }
+  [data-section="loop"] .loop-body { display: flex; flex-direction: column; align-items: stretch; gap: 14px; }
+  [data-section="loop"] .loop-side { display: contents; }
+  [data-section="loop"] .loop-figure { position: static; width: 100%; max-width: 420px; margin-inline: auto; }
+  [data-section="loop"] .loop-control { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  /* the strip's key comes straight under the bar, before the machine */
+  [data-section="loop"] .loop-strip-key { order: -1; margin-top: -2px; }
+  [data-section="loop"] .loop-edit-top { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  [data-section="loop"] .loop-control { margin-inline: -16px; padding: 8px 16px; }
+  [data-section="loop"] .stepper { gap: 8px; }
+  [data-section="loop"] .stepper output { min-width: 7.6em; }
+  [data-section="loop"] .loop-eps { display: grid; grid-template-columns: minmax(0, 1fr); }
+  [data-section="loop"] .loop-ep-head { display: none; }
+  [data-section="loop"] .loop-ep-near-k { display: inline; }
+  [data-section="loop"] .loop-ep { grid-template-columns: 18px minmax(0, 1fr) auto; gap: 2px 8px; align-items: start; }
+  [data-section="loop"] .loop-ep-layout { grid-column: 2; grid-row: 1; }
+  [data-section="loop"] .loop-ep-how { grid-column: 2; grid-row: 2; }
+  [data-section="loop"] .loop-ep-near { grid-column: 3; grid-row: 1; text-align: right; }
+  [data-section="loop"] .loop-ep-drawn { grid-column: 3; grid-row: 2; justify-self: end; }
+  [data-section="loop"] .loop-read { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  [data-section="loop"] .loop-task-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  [data-section="loop"] .loop-task figcaption { display: grid; gap: 0; }
+  [data-section="loop"] .loop-task figcaption b { font-size: 12px; }
+}

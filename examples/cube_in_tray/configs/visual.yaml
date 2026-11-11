@@ -1,0 +1,6 @@
+# Stills of the recorded video at step boundaries, up to max_frames per batch around the first failure,
+# and nothing else about the scene.
+base: ../config.yaml
+name: cube_in_tray_visual
+feedback:
+  form: [visual]

@@ -1,0 +1,9 @@
+# The reference condition with a skill library in the workspace. Clone it beside this repository:
+#   git clone https://github.com/graph-robots/open-robot-skills.git ../open-robot-skills
+#   (git -C ../open-robot-skills checkout 752dfbd, the revision this config was written against)
+# Only skills whose every tool is in tools.json are offered.
+base: ../config.yaml
+name: cube_in_tray_skills_full
+skills:
+  path: ../../../../open-robot-skills
+  mode: full

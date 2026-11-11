@@ -1,0 +1,447 @@
+{
+ "tools": [
+  {
+   "name": "robot.get_ee_pose",
+   "summary": "Get the end-effector pose in world frame.",
+   "params": [
+    {
+     "name": "arm_id",
+     "required": false
+    }
+   ],
+   "returns": "{\"pose\": {\"position\": {x, y, z}, \"rotation\": {w, x, y, z}}}"
+  },
+  {
+   "name": "robot.get_gripper",
+   "summary": "Get the gripper open fraction (0 closed, 1 open).",
+   "params": [
+    {
+     "name": "arm_id",
+     "required": false
+    }
+   ],
+   "returns": "{\"position\": fraction}, 0 closed to 1 open"
+  },
+  {
+   "name": "robot.describe_gripper",
+   "summary": "The hand's geometry: span, axes, pads, housing.",
+   "params": [
+    {
+     "name": "arm_id",
+     "required": false
+    },
+    {
+     "name": "role",
+     "required": false
+    }
+   ],
+   "returns": "span_m, min_grasp_width_m, max_grasp_width_m, close_axis, approach_axis, finger, kind, arm, arm_id"
+  },
+  {
+   "name": "robot.describe_workspace",
+   "summary": "Derived heights and clearances for this robot in this cell.",
+   "params": [
+    {
+     "name": "arm_id",
+     "required": false
+    },
+    {
+     "name": "role",
+     "required": false
+    }
+   ],
+   "returns": "surface_z, transport_z, transport_above_surface_m, align_clearance_m, pregrasp_standoff_m, margin_m, arm, arm_id"
+  },
+  {
+   "name": "robot.grasp_frame",
+   "summary": "A grasp orientation built from this hand's measured axes.",
+   "params": [
+    {
+     "name": "approach",
+     "required": false
+    },
+    {
+     "name": "close_heading_deg",
+     "required": false
+    },
+    {
+     "name": "arm_id",
+     "required": false
+    },
+    {
+     "name": "role",
+     "required": false
+    }
+   ],
+   "returns": "{\"arm\", \"rotation\", \"rotation_flipped\", \"approach\", \"close_axis\"}. close_heading_deg is the world heading, in degrees, the jaws close along; approach defaults to straight down"
+  },
+  {
+   "name": "robot.go_to_pose",
+   "summary": "Move the end-effector to a world-frame pose via IK.",
+   "params": [
+    {
+     "name": "pose",
+     "required": true
+    },
+    {
+     "name": "tolerance",
+     "required": false
+    },
+    {
+     "name": "max_steps",
+     "required": false
+    },
+    {
+     "name": "tcp_offset",
+     "required": false
+    },
+    {
+     "name": "arm_id",
+     "required": false
+    },
+    {
+     "name": "z_approach",
+     "required": false
+    },
+    {
+     "name": "nonblocking",
+     "required": false
+    }
+   ],
+   "returns": "nothing; blocks until the servo settles. The wrist roll is not held"
+  },
+  {
+   "name": "robot.go_to_pose_cartesian",
+   "summary": "Move the end-effector along a straight Cartesian line.",
+   "params": [
+    {
+     "name": "pose",
+     "required": true
+    },
+    {
+     "name": "arm_id",
+     "required": false
+    },
+    {
+     "name": "speed_scale",
+     "required": false
+    }
+   ],
+   "returns": "nothing; same servo along a straight line. The wrist roll is not held"
+  },
+  {
+   "name": "robot.execute_trajectory",
+   "summary": "Execute a joint trajectory waypoint-by-waypoint.",
+   "params": [
+    {
+     "name": "trajectory",
+     "required": true
+    },
+    {
+     "name": "subsample",
+     "required": false
+    },
+    {
+     "name": "tolerance",
+     "required": false
+    },
+    {
+     "name": "max_steps_per_waypoint",
+     "required": false
+    },
+    {
+     "name": "arm_id",
+     "required": false
+    }
+   ],
+   "returns": "nothing; runs a motion.* plan's trajectory"
+  },
+  {
+   "name": "robot.open_gripper",
+   "summary": "Open the gripper and let physics settle.",
+   "params": [
+    {
+     "name": "settle_steps",
+     "required": false
+    },
+    {
+     "name": "arm_id",
+     "required": false
+    }
+   ],
+   "returns": "{\"position\": fraction}"
+  },
+  {
+   "name": "robot.close_gripper",
+   "summary": "Close the gripper and let physics settle.",
+   "params": [
+    {
+     "name": "settle_steps",
+     "required": false
+    },
+    {
+     "name": "arm_id",
+     "required": false
+    }
+   ],
+   "returns": "{\"position\": fraction}; near 0 means the fingers met each other"
+  },
+  {
+   "name": "robot.set_grip",
+   "summary": "Drive the jaws to a width, an object's width, or a named preset.",
+   "params": [
+    {
+     "name": "preset",
+     "required": false
+    },
+    {
+     "name": "width_m",
+     "required": false
+    },
+    {
+     "name": "object_width_m",
+     "required": false
+    },
+    {
+     "name": "squeeze_m",
+     "required": false
+    },
+    {
+     "name": "fraction_closed",
+     "required": false
+    },
+    {
+     "name": "arm_id",
+     "required": false
+    },
+    {
+     "name": "role",
+     "required": false
+    },
+    {
+     "name": "ramp_steps",
+     "required": false
+    },
+    {
+     "name": "settle_steps",
+     "required": false
+    }
+   ],
+   "returns": "requested_width_m, command_width_m, clamped, reason, fraction_closed, waited, arm, arm_id. Ramped over ramp_steps"
+  },
+  {
+   "name": "robot.go_home",
+   "summary": "Move all arms to the home joint configuration.",
+   "params": [
+    {
+     "name": "arm_id",
+     "required": false
+    }
+   ],
+   "returns": "nothing"
+  },
+  {
+   "name": "robot.wait_steps",
+   "summary": "Hold position while the scene runs on for a number of steps.",
+   "params": [
+    {
+     "name": "steps",
+     "required": false
+    },
+    {
+     "name": "timeout_s",
+     "required": false
+    }
+   ],
+   "returns": "nothing; holds position for steps control steps"
+  },
+  {
+   "name": "robot.move_to_joints",
+   "summary": "Move the arm to a joint configuration, blocking until converged.",
+   "params": [
+    {
+     "name": "joint_config",
+     "required": true
+    },
+    {
+     "name": "tolerance",
+     "required": false
+    },
+    {
+     "name": "max_steps",
+     "required": false
+    },
+    {
+     "name": "arm_id",
+     "required": false
+    }
+   ],
+   "returns": "nothing; blocks until converged"
+  },
+  {
+   "name": "robot.solve_ik",
+   "summary": "Solve IK for a world-frame pose; returns a joint configuration.",
+   "params": [
+    {
+     "name": "pose",
+     "required": true
+    },
+    {
+     "name": "tcp_offset",
+     "required": false
+    },
+    {
+     "name": "arm_id",
+     "required": false
+    }
+   ],
+   "returns": "a joint configuration for the pose"
+  },
+  {
+   "name": "motion.plan_linear",
+   "summary": "Plan a straight line to a pose, holding the axes the move is not along.",
+   "params": [
+    {
+     "name": "end",
+     "required": true
+    },
+    {
+     "name": "start",
+     "required": false
+    },
+    {
+     "name": "arm_id",
+     "required": false
+    },
+    {
+     "name": "num_waypoints",
+     "required": false
+    },
+    {
+     "name": "axis",
+     "required": false
+    },
+    {
+     "name": "orientation",
+     "required": false
+    },
+    {
+     "name": "tolerance",
+     "required": false
+    },
+    {
+     "name": "world_config",
+     "required": false
+    },
+    {
+     "name": "attached_object",
+     "required": false
+    },
+    {
+     "name": "allow_start_contact",
+     "required": false
+    },
+    {
+     "name": "allow_goal_contact",
+     "required": false
+    },
+    {
+     "name": "contact_margin",
+     "required": false
+    },
+    {
+     "name": "seed_joints",
+     "required": false
+    }
+   ],
+   "returns": "planned, reason, position_error_m, trajectory ({\"waypoints\": [{\"positions\": [...]}, ...]}). orientation is \"axis\" (wrist free, default) or \"lock\" (full rotation held)"
+  },
+  {
+   "name": "motion.plan_joint",
+   "summary": "Plan an eased joint-space move to a pose, and say how near it got.",
+   "params": [
+    {
+     "name": "pose",
+     "required": true
+    },
+    {
+     "name": "arm_id",
+     "required": false
+    },
+    {
+     "name": "num_waypoints",
+     "required": false
+    },
+    {
+     "name": "orientation",
+     "required": false
+    }
+   ],
+   "returns": "planned, reason, position_error_m, rotation_error_rad, trajectory. The argument is pose, not end"
+  },
+  {
+   "name": "sim.get_object_pose",
+   "summary": "One object's ground-truth world pose (position + wxyz quaternion).",
+   "params": [
+    {
+     "name": "object_name",
+     "required": true
+    }
+   ],
+   "returns": "{\"name\", \"pose\": {\"position\", \"rotation\"}}; refuses fixtures"
+  },
+  {
+   "name": "sim.get_object_obb",
+   "summary": "One object's oriented bounding box and the grasp it implies.",
+   "params": [
+    {
+     "name": "object_name",
+     "required": true
+    },
+    {
+     "name": "handle_frac",
+     "required": false
+    }
+   ],
+   "returns": "obb {center, extent (half), orientation}, grasp_obb, grasp_position, grasp_heading_deg, grasp_width, fits_gripper, top_z, bottom_z; refuses fixtures"
+  },
+  {
+   "name": "sim.get_object_bounds",
+   "summary": "One object's world axis-aligned bounds, as it lies now.",
+   "params": [
+    {
+     "name": "object_name",
+     "required": true
+    }
+   ],
+   "returns": "name, min, max, lowest_z, highest_z, long_axis; refuses fixtures"
+  },
+  {
+   "name": "sim.list_objects",
+   "summary": "Every manipulable object in the scene, with its category.",
+   "params": [],
+   "returns": "{\"objects\": [{\"name\", \"category\", \"static\"}, ...]}"
+  },
+  {
+   "name": "sim.list_regions",
+   "summary": "Every goal region, with its world centre.",
+   "params": [],
+   "returns": "{\"regions\": [{\"name\", \"frame\", \"center\"}, ...]}"
+  },
+  {
+   "name": "sim.get_region_obb",
+   "summary": "One goal region as an oriented bounding box, for aiming a place.",
+   "params": [
+    {
+     "name": "region_name",
+     "required": true
+    },
+    {
+     "name": "height",
+     "required": false
+    }
+   ],
+   "returns": "{\"name\", \"obb\": {center, extent (half), orientation}}: the region's own volume near its floor"
+  }
+ ]
+}

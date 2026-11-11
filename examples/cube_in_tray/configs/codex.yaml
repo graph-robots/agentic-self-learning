@@ -1,0 +1,7 @@
+# The reference condition with the Codex CLI as the agent (codex login first).
+base: ../config.yaml
+name: cube_in_tray_codex
+agent:
+  kind: codex
+  model: gpt-6-astra
+  reasoning_effort: xhigh

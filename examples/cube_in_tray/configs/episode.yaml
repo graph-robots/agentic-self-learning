@@ -1,0 +1,5 @@
+# Once per episode: start and end, nothing in between.
+base: ../config.yaml
+name: cube_in_tray_episode
+feedback:
+  granularity: episode

@@ -1,0 +1,84 @@
+/* Code (DESIGN_SPEC §3.11): the intro beside the example clip, then the switchboard: four switches on the left, the
+   config they produce on the right, the run command across the foot. */
+[data-section="code"] .code-intro { align-items: center; }
+[data-section="code"] .code-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+[data-section="code"] .code-links .pill { max-width: 100%; }
+[data-section="code"] .code-clip { margin: 0; display: grid; gap: 8px; }
+
+/* ---- the switchboard */
+[data-section="code"] .code-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 22px 32px; align-items: start; }
+[data-section="code"] .code-switches, [data-section="code"] .code-pair { display: grid; gap: 16px; }
+/* Form and Space are the two halves of Finding 4's one ladder: a single tag, bracketed down to the Space switch */
+[data-section="code"] .code-pair { position: relative; }
+[data-section="code"] .code-pair::after {
+  content: ""; position: absolute; top: 18px; bottom: 30px; right: -13px; width: 13px; pointer-events: none;
+  border: 1.5px solid color-mix(in srgb, var(--cause) 35%, var(--line)); border-left: 0; border-radius: 0 8px 8px 0;
+}
+[data-section="code"] .code-switch { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; column-gap: 10px; row-gap: 7px; align-items: center; }
+[data-section="code"] .code-switch .loopglyph { grid-column: 1; grid-row: 1; }
+[data-section="code"] .code-name { grid-column: 2; grid-row: 1; font: 700 14.5px/1.3 var(--sans); color: var(--ink); min-width: 0; }
+[data-section="code"] .code-name code { display: block; margin-top: 2px; font-size: 12px; color: var(--muted); white-space: nowrap; }
+[data-section="code"] .code-ftag {
+  grid-column: 3; grid-row: 1; font: 700 12px/1 var(--sans); color: var(--cause); text-decoration: none; white-space: nowrap;
+  padding: 5px 9px; border: 1px solid color-mix(in srgb, var(--cause) 35%, var(--line)); border-radius: 999px;
+}
+[data-section="code"] .code-ftag:hover { background: var(--cause-wash); }
+/* every switch spans its row, options in equal columns, so the four read as one panel */
+[data-section="code"] .code-switch .lens { grid-column: 2 / span 2; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
+[data-section="code"] .lens button { display: grid; gap: 2px; text-align: left; align-content: center; }
+[data-section="code"] .lens button code { font: 500 12px/1.25 var(--mono); color: inherit; }
+[data-section="code"] .lens button span { font: 600 11px/1.2 var(--sans); color: var(--muted); letter-spacing: 0.01em; }
+/* config.yaml's own value, under its option in every switch */
+[data-section="code"] .code-refs {
+  grid-column: 2 / span 2; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); column-gap: 4px;
+  padding: 0 5px; margin-top: -3px; font: 600 11px/1 var(--sans); letter-spacing: 0.02em; color: var(--muted);
+}
+[data-section="code"] .code-refs span { padding-left: 10px; }
+
+/* ---- outcome only: the switches that change nothing in the report, hatched */
+[data-section="code"] .code-switch > *, [data-section="code"] .lens button { transition: opacity var(--t-fog); }
+[data-section="code"] .code-switch[data-fog] > :not(.lens) { opacity: 0.45; }
+[data-section="code"] .code-switch[data-fog] .lens { background: repeating-linear-gradient(135deg, var(--fog-ink) 0 1px, var(--fog-bg) 1px 6px); }
+[data-section="code"] .code-switch[data-fog] .lens button { opacity: 0.5; }
+[data-section="code"] .code-why { grid-column: 2 / span 2; font: 500 var(--fs-small)/1.45 var(--sans); color: var(--ink); }
+[data-section="code"] .code-why::before {
+  content: ""; display: inline-block; width: 14px; height: 12px; margin-right: 8px; vertical-align: -1px; border-radius: 2px;
+  background: repeating-linear-gradient(135deg, var(--fog-ink) 0 1px, var(--fog-bg) 1px 4px); box-shadow: inset 0 0 0 1px var(--fog-ink);
+}
+
+/* ---- the config card: the file in play and its own comment, then the merged blocks */
+[data-section="code"] .code-file { display: grid; border: 1px solid var(--line); border-radius: var(--r-panel); background: var(--soft); overflow: hidden; min-width: 0; }
+[data-section="code"] #code-overlay {
+  display: grid; gap: 8px; padding: 11px 14px; margin: 0; background: var(--stage-inset); border-bottom: 1px solid var(--line);
+  font: 500 var(--fs-mono)/1.5 var(--mono); min-height: 4.5em; align-content: start;
+}
+[data-section="code"] .code-entry { display: grid; gap: 1px; min-width: 0; }
+[data-section="code"] .code-path { color: var(--ink); font-weight: 500; overflow-wrap: anywhere; }
+[data-section="code"] .code-entry .c { color: var(--muted); overflow-wrap: anywhere; }
+[data-section="code"] .code-file pre.cfg { border: 0; border-radius: 0; background: transparent; padding: 10px 8px; }
+[data-section="code"] pre.cfg .ln { display: block; padding: 0 6px; border-radius: 4px; transition: background var(--t-fog); }
+[data-section="code"] pre.cfg .ln.set { background: var(--cause-wash); box-shadow: inset 3px 0 0 var(--cause); }
+[data-section="code"] pre.cfg .ln.linked { outline: 1px solid color-mix(in srgb, var(--cause) 60%, transparent); outline-offset: -1px; }
+[data-section="code"] pre.cfg .ln.flash { background: var(--mark); }
+[data-section="code"] pre.cfg .y-key { color: var(--muted); }
+[data-section="code"] .code-note { padding: 10px 14px; border-top: 1px dashed var(--line); font: 500 var(--fs-small)/1.45 var(--sans); color: var(--ink); }
+[data-section="code"] .code-note[hidden] { display: none; }
+[data-section="code"] .code-swatch { display: inline-block; width: 14px; height: 12px; margin-right: 8px; vertical-align: -1px; border-radius: 2px; background: var(--cause-wash); box-shadow: inset 3px 0 0 var(--cause); }
+
+/* ---- the run command */
+[data-section="code"] .code-run { display: grid; gap: 10px; border-top: 1px dashed var(--line); padding-top: 16px; min-width: 0; }
+[data-section="code"] .code-run-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+[data-section="code"] .code-run pre.cfg { padding: 10px 8px; }
+[data-section="code"] #code-copy { min-height: 30px; padding: 5px 12px; font-size: 12.5px; }
+
+@media (max-width: 860px) {
+  [data-section="code"] .code-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  [data-section="code"] .code-switch .lens, [data-section="code"] .code-refs, [data-section="code"] .code-why { grid-column: 1 / -1; }
+  [data-section="code"] .code-pair::after { right: -10px; width: 10px; }
+  /* the run line is what a switch changes, so on a phone it wraps instead of hiding past the edge: at spaces and after
+     a path's slashes (code.js marks them), never inside a word */
+  [data-section="code"] #code-quick { white-space: pre-wrap; overflow-wrap: normal; }
+  [data-section="code"] #code-quick .ln { padding-left: calc(6px + 2ch); text-indent: -2ch; }
+}

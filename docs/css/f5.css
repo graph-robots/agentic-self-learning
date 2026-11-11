@@ -1,0 +1,159 @@
+/* Finding 5 (Physical reasoning): two lanes on one clock, the fix's callouts, 17 of 19, the program rows. */
+
+/* ---- the clock: Play and a visible scrubber (base's input.scrub is an invisible overlay for ribbons) */
+[data-section="f5"] .f5-clock { gap: 10px 14px; flex: 1 1 320px; }
+[data-section="f5"] .f5-clock .btn { min-width: 92px; justify-content: center; }
+[data-section="f5"] .f5-clock input.scrub {
+  position: static; opacity: 1; flex: 1 1 160px; min-width: 120px; height: 24px; margin: 0; cursor: pointer;
+  -webkit-appearance: none; appearance: none; background: transparent;
+}
+[data-section="f5"] .f5-clock input.scrub::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: var(--line); }
+[data-section="f5"] .f5-clock input.scrub::-moz-range-track { height: 4px; border-radius: 2px; background: var(--line); }
+[data-section="f5"] .f5-clock input.scrub::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 16px; height: 16px; margin-top: -6px; border-radius: 50%; background: var(--ink); border: 2px solid var(--card);
+  box-shadow: 0 0 0 1px var(--ink);
+}
+[data-section="f5"] .f5-clock input.scrub::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--ink); border: 2px solid var(--card); }
+[data-section="f5"] .f5-clock input.scrub:focus-visible { outline: 2px solid var(--cause); outline-offset: 2px; }
+[data-section="f5"] .f5-clock output { font: 500 12px var(--mono); color: var(--muted); min-width: 4.2em; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ---- lanes */
+[data-section="f5"] .lanes { gap: 22px 24px; }
+[data-section="f5"] .lane { display: grid; gap: 12px; align-content: start; grid-template-columns: minmax(0, 1fr); }
+[data-section="f5"] .lane > * { min-width: 0; }
+/* the overhead view has a wide grey margin: a 2:1 crop keeps the table, the tray and the box */
+[data-section="f5"] .lane .clip { aspect-ratio: 2 / 1; }
+/* one clock drives both clips, from the stage's own Play button */
+[data-section="f5"] .lane .playtoggle { display: none; }
+[data-section="f5"] .lane-geo { display: grid; gap: 10px; grid-template-columns: minmax(0, 1fr); padding: 10px 12px 14px; background: var(--stage-inset); border-radius: var(--r-panel); }
+[data-section="f5"] .f5-geo-head { margin: 0; font: 700 14.5px/1.35 var(--sans); color: var(--ink); text-wrap: balance; }
+[data-section="f5"] .geo-box { min-width: 0; position: relative; }
+/* f5's layer over the keyhole: the opening's tint and the syringes' numbers; it never takes the pointer */
+[data-section="f5"] svg.f5-over { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+[data-section="f5"] svg.f5-over .f5-end { font: 700 11.5px var(--sans); fill: var(--ink); paint-order: stroke; stroke: var(--card); stroke-width: 3px; stroke-linejoin: round; }
+[data-section="f5"] .lane-meta { display: flex; align-items: center; gap: 14px; }
+[data-section="f5"] .lane-meta .tilt { margin: 0; flex: none; display: grid; justify-items: center; }
+[data-section="f5"] .lane-meta .tilt figcaption { font: 500 11px/1.2 var(--sans); color: var(--muted); }
+[data-section="f5"] .lane-meta .tilt svg.gauge { width: 104px; }
+[data-section="f5"] .lane-note { font: 500 var(--fs-small)/1.45 var(--sans); color: var(--ink); max-width: 52ch; }
+
+/* the two syringes: syringe 1 solid, syringe 2 dashed, in the section and on the gauge */
+[data-section="f5"] svg.keyhole .bar.ok { stroke: var(--ok); }
+[data-section="f5"] svg.keyhole .bar.second { stroke-dasharray: 5 3; }
+/* the carry outline is syringe 1 earlier on: solid like it, faint; the first program's in its own orange */
+[data-section="f5"] svg.keyhole .bar.ghost { stroke-width: 1.5; }
+[data-section="f5"] svg.keyhole .bar.ghost.flat { stroke: var(--seen); stroke-opacity: 0.45; }
+[data-section="f5"] svg.gauge .needle.ghost { stroke: var(--muted); stroke-width: 1.8; stroke-dasharray: 3 2.5; }
+/* the key to the sections on one line, the caption on the next */
+[data-section="f5"] .f5-geo-key { margin-top: -6px; gap: 4px 16px; font-size: var(--fs-small); }
+[data-section="f5"] .f5-geo-cap { margin-top: -14px; max-width: none; }
+[data-section="f5"] .f5-key { display: inline-flex; align-items: center; gap: 6px; color: var(--ink); white-space: nowrap; }
+[data-section="f5"] .f5-swatch { display: inline-block; width: 22px; height: 8px; border-radius: 4px; border: 1.5px solid var(--ink); }
+[data-section="f5"] .f5-swatch.second { border-style: dashed; }
+[data-section="f5"] .f5-swatch.ghost { border-color: var(--ctx); border-width: 1px; }
+
+/* ---- callouts: hover links a dimension to its line in the diff */
+[data-section="f5"] svg.keyhole .geo-dim text { font-size: 11.5px; pointer-events: all; cursor: help; }
+/* the opening, the outline's time and the syringe's length are our words, in sans, and are not callouts */
+[data-section="f5"] svg.keyhole .geo-dim:is([data-key="opening"], [data-key="ghost"], [data-key="length"]) text { font: 500 11.5px var(--sans); fill: var(--muted); cursor: default; }
+[data-section="f5"] svg.keyhole .geo-dim:is([data-key="opening"], [data-key="length"]) line { stroke: var(--muted); }
+/* the hang clamp's range, faint beside the hang itself; a leader is a line without end ticks */
+[data-section="f5"] svg.keyhole .geo-dim.range line { stroke: var(--muted); stroke-dasharray: 2 2; }
+[data-section="f5"] svg.keyhole .geo-dim.range line ~ line { stroke-dasharray: none; }
+[data-section="f5"] svg.keyhole .geo-dim.leader line { stroke: var(--muted); }
+[data-section="f5"] svg.keyhole .geo-dim.leader line ~ line { display: none; }
+[data-section="f5"] svg.keyhole .geo-dim.hot.cone path { fill: var(--cause-wash); stroke-width: 1.6; }
+[data-section="f5"] svg.keyhole .geo-dim.hot line { stroke: var(--cause); }
+[data-section="f5"] .callout-key { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+[data-section="f5"] .callout-key li { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; align-items: start; padding: 6px 8px; border-radius: 8px; cursor: help; }
+[data-section="f5"] .callout-key.numbered li { grid-template-columns: 20px minmax(0, 1fr); }
+[data-section="f5"] .callout-key li:hover, [data-section="f5"] .callout-key li.on { background: var(--cause-wash); }
+[data-section="f5"] .callout-key li.on code { color: var(--cause); }
+[data-section="f5"] .callout-key .n { display: none; font: 500 11px/16px var(--mono); text-align: center; border: 1px solid var(--ink); border-radius: 50%; width: 18px; height: 18px; }
+[data-section="f5"] .callout-key.numbered .n { display: block; }
+[data-section="f5"] .callout-key code { display: block; font-size: 11.5px; color: var(--ink); overflow-wrap: anywhere; }
+[data-section="f5"] .callout-key .gloss { display: block; font: 500 12.5px/1.4 var(--sans); color: var(--muted); }
+
+/* ---- what the agent said and wrote */
+[data-section="f5"] .f5-said-row { align-items: stretch; }
+[data-section="f5"] .f5-said-row > * { align-self: stretch; }
+/* the diff spans the stage: the callouts on the second section name their constants, and hovering a line lights its
+   dimension there */
+[data-section="f5"] .f5-code { display: grid; gap: 8px; min-width: 0; }
+[data-section="f5"] .f5-diffhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+[data-section="f5"] .f5-diffhead code { font-size: 12px; color: var(--muted); overflow-wrap: anywhere; }
+[data-section="f5"] .f5-diffhead .figcap { margin-left: auto; font-size: var(--fs-micro); }
+[data-section="f5"] .callout-key[hidden] { display: none; }
+[data-section="f5"] pre.diff { max-height: none; font-size: 11.5px; white-space: pre; overflow-wrap: normal; overflow-x: auto; }
+[data-section="f5"] pre.diff .ln[data-key] { cursor: help; }
+[data-section="f5"] pre.diff .ln[data-key]:focus-visible { outline: 2px solid var(--cause); outline-offset: -2px; }
+/* a phone wraps the diff at its spaces rather than hide its line ends, never inside a name or a number (a token wider
+   than the box scrolls inside it); f5.js sets each line's hanging indent */
+@media (max-width: 600px) {
+  [data-section="f5"] pre.diff { white-space: pre-wrap; overflow-wrap: normal; overflow-x: auto; }
+  [data-section="f5"] pre.diff .ln { padding-left: calc(6px + var(--hang, 0ch)); text-indent: calc(-1 * var(--hang, 0ch)); }
+}
+
+/* ---- 17 of 19 */
+[data-section="f5"] figure.glyphs { margin: 0; display: grid; gap: 10px; align-content: center; padding: 14px 16px; background: var(--stage-inset); border-radius: var(--r-panel); }
+[data-section="f5"] figure.glyphs .eyebrow { margin: 0; }
+[data-section="f5"] .f5-19-row { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 10px 18px; }
+[data-section="f5"] .f5-19-row > * { min-width: 0; }
+[data-section="f5"] .f5-big { margin: 0; white-space: nowrap; }
+[data-section="f5"] .f5-big .f5-of { color: var(--muted); font-size: 0.6em; margin-left: 2px; }
+[data-section="f5"] figure.glyphs svg { display: block; max-width: 100%; height: auto; overflow: visible; margin: 0 auto; }
+@media (max-width: 600px) { [data-section="f5"] .f5-19-row { grid-template-columns: minmax(0, 1fr); } }
+[data-section="f5"] figure.glyphs figcaption { color: var(--ink); font-size: 14px; }
+[data-section="f5"] .syr .glid { stroke: var(--muted); stroke-width: 2.4; stroke-linecap: round; }
+[data-section="f5"] .syr .gwall { fill: none; stroke: var(--fog-ink); stroke-width: 1; stroke-dasharray: 2 2; }
+[data-section="f5"] .syr.flat .gbar { fill: var(--card); stroke: var(--seen); stroke-width: 1.6; }
+/* the rest: an empty dashed slot where a flat syringe would lie, as "no such step" is in the program rows */
+[data-section="f5"] .syr.other .gbar { fill: none; stroke: var(--ctx); stroke-width: 1.2; stroke-dasharray: 2.5 2; }
+
+/* ---- program rows */
+[data-section="f5"] .f5-structure { position: relative; margin: 0; display: grid; gap: 10px; min-width: 0; }
+[data-section="f5"] svg.structure { display: block; width: 100%; overflow: visible; }
+[data-section="f5"] .structure .st-head { font: 600 10.5px var(--sans); fill: var(--muted); letter-spacing: 0.02em; }
+[data-section="f5"] .structure .st-letter { font: 700 12.5px var(--mono); fill: var(--ink); }
+[data-section="f5"] .structure .st-name { font: 500 11.5px var(--sans); fill: var(--muted); }
+[data-section="f5"] .structure .st-rate { font: 600 17px var(--num); fill: var(--ink); font-variant-numeric: tabular-nums; }
+[data-section="f5"] .structure .st-line { stroke: var(--line); stroke-width: 1.5; }
+[data-section="f5"] .structure .st-band { fill: var(--cause); fill-opacity: 0.09; }
+[data-section="f5"] .structure .st-chip rect { fill: var(--card); stroke: var(--muted); stroke-width: 1; }
+[data-section="f5"] .structure .st-chip use { color: var(--ink); }
+[data-section="f5"] .structure .st-chip.motion rect { fill: var(--cause-wash); stroke: var(--cause); stroke-width: 1.5; }
+[data-section="f5"] .structure .st-chip.motion use { color: var(--cause); }
+[data-section="f5"] .structure .st-gap { fill: var(--card); stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 2.5; }
+[data-section="f5"] .structure .st-repeat { fill: none; stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 3 2; }
+[data-section="f5"] .structure .st-times-bg { fill: var(--ink); }
+[data-section="f5"] .structure .st-times { font: 500 10.5px var(--mono); fill: var(--bg); }
+[data-section="f5"] .structure .st-times-g { cursor: help; }
+[data-section="f5"] .structure .st-times-g:focus-visible { outline: 2px solid var(--cause); outline-offset: 2px; }
+[data-section="f5"] .structure .st-hit { fill: transparent; cursor: help; }
+[data-section="f5"] .structure .st-hit:hover, [data-section="f5"] .structure .st-hit:focus-visible { fill: var(--ink); fill-opacity: 0.05; }
+[data-section="f5"] .f5-kinds { gap: 6px 14px; font-size: 12.5px; }
+[data-section="f5"] .f5-kinds .kind { display: inline-flex; align-items: center; gap: 6px; }
+[data-section="f5"] .f5-kinds .kind svg.glyph { color: var(--ink); }
+[data-section="f5"] .f5-kinds .kind.motion { color: var(--cause); font-weight: 700; }
+[data-section="f5"] .f5-kinds .kind.motion svg.glyph { color: var(--cause); }
+[data-section="f5"] .f5-kinds .kind.gap i { width: 13px; height: 13px; border: 1px dashed var(--muted); border-radius: 3px; display: inline-block; }
+
+/* ---- the drawer */
+[data-section="f5"] .drawer-body.cols-7-5 { align-items: start; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+@media (max-width: 860px) { [data-section="f5"] .drawer-body.cols-7-5 { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---- narrow: the lanes stack, so the clock sticks under the section rail while the lanes are on screen */
+[data-section="f5"] .f5-zone { display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr); min-width: 0; }
+[data-section="f5"] .f5-zone > * { min-width: 0; }
+@media (max-width: 860px) {
+  [data-section="f5"] .f5-zone > .stage-head { display: contents; }
+  [data-section="f5"] .f5-zone .f5-clock {
+    position: sticky; top: 44px; z-index: 6; margin: -8px -8px 0; padding: 8px; background: var(--card);
+    border-bottom: 1px solid var(--line); flex-wrap: nowrap;
+  }
+}
+@media (max-width: 600px) {
+  [data-section="f5"] .f5-zone { gap: 16px; }
+  [data-section="f5"] .lane-geo { padding: 8px; }
+  [data-section="f5"] .lane-meta .tilt svg.gauge { width: 88px; }
+}

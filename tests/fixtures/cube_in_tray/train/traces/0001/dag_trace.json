@@ -1,0 +1,2327 @@
+{
+  "nodes": [
+    {
+      "id": "n_0000",
+      "name": "perceive",
+      "node_type": "subgraph",
+      "service": null,
+      "method": null,
+      "script": null,
+      "started_at": 0.0,
+      "finished_at": 0.0,
+      "duration_ms": 0.0,
+      "status": "pending",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": false,
+      "has_output": false,
+      "visits": 0,
+      "assets": []
+    },
+    {
+      "id": "n_0001",
+      "name": "pick",
+      "node_type": "subgraph",
+      "service": null,
+      "method": null,
+      "script": null,
+      "started_at": 0.0,
+      "finished_at": 0.0,
+      "duration_ms": 0.0,
+      "status": "pending",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": false,
+      "has_output": false,
+      "visits": 0,
+      "assets": []
+    },
+    {
+      "id": "n_0002",
+      "name": "pick_again",
+      "node_type": "subgraph",
+      "service": null,
+      "method": null,
+      "script": null,
+      "started_at": 0.0,
+      "finished_at": 0.0,
+      "duration_ms": 0.0,
+      "status": "pending",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": false,
+      "has_output": false,
+      "visits": 0,
+      "assets": []
+    },
+    {
+      "id": "n_0003",
+      "name": "place",
+      "node_type": "subgraph",
+      "service": null,
+      "method": null,
+      "script": null,
+      "started_at": 0.0,
+      "finished_at": 0.0,
+      "duration_ms": 0.0,
+      "status": "pending",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": false,
+      "has_output": false,
+      "visits": 0,
+      "assets": []
+    },
+    {
+      "id": "n_0004",
+      "name": "verify",
+      "node_type": "subgraph",
+      "service": null,
+      "method": null,
+      "script": null,
+      "started_at": 0.0,
+      "finished_at": 0.0,
+      "duration_ms": 0.0,
+      "status": "pending",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": false,
+      "has_output": false,
+      "visits": 0,
+      "assets": []
+    },
+    {
+      "id": "n_0005",
+      "name": "done",
+      "node_type": "end",
+      "service": null,
+      "method": null,
+      "script": null,
+      "started_at": 0.0,
+      "finished_at": 0.0,
+      "duration_ms": 0.0,
+      "status": "pending",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": false,
+      "has_output": false,
+      "visits": 0,
+      "assets": []
+    },
+    {
+      "id": "n_0006",
+      "name": "abort",
+      "node_type": "end",
+      "service": null,
+      "method": null,
+      "script": null,
+      "started_at": 0.0,
+      "finished_at": 0.0,
+      "duration_ms": 0.0,
+      "status": "pending",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": false,
+      "has_output": false,
+      "visits": 0,
+      "assets": []
+    },
+    {
+      "id": "n_0007",
+      "name": "perceive_sg.find",
+      "node_type": "script",
+      "service": null,
+      "method": null,
+      "script": "scripts/perceive/find.py",
+      "started_at": 1792656222.4173017,
+      "finished_at": 1792656222.4203105,
+      "duration_ms": 3.01,
+      "status": "ok",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": true,
+      "has_output": true,
+      "visits": 1,
+      "assets": []
+    },
+    {
+      "id": "n_0008",
+      "name": "perceive_sg.ok",
+      "node_type": "noop",
+      "service": null,
+      "method": null,
+      "script": null,
+      "started_at": 0.0,
+      "finished_at": 0.0,
+      "duration_ms": 0.0,
+      "status": "pending",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": false,
+      "has_output": false,
+      "visits": 0,
+      "assets": []
+    },
+    {
+      "id": "n_0009",
+      "name": "pick_sg.reset",
+      "node_type": "script",
+      "service": null,
+      "method": null,
+      "script": "scripts/pick/reset.py",
+      "started_at": 1792656222.421005,
+      "finished_at": 1792656223.0894015,
+      "duration_ms": 668.4,
+      "status": "ok",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": true,
+      "has_output": true,
+      "visits": 1,
+      "assets": []
+    },
+    {
+      "id": "n_0010",
+      "name": "pick_sg.approach",
+      "node_type": "script",
+      "service": null,
+      "method": null,
+      "script": "scripts/pick/approach.py",
+      "started_at": 1792656223.090299,
+      "finished_at": 1792656225.2165937,
+      "duration_ms": 2126.29,
+      "status": "ok",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": true,
+      "has_output": true,
+      "visits": 1,
+      "assets": []
+    },
+    {
+      "id": "n_0011",
+      "name": "pick_sg.descend",
+      "node_type": "script",
+      "service": null,
+      "method": null,
+      "script": "scripts/pick/descend.py",
+      "started_at": 1792656225.217512,
+      "finished_at": 1792656226.2025602,
+      "duration_ms": 985.05,
+      "status": "ok",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": true,
+      "has_output": true,
+      "visits": 1,
+      "assets": []
+    },
+    {
+      "id": "n_0012",
+      "name": "pick_sg.close",
+      "node_type": "script",
+      "service": null,
+      "method": null,
+      "script": "scripts/pick/close.py",
+      "started_at": 1792656226.203535,
+      "finished_at": 1792656227.691952,
+      "duration_ms": 1488.42,
+      "status": "ok",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": true,
+      "has_output": true,
+      "visits": 1,
+      "assets": []
+    },
+    {
+      "id": "n_0013",
+      "name": "pick_sg.lift",
+      "node_type": "script",
+      "service": null,
+      "method": null,
+      "script": "scripts/pick/lift.py",
+      "started_at": 1792656227.6929593,
+      "finished_at": 1792656228.9192922,
+      "duration_ms": 1226.33,
+      "status": "ok",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": true,
+      "has_output": true,
+      "visits": 1,
+      "assets": []
+    },
+    {
+      "id": "n_0014",
+      "name": "pick_sg.held",
+      "node_type": "noop",
+      "service": null,
+      "method": null,
+      "script": null,
+      "started_at": 0.0,
+      "finished_at": 0.0,
+      "duration_ms": 0.0,
+      "status": "pending",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": false,
+      "has_output": false,
+      "visits": 0,
+      "assets": []
+    },
+    {
+      "id": "n_0015",
+      "name": "place_sg.carry",
+      "node_type": "script",
+      "service": null,
+      "method": null,
+      "script": "scripts/place/carry.py",
+      "started_at": 1792656228.9204826,
+      "finished_at": 1792656231.0679374,
+      "duration_ms": 2147.45,
+      "status": "ok",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": true,
+      "has_output": true,
+      "visits": 1,
+      "assets": []
+    },
+    {
+      "id": "n_0016",
+      "name": "place_sg.lower",
+      "node_type": "script",
+      "service": null,
+      "method": null,
+      "script": "scripts/place/lower.py",
+      "started_at": 1792656231.0691938,
+      "finished_at": 1792656232.245792,
+      "duration_ms": 1176.6,
+      "status": "ok",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": true,
+      "has_output": true,
+      "visits": 1,
+      "assets": []
+    },
+    {
+      "id": "n_0017",
+      "name": "place_sg.release",
+      "node_type": "script",
+      "service": null,
+      "method": null,
+      "script": "scripts/place/release.py",
+      "started_at": 1792656232.2471185,
+      "finished_at": 1792656235.0667634,
+      "duration_ms": 2819.64,
+      "status": "ok",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": true,
+      "has_output": true,
+      "visits": 1,
+      "assets": []
+    },
+    {
+      "id": "n_0018",
+      "name": "place_sg.placed",
+      "node_type": "noop",
+      "service": null,
+      "method": null,
+      "script": null,
+      "started_at": 0.0,
+      "finished_at": 0.0,
+      "duration_ms": 0.0,
+      "status": "pending",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": false,
+      "has_output": false,
+      "visits": 0,
+      "assets": []
+    },
+    {
+      "id": "n_0019",
+      "name": "verify_sg.clear",
+      "node_type": "script",
+      "service": null,
+      "method": null,
+      "script": "scripts/verify/clear.py",
+      "started_at": 1792656235.068196,
+      "finished_at": 1792656242.8547251,
+      "duration_ms": 7786.53,
+      "status": "error",
+      "condition": null,
+      "condition_result": null,
+      "error_message": "Node 'verify_sg.clear' failed: BusClosed: the simulation bus closed: the episode ended",
+      "has_inputs": true,
+      "has_output": false,
+      "visits": 1,
+      "assets": []
+    },
+    {
+      "id": "n_0020",
+      "name": "verify_sg.check",
+      "node_type": "script",
+      "service": null,
+      "method": null,
+      "script": "scripts/verify/check.py",
+      "started_at": 0.0,
+      "finished_at": 0.0,
+      "duration_ms": 0.0,
+      "status": "pending",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": false,
+      "has_output": false,
+      "visits": 0,
+      "assets": []
+    },
+    {
+      "id": "n_0021",
+      "name": "verify_sg.in_tray",
+      "node_type": "noop",
+      "service": null,
+      "method": null,
+      "script": null,
+      "started_at": 0.0,
+      "finished_at": 0.0,
+      "duration_ms": 0.0,
+      "status": "pending",
+      "condition": null,
+      "condition_result": null,
+      "error_message": null,
+      "has_inputs": false,
+      "has_output": false,
+      "visits": 0,
+      "assets": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "n_0000",
+      "to": "n_0001",
+      "from_id": "n_0000",
+      "to_id": "n_0001",
+      "from_name": "perceive",
+      "to_name": "pick"
+    },
+    {
+      "from": "n_0000",
+      "to": "n_0006",
+      "from_id": "n_0000",
+      "to_id": "n_0006",
+      "from_name": "perceive",
+      "to_name": "abort"
+    },
+    {
+      "from": "n_0001",
+      "to": "n_0003",
+      "from_id": "n_0001",
+      "to_id": "n_0003",
+      "from_name": "pick",
+      "to_name": "place"
+    },
+    {
+      "from": "n_0001",
+      "to": "n_0002",
+      "from_id": "n_0001",
+      "to_id": "n_0002",
+      "from_name": "pick",
+      "to_name": "pick_again"
+    },
+    {
+      "from": "n_0002",
+      "to": "n_0003",
+      "from_id": "n_0002",
+      "to_id": "n_0003",
+      "from_name": "pick_again",
+      "to_name": "place"
+    },
+    {
+      "from": "n_0002",
+      "to": "n_0006",
+      "from_id": "n_0002",
+      "to_id": "n_0006",
+      "from_name": "pick_again",
+      "to_name": "abort"
+    },
+    {
+      "from": "n_0003",
+      "to": "n_0004",
+      "from_id": "n_0003",
+      "to_id": "n_0004",
+      "from_name": "place",
+      "to_name": "verify"
+    },
+    {
+      "from": "n_0003",
+      "to": "n_0004",
+      "from_id": "n_0003",
+      "to_id": "n_0004",
+      "from_name": "place",
+      "to_name": "verify"
+    },
+    {
+      "from": "n_0004",
+      "to": "n_0005",
+      "from_id": "n_0004",
+      "to_id": "n_0005",
+      "from_name": "verify",
+      "to_name": "done"
+    },
+    {
+      "from": "n_0004",
+      "to": "n_0006",
+      "from_id": "n_0004",
+      "to_id": "n_0006",
+      "from_name": "verify",
+      "to_name": "abort"
+    },
+    {
+      "from": "n_0007",
+      "to": "n_0008",
+      "from_id": "n_0007",
+      "to_id": "n_0008",
+      "from_name": "perceive_sg.find",
+      "to_name": "perceive_sg.ok"
+    },
+    {
+      "from": "n_0009",
+      "to": "n_0010",
+      "from_id": "n_0009",
+      "to_id": "n_0010",
+      "from_name": "pick_sg.reset",
+      "to_name": "pick_sg.approach"
+    },
+    {
+      "from": "n_0010",
+      "to": "n_0011",
+      "from_id": "n_0010",
+      "to_id": "n_0011",
+      "from_name": "pick_sg.approach",
+      "to_name": "pick_sg.descend"
+    },
+    {
+      "from": "n_0011",
+      "to": "n_0012",
+      "from_id": "n_0011",
+      "to_id": "n_0012",
+      "from_name": "pick_sg.descend",
+      "to_name": "pick_sg.close"
+    },
+    {
+      "from": "n_0012",
+      "to": "n_0013",
+      "from_id": "n_0012",
+      "to_id": "n_0013",
+      "from_name": "pick_sg.close",
+      "to_name": "pick_sg.lift"
+    },
+    {
+      "from": "n_0013",
+      "to": "n_0014",
+      "from_id": "n_0013",
+      "to_id": "n_0014",
+      "from_name": "pick_sg.lift",
+      "to_name": "pick_sg.held"
+    },
+    {
+      "from": "n_0015",
+      "to": "n_0016",
+      "from_id": "n_0015",
+      "to_id": "n_0016",
+      "from_name": "place_sg.carry",
+      "to_name": "place_sg.lower"
+    },
+    {
+      "from": "n_0016",
+      "to": "n_0017",
+      "from_id": "n_0016",
+      "to_id": "n_0017",
+      "from_name": "place_sg.lower",
+      "to_name": "place_sg.release"
+    },
+    {
+      "from": "n_0017",
+      "to": "n_0018",
+      "from_id": "n_0017",
+      "to_id": "n_0018",
+      "from_name": "place_sg.release",
+      "to_name": "place_sg.placed"
+    },
+    {
+      "from": "n_0019",
+      "to": "n_0020",
+      "from_id": "n_0019",
+      "to_id": "n_0020",
+      "from_name": "verify_sg.clear",
+      "to_name": "verify_sg.check"
+    },
+    {
+      "from": "n_0020",
+      "to": "n_0021",
+      "from_id": "n_0020",
+      "to_id": "n_0021",
+      "from_name": "verify_sg.check",
+      "to_name": "verify_sg.in_tray"
+    }
+  ],
+  "events": [
+    {
+      "seq": 0,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.4164023,
+      "node_id": "n_0000",
+      "node_name": "perceive",
+      "status": null,
+      "detail": {
+        "node_type": "subgraph"
+      }
+    },
+    {
+      "seq": 1,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.4164095,
+      "node_id": "n_0001",
+      "node_name": "pick",
+      "status": null,
+      "detail": {
+        "node_type": "subgraph"
+      }
+    },
+    {
+      "seq": 2,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.4164116,
+      "node_id": "n_0002",
+      "node_name": "pick_again",
+      "status": null,
+      "detail": {
+        "node_type": "subgraph"
+      }
+    },
+    {
+      "seq": 3,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.4164135,
+      "node_id": "n_0003",
+      "node_name": "place",
+      "status": null,
+      "detail": {
+        "node_type": "subgraph"
+      }
+    },
+    {
+      "seq": 4,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.4164157,
+      "node_id": "n_0004",
+      "node_name": "verify",
+      "status": null,
+      "detail": {
+        "node_type": "subgraph"
+      }
+    },
+    {
+      "seq": 5,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.4164183,
+      "node_id": "n_0005",
+      "node_name": "done",
+      "status": null,
+      "detail": {
+        "node_type": "end"
+      }
+    },
+    {
+      "seq": 6,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.41642,
+      "node_id": "n_0006",
+      "node_name": "abort",
+      "status": null,
+      "detail": {
+        "node_type": "end"
+      }
+    },
+    {
+      "seq": 7,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.416426,
+      "node_id": "n_0000",
+      "node_name": "perceive",
+      "status": null,
+      "detail": {
+        "from_name": "perceive",
+        "to_name": "pick",
+        "to_id": "n_0001"
+      }
+    },
+    {
+      "seq": 8,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164279,
+      "node_id": "n_0000",
+      "node_name": "perceive",
+      "status": null,
+      "detail": {
+        "from_name": "perceive",
+        "to_name": "abort",
+        "to_id": "n_0006"
+      }
+    },
+    {
+      "seq": 9,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164293,
+      "node_id": "n_0001",
+      "node_name": "pick",
+      "status": null,
+      "detail": {
+        "from_name": "pick",
+        "to_name": "place",
+        "to_id": "n_0003"
+      }
+    },
+    {
+      "seq": 10,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164302,
+      "node_id": "n_0001",
+      "node_name": "pick",
+      "status": null,
+      "detail": {
+        "from_name": "pick",
+        "to_name": "pick_again",
+        "to_id": "n_0002"
+      }
+    },
+    {
+      "seq": 11,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164317,
+      "node_id": "n_0002",
+      "node_name": "pick_again",
+      "status": null,
+      "detail": {
+        "from_name": "pick_again",
+        "to_name": "place",
+        "to_id": "n_0003"
+      }
+    },
+    {
+      "seq": 12,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164329,
+      "node_id": "n_0002",
+      "node_name": "pick_again",
+      "status": null,
+      "detail": {
+        "from_name": "pick_again",
+        "to_name": "abort",
+        "to_id": "n_0006"
+      }
+    },
+    {
+      "seq": 13,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164343,
+      "node_id": "n_0003",
+      "node_name": "place",
+      "status": null,
+      "detail": {
+        "from_name": "place",
+        "to_name": "verify",
+        "to_id": "n_0004"
+      }
+    },
+    {
+      "seq": 14,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164352,
+      "node_id": "n_0003",
+      "node_name": "place",
+      "status": null,
+      "detail": {
+        "from_name": "place",
+        "to_name": "verify",
+        "to_id": "n_0004"
+      }
+    },
+    {
+      "seq": 15,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164362,
+      "node_id": "n_0004",
+      "node_name": "verify",
+      "status": null,
+      "detail": {
+        "from_name": "verify",
+        "to_name": "done",
+        "to_id": "n_0005"
+      }
+    },
+    {
+      "seq": 16,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164367,
+      "node_id": "n_0004",
+      "node_name": "verify",
+      "status": null,
+      "detail": {
+        "from_name": "verify",
+        "to_name": "abort",
+        "to_id": "n_0006"
+      }
+    },
+    {
+      "seq": 17,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.4164405,
+      "node_id": "n_0007",
+      "node_name": "perceive_sg.find",
+      "status": null,
+      "detail": {
+        "node_type": "script"
+      }
+    },
+    {
+      "seq": 18,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.416443,
+      "node_id": "n_0008",
+      "node_name": "perceive_sg.ok",
+      "status": null,
+      "detail": {
+        "node_type": "noop"
+      }
+    },
+    {
+      "seq": 19,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164453,
+      "node_id": "n_0007",
+      "node_name": "perceive_sg.find",
+      "status": null,
+      "detail": {
+        "from_name": "perceive_sg.find",
+        "to_name": "perceive_sg.ok",
+        "to_id": "n_0008"
+      }
+    },
+    {
+      "seq": 20,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.416448,
+      "node_id": "n_0009",
+      "node_name": "pick_sg.reset",
+      "status": null,
+      "detail": {
+        "node_type": "script"
+      }
+    },
+    {
+      "seq": 21,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.4164503,
+      "node_id": "n_0010",
+      "node_name": "pick_sg.approach",
+      "status": null,
+      "detail": {
+        "node_type": "script"
+      }
+    },
+    {
+      "seq": 22,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.4164522,
+      "node_id": "n_0011",
+      "node_name": "pick_sg.descend",
+      "status": null,
+      "detail": {
+        "node_type": "script"
+      }
+    },
+    {
+      "seq": 23,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.4164538,
+      "node_id": "n_0012",
+      "node_name": "pick_sg.close",
+      "status": null,
+      "detail": {
+        "node_type": "script"
+      }
+    },
+    {
+      "seq": 24,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.4164562,
+      "node_id": "n_0013",
+      "node_name": "pick_sg.lift",
+      "status": null,
+      "detail": {
+        "node_type": "script"
+      }
+    },
+    {
+      "seq": 25,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.4164581,
+      "node_id": "n_0014",
+      "node_name": "pick_sg.held",
+      "status": null,
+      "detail": {
+        "node_type": "noop"
+      }
+    },
+    {
+      "seq": 26,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164603,
+      "node_id": "n_0009",
+      "node_name": "pick_sg.reset",
+      "status": null,
+      "detail": {
+        "from_name": "pick_sg.reset",
+        "to_name": "pick_sg.approach",
+        "to_id": "n_0010"
+      }
+    },
+    {
+      "seq": 27,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164612,
+      "node_id": "n_0010",
+      "node_name": "pick_sg.approach",
+      "status": null,
+      "detail": {
+        "from_name": "pick_sg.approach",
+        "to_name": "pick_sg.descend",
+        "to_id": "n_0011"
+      }
+    },
+    {
+      "seq": 28,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164624,
+      "node_id": "n_0011",
+      "node_name": "pick_sg.descend",
+      "status": null,
+      "detail": {
+        "from_name": "pick_sg.descend",
+        "to_name": "pick_sg.close",
+        "to_id": "n_0012"
+      }
+    },
+    {
+      "seq": 29,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164636,
+      "node_id": "n_0012",
+      "node_name": "pick_sg.close",
+      "status": null,
+      "detail": {
+        "from_name": "pick_sg.close",
+        "to_name": "pick_sg.lift",
+        "to_id": "n_0013"
+      }
+    },
+    {
+      "seq": 30,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164646,
+      "node_id": "n_0013",
+      "node_name": "pick_sg.lift",
+      "status": null,
+      "detail": {
+        "from_name": "pick_sg.lift",
+        "to_name": "pick_sg.held",
+        "to_id": "n_0014"
+      }
+    },
+    {
+      "seq": 31,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.416467,
+      "node_id": "n_0015",
+      "node_name": "place_sg.carry",
+      "status": null,
+      "detail": {
+        "node_type": "script"
+      }
+    },
+    {
+      "seq": 32,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.4164686,
+      "node_id": "n_0016",
+      "node_name": "place_sg.lower",
+      "status": null,
+      "detail": {
+        "node_type": "script"
+      }
+    },
+    {
+      "seq": 33,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.4164703,
+      "node_id": "n_0017",
+      "node_name": "place_sg.release",
+      "status": null,
+      "detail": {
+        "node_type": "script"
+      }
+    },
+    {
+      "seq": 34,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.416472,
+      "node_id": "n_0018",
+      "node_name": "place_sg.placed",
+      "status": null,
+      "detail": {
+        "node_type": "noop"
+      }
+    },
+    {
+      "seq": 35,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164734,
+      "node_id": "n_0015",
+      "node_name": "place_sg.carry",
+      "status": null,
+      "detail": {
+        "from_name": "place_sg.carry",
+        "to_name": "place_sg.lower",
+        "to_id": "n_0016"
+      }
+    },
+    {
+      "seq": 36,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164743,
+      "node_id": "n_0016",
+      "node_name": "place_sg.lower",
+      "status": null,
+      "detail": {
+        "from_name": "place_sg.lower",
+        "to_name": "place_sg.release",
+        "to_id": "n_0017"
+      }
+    },
+    {
+      "seq": 37,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164753,
+      "node_id": "n_0017",
+      "node_name": "place_sg.release",
+      "status": null,
+      "detail": {
+        "from_name": "place_sg.release",
+        "to_name": "place_sg.placed",
+        "to_id": "n_0018"
+      }
+    },
+    {
+      "seq": 38,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.416478,
+      "node_id": "n_0019",
+      "node_name": "verify_sg.clear",
+      "status": null,
+      "detail": {
+        "node_type": "script"
+      }
+    },
+    {
+      "seq": 39,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.4164798,
+      "node_id": "n_0020",
+      "node_name": "verify_sg.check",
+      "status": null,
+      "detail": {
+        "node_type": "script"
+      }
+    },
+    {
+      "seq": 40,
+      "event_type": "node_registered",
+      "timestamp": 1792656222.4164815,
+      "node_id": "n_0021",
+      "node_name": "verify_sg.in_tray",
+      "status": null,
+      "detail": {
+        "node_type": "noop"
+      }
+    },
+    {
+      "seq": 41,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164834,
+      "node_id": "n_0019",
+      "node_name": "verify_sg.clear",
+      "status": null,
+      "detail": {
+        "from_name": "verify_sg.clear",
+        "to_name": "verify_sg.check",
+        "to_id": "n_0020"
+      }
+    },
+    {
+      "seq": 42,
+      "event_type": "edge_registered",
+      "timestamp": 1792656222.4164844,
+      "node_id": "n_0020",
+      "node_name": "verify_sg.check",
+      "status": null,
+      "detail": {
+        "from_name": "verify_sg.check",
+        "to_name": "verify_sg.in_tray",
+        "to_id": "n_0021"
+      }
+    },
+    {
+      "seq": 43,
+      "event_type": "node_started",
+      "timestamp": 1792656222.4173045,
+      "node_id": "n_0007",
+      "node_name": "perceive_sg.find",
+      "status": "running",
+      "detail": {}
+    },
+    {
+      "seq": 44,
+      "event_type": "inputs_recorded",
+      "timestamp": 1792656222.4175081,
+      "node_id": "n_0007",
+      "node_name": "perceive_sg.find",
+      "status": null,
+      "detail": {
+        "asset_count": 0,
+        "keys": []
+      }
+    },
+    {
+      "seq": 45,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656222.4179451,
+      "node_id": "n_0007",
+      "node_name": "perceive_sg.find",
+      "status": null,
+      "detail": {
+        "seq": 0,
+        "tool": "sim.list_objects"
+      }
+    },
+    {
+      "seq": 46,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656222.418362,
+      "node_id": "n_0007",
+      "node_name": "perceive_sg.find",
+      "status": null,
+      "detail": {
+        "seq": 1,
+        "tool": "sim.list_regions"
+      }
+    },
+    {
+      "seq": 47,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656222.4189796,
+      "node_id": "n_0007",
+      "node_name": "perceive_sg.find",
+      "status": null,
+      "detail": {
+        "seq": 2,
+        "tool": "sim.get_object_obb"
+      }
+    },
+    {
+      "seq": 48,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656222.4192038,
+      "node_id": "n_0007",
+      "node_name": "perceive_sg.find",
+      "status": null,
+      "detail": {
+        "seq": 3,
+        "tool": "sim.get_region_obb"
+      }
+    },
+    {
+      "seq": 49,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656222.4197881,
+      "node_id": "n_0007",
+      "node_name": "perceive_sg.find",
+      "status": null,
+      "detail": {
+        "seq": 4,
+        "tool": "robot.describe_workspace"
+      }
+    },
+    {
+      "seq": 50,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656222.4201164,
+      "node_id": "n_0007",
+      "node_name": "perceive_sg.find",
+      "status": null,
+      "detail": {
+        "seq": 5,
+        "tool": "robot.describe_gripper"
+      }
+    },
+    {
+      "seq": 51,
+      "event_type": "output_recorded",
+      "timestamp": 1792656222.4203072,
+      "node_id": "n_0007",
+      "node_name": "perceive_sg.find",
+      "status": null,
+      "detail": {
+        "asset_count": 0
+      }
+    },
+    {
+      "seq": 52,
+      "event_type": "node_finished",
+      "timestamp": 1792656222.4203148,
+      "node_id": "n_0007",
+      "node_name": "perceive_sg.find",
+      "status": "ok",
+      "detail": {
+        "success": true,
+        "duration_ms": 3.01
+      }
+    },
+    {
+      "seq": 53,
+      "event_type": "node_started",
+      "timestamp": 1792656222.4210064,
+      "node_id": "n_0009",
+      "node_name": "pick_sg.reset",
+      "status": "running",
+      "detail": {}
+    },
+    {
+      "seq": 54,
+      "event_type": "inputs_recorded",
+      "timestamp": 1792656222.4211655,
+      "node_id": "n_0009",
+      "node_name": "pick_sg.reset",
+      "status": null,
+      "detail": {
+        "asset_count": 0,
+        "keys": [
+          "cube"
+        ]
+      }
+    },
+    {
+      "seq": 55,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656222.4219177,
+      "node_id": "n_0009",
+      "node_name": "pick_sg.reset",
+      "status": null,
+      "detail": {
+        "seq": 0,
+        "tool": "sim.get_object_obb"
+      }
+    },
+    {
+      "seq": 56,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656222.422184,
+      "node_id": "n_0009",
+      "node_name": "pick_sg.reset",
+      "status": null,
+      "detail": {
+        "seq": 1,
+        "tool": "robot.describe_gripper"
+      }
+    },
+    {
+      "seq": 57,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656222.4330192,
+      "node_id": "n_0009",
+      "node_name": "pick_sg.reset",
+      "status": null,
+      "detail": {
+        "seq": 2,
+        "tool": "robot.get_gripper"
+      }
+    },
+    {
+      "seq": 58,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656223.0809503,
+      "node_id": "n_0009",
+      "node_name": "pick_sg.reset",
+      "status": null,
+      "detail": {
+        "seq": 3,
+        "tool": "robot.open_gripper"
+      }
+    },
+    {
+      "seq": 59,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656223.0891955,
+      "node_id": "n_0009",
+      "node_name": "pick_sg.reset",
+      "status": null,
+      "detail": {
+        "seq": 4,
+        "tool": "robot.get_ee_pose"
+      }
+    },
+    {
+      "seq": 60,
+      "event_type": "output_recorded",
+      "timestamp": 1792656223.0893974,
+      "node_id": "n_0009",
+      "node_name": "pick_sg.reset",
+      "status": null,
+      "detail": {
+        "asset_count": 0
+      }
+    },
+    {
+      "seq": 61,
+      "event_type": "node_finished",
+      "timestamp": 1792656223.0894067,
+      "node_id": "n_0009",
+      "node_name": "pick_sg.reset",
+      "status": "ok",
+      "detail": {
+        "success": true,
+        "duration_ms": 668.4
+      }
+    },
+    {
+      "seq": 62,
+      "event_type": "node_started",
+      "timestamp": 1792656223.0903,
+      "node_id": "n_0010",
+      "node_name": "pick_sg.approach",
+      "status": "running",
+      "detail": {}
+    },
+    {
+      "seq": 63,
+      "event_type": "inputs_recorded",
+      "timestamp": 1792656223.0904777,
+      "node_id": "n_0010",
+      "node_name": "pick_sg.approach",
+      "status": null,
+      "detail": {
+        "asset_count": 0,
+        "keys": [
+          "cube"
+        ]
+      }
+    },
+    {
+      "seq": 64,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656223.0913699,
+      "node_id": "n_0010",
+      "node_name": "pick_sg.approach",
+      "status": null,
+      "detail": {
+        "seq": 0,
+        "tool": "sim.get_object_obb"
+      }
+    },
+    {
+      "seq": 65,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656223.091561,
+      "node_id": "n_0010",
+      "node_name": "pick_sg.approach",
+      "status": null,
+      "detail": {
+        "seq": 1,
+        "tool": "robot.describe_workspace"
+      }
+    },
+    {
+      "seq": 66,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656223.0918312,
+      "node_id": "n_0010",
+      "node_name": "pick_sg.approach",
+      "status": null,
+      "detail": {
+        "seq": 2,
+        "tool": "robot.describe_gripper"
+      }
+    },
+    {
+      "seq": 67,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656223.0922647,
+      "node_id": "n_0010",
+      "node_name": "pick_sg.approach",
+      "status": null,
+      "detail": {
+        "seq": 3,
+        "tool": "robot.grasp_frame"
+      }
+    },
+    {
+      "seq": 68,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656224.3028731,
+      "node_id": "n_0010",
+      "node_name": "pick_sg.approach",
+      "status": null,
+      "detail": {
+        "seq": 4,
+        "tool": "motion.plan_joint"
+      }
+    },
+    {
+      "seq": 69,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656224.3132646,
+      "node_id": "n_0010",
+      "node_name": "pick_sg.approach",
+      "status": null,
+      "detail": {
+        "seq": 5,
+        "tool": "motion.plan_joint"
+      }
+    },
+    {
+      "seq": 70,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656224.313886,
+      "node_id": "n_0010",
+      "node_name": "pick_sg.approach",
+      "status": null,
+      "detail": {
+        "seq": 6,
+        "tool": "robot.grasp_frame"
+      }
+    },
+    {
+      "seq": 71,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656224.3228977,
+      "node_id": "n_0010",
+      "node_name": "pick_sg.approach",
+      "status": null,
+      "detail": {
+        "seq": 7,
+        "tool": "motion.plan_joint"
+      }
+    },
+    {
+      "seq": 72,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656224.3331258,
+      "node_id": "n_0010",
+      "node_name": "pick_sg.approach",
+      "status": null,
+      "detail": {
+        "seq": 8,
+        "tool": "motion.plan_joint"
+      }
+    },
+    {
+      "seq": 73,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656225.206341,
+      "node_id": "n_0010",
+      "node_name": "pick_sg.approach",
+      "status": null,
+      "detail": {
+        "seq": 9,
+        "tool": "robot.execute_trajectory"
+      }
+    },
+    {
+      "seq": 74,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656225.216323,
+      "node_id": "n_0010",
+      "node_name": "pick_sg.approach",
+      "status": null,
+      "detail": {
+        "seq": 10,
+        "tool": "robot.get_ee_pose"
+      }
+    },
+    {
+      "seq": 75,
+      "event_type": "output_recorded",
+      "timestamp": 1792656225.2165902,
+      "node_id": "n_0010",
+      "node_name": "pick_sg.approach",
+      "status": null,
+      "detail": {
+        "asset_count": 0
+      }
+    },
+    {
+      "seq": 76,
+      "event_type": "node_finished",
+      "timestamp": 1792656225.2165978,
+      "node_id": "n_0010",
+      "node_name": "pick_sg.approach",
+      "status": "ok",
+      "detail": {
+        "success": true,
+        "duration_ms": 2126.29
+      }
+    },
+    {
+      "seq": 77,
+      "event_type": "node_started",
+      "timestamp": 1792656225.2175133,
+      "node_id": "n_0011",
+      "node_name": "pick_sg.descend",
+      "status": "running",
+      "detail": {}
+    },
+    {
+      "seq": 78,
+      "event_type": "inputs_recorded",
+      "timestamp": 1792656225.2177055,
+      "node_id": "n_0011",
+      "node_name": "pick_sg.descend",
+      "status": null,
+      "detail": {
+        "asset_count": 0,
+        "keys": [
+          "cube",
+          "grasp"
+        ]
+      }
+    },
+    {
+      "seq": 79,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656225.2182567,
+      "node_id": "n_0011",
+      "node_name": "pick_sg.descend",
+      "status": null,
+      "detail": {
+        "seq": 0,
+        "tool": "sim.get_object_pose"
+      }
+    },
+    {
+      "seq": 80,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656225.2670584,
+      "node_id": "n_0011",
+      "node_name": "pick_sg.descend",
+      "status": null,
+      "detail": {
+        "seq": 1,
+        "tool": "motion.plan_linear"
+      }
+    },
+    {
+      "seq": 81,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656226.1913,
+      "node_id": "n_0011",
+      "node_name": "pick_sg.descend",
+      "status": null,
+      "detail": {
+        "seq": 2,
+        "tool": "robot.execute_trajectory"
+      }
+    },
+    {
+      "seq": 82,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656226.2019904,
+      "node_id": "n_0011",
+      "node_name": "pick_sg.descend",
+      "status": null,
+      "detail": {
+        "seq": 3,
+        "tool": "robot.get_ee_pose"
+      }
+    },
+    {
+      "seq": 83,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656226.2022617,
+      "node_id": "n_0011",
+      "node_name": "pick_sg.descend",
+      "status": null,
+      "detail": {
+        "seq": 4,
+        "tool": "sim.get_object_pose"
+      }
+    },
+    {
+      "seq": 84,
+      "event_type": "output_recorded",
+      "timestamp": 1792656226.202556,
+      "node_id": "n_0011",
+      "node_name": "pick_sg.descend",
+      "status": null,
+      "detail": {
+        "asset_count": 0
+      }
+    },
+    {
+      "seq": 85,
+      "event_type": "node_finished",
+      "timestamp": 1792656226.202564,
+      "node_id": "n_0011",
+      "node_name": "pick_sg.descend",
+      "status": "ok",
+      "detail": {
+        "success": true,
+        "duration_ms": 985.05
+      }
+    },
+    {
+      "seq": 86,
+      "event_type": "node_started",
+      "timestamp": 1792656226.2035363,
+      "node_id": "n_0012",
+      "node_name": "pick_sg.close",
+      "status": "running",
+      "detail": {}
+    },
+    {
+      "seq": 87,
+      "event_type": "inputs_recorded",
+      "timestamp": 1792656226.203704,
+      "node_id": "n_0012",
+      "node_name": "pick_sg.close",
+      "status": null,
+      "detail": {
+        "asset_count": 0,
+        "keys": [
+          "width"
+        ]
+      }
+    },
+    {
+      "seq": 88,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656227.6912813,
+      "node_id": "n_0012",
+      "node_name": "pick_sg.close",
+      "status": null,
+      "detail": {
+        "seq": 0,
+        "tool": "robot.close_gripper"
+      }
+    },
+    {
+      "seq": 89,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656227.69177,
+      "node_id": "n_0012",
+      "node_name": "pick_sg.close",
+      "status": null,
+      "detail": {
+        "seq": 1,
+        "tool": "robot.describe_gripper"
+      }
+    },
+    {
+      "seq": 90,
+      "event_type": "output_recorded",
+      "timestamp": 1792656227.6919482,
+      "node_id": "n_0012",
+      "node_name": "pick_sg.close",
+      "status": null,
+      "detail": {
+        "asset_count": 0
+      }
+    },
+    {
+      "seq": 91,
+      "event_type": "node_finished",
+      "timestamp": 1792656227.6919575,
+      "node_id": "n_0012",
+      "node_name": "pick_sg.close",
+      "status": "ok",
+      "detail": {
+        "success": true,
+        "duration_ms": 1488.42
+      }
+    },
+    {
+      "seq": 92,
+      "event_type": "node_started",
+      "timestamp": 1792656227.69296,
+      "node_id": "n_0013",
+      "node_name": "pick_sg.lift",
+      "status": "running",
+      "detail": {}
+    },
+    {
+      "seq": 93,
+      "event_type": "inputs_recorded",
+      "timestamp": 1792656227.6931386,
+      "node_id": "n_0013",
+      "node_name": "pick_sg.lift",
+      "status": null,
+      "detail": {
+        "asset_count": 0,
+        "keys": [
+          "cube",
+          "tray"
+        ]
+      }
+    },
+    {
+      "seq": 94,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656227.703775,
+      "node_id": "n_0013",
+      "node_name": "pick_sg.lift",
+      "status": null,
+      "detail": {
+        "seq": 0,
+        "tool": "robot.get_ee_pose"
+      }
+    },
+    {
+      "seq": 95,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656227.7039788,
+      "node_id": "n_0013",
+      "node_name": "pick_sg.lift",
+      "status": null,
+      "detail": {
+        "seq": 1,
+        "tool": "sim.get_object_pose"
+      }
+    },
+    {
+      "seq": 96,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656227.7045891,
+      "node_id": "n_0013",
+      "node_name": "pick_sg.lift",
+      "status": null,
+      "detail": {
+        "seq": 2,
+        "tool": "sim.get_object_obb"
+      }
+    },
+    {
+      "seq": 97,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656227.7047853,
+      "node_id": "n_0013",
+      "node_name": "pick_sg.lift",
+      "status": null,
+      "detail": {
+        "seq": 3,
+        "tool": "sim.get_region_obb"
+      }
+    },
+    {
+      "seq": 98,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656227.7591925,
+      "node_id": "n_0013",
+      "node_name": "pick_sg.lift",
+      "status": null,
+      "detail": {
+        "seq": 4,
+        "tool": "motion.plan_linear"
+      }
+    },
+    {
+      "seq": 99,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656228.893071,
+      "node_id": "n_0013",
+      "node_name": "pick_sg.lift",
+      "status": null,
+      "detail": {
+        "seq": 5,
+        "tool": "robot.execute_trajectory"
+      }
+    },
+    {
+      "seq": 100,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656228.9042907,
+      "node_id": "n_0013",
+      "node_name": "pick_sg.lift",
+      "status": null,
+      "detail": {
+        "seq": 6,
+        "tool": "robot.get_ee_pose"
+      }
+    },
+    {
+      "seq": 101,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656228.904516,
+      "node_id": "n_0013",
+      "node_name": "pick_sg.lift",
+      "status": null,
+      "detail": {
+        "seq": 7,
+        "tool": "sim.get_object_pose"
+      }
+    },
+    {
+      "seq": 102,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656228.919046,
+      "node_id": "n_0013",
+      "node_name": "pick_sg.lift",
+      "status": null,
+      "detail": {
+        "seq": 8,
+        "tool": "robot.get_gripper"
+      }
+    },
+    {
+      "seq": 103,
+      "event_type": "output_recorded",
+      "timestamp": 1792656228.9192884,
+      "node_id": "n_0013",
+      "node_name": "pick_sg.lift",
+      "status": null,
+      "detail": {
+        "asset_count": 0
+      }
+    },
+    {
+      "seq": 104,
+      "event_type": "node_finished",
+      "timestamp": 1792656228.919297,
+      "node_id": "n_0013",
+      "node_name": "pick_sg.lift",
+      "status": "ok",
+      "detail": {
+        "success": true,
+        "duration_ms": 1226.33
+      }
+    },
+    {
+      "seq": 105,
+      "event_type": "node_started",
+      "timestamp": 1792656228.9204838,
+      "node_id": "n_0015",
+      "node_name": "place_sg.carry",
+      "status": "running",
+      "detail": {}
+    },
+    {
+      "seq": 106,
+      "event_type": "inputs_recorded",
+      "timestamp": 1792656228.9206586,
+      "node_id": "n_0015",
+      "node_name": "place_sg.carry",
+      "status": null,
+      "detail": {
+        "asset_count": 0,
+        "keys": [
+          "cube",
+          "tray"
+        ]
+      }
+    },
+    {
+      "seq": 107,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656228.9211817,
+      "node_id": "n_0015",
+      "node_name": "place_sg.carry",
+      "status": null,
+      "detail": {
+        "seq": 0,
+        "tool": "sim.get_region_obb"
+      }
+    },
+    {
+      "seq": 108,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656228.9308233,
+      "node_id": "n_0015",
+      "node_name": "place_sg.carry",
+      "status": null,
+      "detail": {
+        "seq": 1,
+        "tool": "robot.get_ee_pose"
+      }
+    },
+    {
+      "seq": 109,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656228.9315023,
+      "node_id": "n_0015",
+      "node_name": "place_sg.carry",
+      "status": null,
+      "detail": {
+        "seq": 2,
+        "tool": "sim.get_object_obb"
+      }
+    },
+    {
+      "seq": 110,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656228.9459054,
+      "node_id": "n_0015",
+      "node_name": "place_sg.carry",
+      "status": null,
+      "detail": {
+        "seq": 3,
+        "tool": "robot.get_gripper"
+      }
+    },
+    {
+      "seq": 111,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656228.9577384,
+      "node_id": "n_0015",
+      "node_name": "place_sg.carry",
+      "status": null,
+      "detail": {
+        "seq": 4,
+        "tool": "robot.get_ee_pose"
+      }
+    },
+    {
+      "seq": 112,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656228.9582021,
+      "node_id": "n_0015",
+      "node_name": "place_sg.carry",
+      "status": null,
+      "detail": {
+        "seq": 5,
+        "tool": "sim.get_object_obb"
+      }
+    },
+    {
+      "seq": 113,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656229.0110703,
+      "node_id": "n_0015",
+      "node_name": "place_sg.carry",
+      "status": null,
+      "detail": {
+        "seq": 6,
+        "tool": "motion.plan_linear"
+      }
+    },
+    {
+      "seq": 114,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656231.0407064,
+      "node_id": "n_0015",
+      "node_name": "place_sg.carry",
+      "status": null,
+      "detail": {
+        "seq": 7,
+        "tool": "robot.execute_trajectory"
+      }
+    },
+    {
+      "seq": 115,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656231.0522566,
+      "node_id": "n_0015",
+      "node_name": "place_sg.carry",
+      "status": null,
+      "detail": {
+        "seq": 8,
+        "tool": "robot.get_ee_pose"
+      }
+    },
+    {
+      "seq": 116,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656231.0529196,
+      "node_id": "n_0015",
+      "node_name": "place_sg.carry",
+      "status": null,
+      "detail": {
+        "seq": 9,
+        "tool": "sim.get_object_obb"
+      }
+    },
+    {
+      "seq": 117,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656231.0676844,
+      "node_id": "n_0015",
+      "node_name": "place_sg.carry",
+      "status": null,
+      "detail": {
+        "seq": 10,
+        "tool": "robot.get_gripper"
+      }
+    },
+    {
+      "seq": 118,
+      "event_type": "output_recorded",
+      "timestamp": 1792656231.0679338,
+      "node_id": "n_0015",
+      "node_name": "place_sg.carry",
+      "status": null,
+      "detail": {
+        "asset_count": 0
+      }
+    },
+    {
+      "seq": 119,
+      "event_type": "node_finished",
+      "timestamp": 1792656231.0679417,
+      "node_id": "n_0015",
+      "node_name": "place_sg.carry",
+      "status": "ok",
+      "detail": {
+        "success": true,
+        "duration_ms": 2147.45
+      }
+    },
+    {
+      "seq": 120,
+      "event_type": "node_started",
+      "timestamp": 1792656231.069195,
+      "node_id": "n_0016",
+      "node_name": "place_sg.lower",
+      "status": "running",
+      "detail": {}
+    },
+    {
+      "seq": 121,
+      "event_type": "inputs_recorded",
+      "timestamp": 1792656231.06938,
+      "node_id": "n_0016",
+      "node_name": "place_sg.lower",
+      "status": null,
+      "detail": {
+        "asset_count": 0,
+        "keys": [
+          "cube",
+          "tray"
+        ]
+      }
+    },
+    {
+      "seq": 122,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656231.0702517,
+      "node_id": "n_0016",
+      "node_name": "place_sg.lower",
+      "status": null,
+      "detail": {
+        "seq": 0,
+        "tool": "sim.get_region_obb"
+      }
+    },
+    {
+      "seq": 123,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656231.0708013,
+      "node_id": "n_0016",
+      "node_name": "place_sg.lower",
+      "status": null,
+      "detail": {
+        "seq": 1,
+        "tool": "sim.get_object_obb"
+      }
+    },
+    {
+      "seq": 124,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656231.0799527,
+      "node_id": "n_0016",
+      "node_name": "place_sg.lower",
+      "status": null,
+      "detail": {
+        "seq": 2,
+        "tool": "robot.get_ee_pose"
+      }
+    },
+    {
+      "seq": 125,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656231.13295,
+      "node_id": "n_0016",
+      "node_name": "place_sg.lower",
+      "status": null,
+      "detail": {
+        "seq": 3,
+        "tool": "motion.plan_linear"
+      }
+    },
+    {
+      "seq": 126,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656232.2452536,
+      "node_id": "n_0016",
+      "node_name": "place_sg.lower",
+      "status": null,
+      "detail": {
+        "seq": 4,
+        "tool": "robot.execute_trajectory"
+      }
+    },
+    {
+      "seq": 127,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656232.2455585,
+      "node_id": "n_0016",
+      "node_name": "place_sg.lower",
+      "status": null,
+      "detail": {
+        "seq": 5,
+        "tool": "sim.get_object_pose"
+      }
+    },
+    {
+      "seq": 128,
+      "event_type": "output_recorded",
+      "timestamp": 1792656232.2457874,
+      "node_id": "n_0016",
+      "node_name": "place_sg.lower",
+      "status": null,
+      "detail": {
+        "asset_count": 0
+      }
+    },
+    {
+      "seq": 129,
+      "event_type": "node_finished",
+      "timestamp": 1792656232.2457955,
+      "node_id": "n_0016",
+      "node_name": "place_sg.lower",
+      "status": "ok",
+      "detail": {
+        "success": true,
+        "duration_ms": 1176.6
+      }
+    },
+    {
+      "seq": 130,
+      "event_type": "node_started",
+      "timestamp": 1792656232.2471201,
+      "node_id": "n_0017",
+      "node_name": "place_sg.release",
+      "status": "running",
+      "detail": {}
+    },
+    {
+      "seq": 131,
+      "event_type": "inputs_recorded",
+      "timestamp": 1792656232.2473137,
+      "node_id": "n_0017",
+      "node_name": "place_sg.release",
+      "status": null,
+      "detail": {
+        "asset_count": 0,
+        "keys": [
+          "cube"
+        ]
+      }
+    },
+    {
+      "seq": 132,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656233.174386,
+      "node_id": "n_0017",
+      "node_name": "place_sg.release",
+      "status": null,
+      "detail": {
+        "seq": 0,
+        "tool": "robot.open_gripper"
+      }
+    },
+    {
+      "seq": 133,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656233.1858296,
+      "node_id": "n_0017",
+      "node_name": "place_sg.release",
+      "status": null,
+      "detail": {
+        "seq": 1,
+        "tool": "robot.get_ee_pose"
+      }
+    },
+    {
+      "seq": 134,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656233.237659,
+      "node_id": "n_0017",
+      "node_name": "place_sg.release",
+      "status": null,
+      "detail": {
+        "seq": 2,
+        "tool": "motion.plan_linear"
+      }
+    },
+    {
+      "seq": 135,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656235.0662653,
+      "node_id": "n_0017",
+      "node_name": "place_sg.release",
+      "status": null,
+      "detail": {
+        "seq": 3,
+        "tool": "robot.execute_trajectory"
+      }
+    },
+    {
+      "seq": 136,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656235.0665696,
+      "node_id": "n_0017",
+      "node_name": "place_sg.release",
+      "status": null,
+      "detail": {
+        "seq": 4,
+        "tool": "sim.get_object_pose"
+      }
+    },
+    {
+      "seq": 137,
+      "event_type": "output_recorded",
+      "timestamp": 1792656235.0667605,
+      "node_id": "n_0017",
+      "node_name": "place_sg.release",
+      "status": null,
+      "detail": {
+        "asset_count": 0
+      }
+    },
+    {
+      "seq": 138,
+      "event_type": "node_finished",
+      "timestamp": 1792656235.0667675,
+      "node_id": "n_0017",
+      "node_name": "place_sg.release",
+      "status": "ok",
+      "detail": {
+        "success": true,
+        "duration_ms": 2819.64
+      }
+    },
+    {
+      "seq": 139,
+      "event_type": "node_started",
+      "timestamp": 1792656235.068197,
+      "node_id": "n_0019",
+      "node_name": "verify_sg.clear",
+      "status": "running",
+      "detail": {}
+    },
+    {
+      "seq": 140,
+      "event_type": "inputs_recorded",
+      "timestamp": 1792656235.068387,
+      "node_id": "n_0019",
+      "node_name": "verify_sg.clear",
+      "status": null,
+      "detail": {
+        "asset_count": 0,
+        "keys": [
+          "cube"
+        ]
+      }
+    },
+    {
+      "seq": 141,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656235.0797255,
+      "node_id": "n_0019",
+      "node_name": "verify_sg.clear",
+      "status": null,
+      "detail": {
+        "seq": 0,
+        "tool": "robot.get_gripper"
+      }
+    },
+    {
+      "seq": 142,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656235.0909798,
+      "node_id": "n_0019",
+      "node_name": "verify_sg.clear",
+      "status": null,
+      "detail": {
+        "seq": 1,
+        "tool": "robot.get_ee_pose"
+      }
+    },
+    {
+      "seq": 143,
+      "event_type": "subcall_recorded",
+      "timestamp": 1792656235.091647,
+      "node_id": "n_0019",
+      "node_name": "verify_sg.clear",
+      "status": null,
+      "detail": {
+        "seq": 2,
+        "tool": "sim.get_object_obb"
+      }
+    },
+    {
+      "seq": 144,
+      "event_type": "node_finished",
+      "timestamp": 1792656242.854736,
+      "node_id": "n_0019",
+      "node_name": "verify_sg.clear",
+      "status": "error",
+      "detail": {
+        "success": false,
+        "duration_ms": 7786.53
+      }
+    },
+    {
+      "seq": 145,
+      "event_type": "error_recorded",
+      "timestamp": 1792656242.8547487,
+      "node_id": "n_0019",
+      "node_name": "verify_sg.clear",
+      "status": "error",
+      "detail": {
+        "error": "Node 'verify_sg.clear' failed: BusClosed: the simulation bus closed: the episode ended"
+      }
+    }
+  ]
+}

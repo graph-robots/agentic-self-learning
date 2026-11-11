@@ -1,0 +1,3 @@
+# The paper's reference condition (the same as ../config.yaml): state + relations, parts, per workflow step.
+base: ../config.yaml
+name: cube_in_tray_reference

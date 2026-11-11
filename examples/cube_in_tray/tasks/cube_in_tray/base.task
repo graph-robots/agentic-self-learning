@@ -1,0 +1,83 @@
+; -*- mode: lisp -*-
+; ---------------------------------------------------------------------------
+; One arm takes a 40 mm red cube off the bench and sets it down in an open
+; tray beside it. The cube and the tray are this task's own primitives
+; (records.py, tray.py). Every episode draws where both stand, how the cube is
+; turned, and how heavy and slippery the two are (staging.py).
+; ---------------------------------------------------------------------------
+
+(define (problem PUT_THE_RED_CUBE_IN_THE_TRAY)
+
+  (:domain cube_in_tray)
+
+  (:language pick up the red cube and put it in the tray)
+
+  (:staging
+    (:scene bench_075)
+    ; One arm does the whole job, the right one, on whose side both objects
+    ; stand. The left one stays parked.
+    (:embodiment yam_i2rt (:work-arm right))
+    (:arms 1)
+    (:control-mode joint_position)
+    (:physics cube_in_tray_mujoco@v1)
+    (:cameras cube_in_tray_views@v1)
+    (:episodes (:count 64) (:seed 0) (:sampler staging:draw_base))
+    ; 20 s at 60 Hz.
+    (:max-steps 1200)
+  )
+
+  (:objects
+    cube - red_cube
+  )
+
+  (:fixtures
+    tray - tray
+  )
+
+  ; The inside of the tray, in the TRAY's own frame: origin at the centre of
+  ; its foot on the bench, +z up (tray.py). The inside is 160 x 120 mm; a cube
+  ; resting on the floor has its centre within 60 x 40 mm of the middle and
+  ; 28 mm up. A cube perched on a wall's top edge is outside the square.
+  (:regions
+    (tray_inside
+      (:target tray)
+      (:ranges ((-0.065 -0.045 0.065 0.045)))
+      (:z-range 0.018 0.045))
+  )
+
+  (:init
+    (<= (speed cube) 0.02)
+    (not (>= (containment cube tray_inside) 1.0))
+  )
+
+  ; The cube inside the tray, resting on it, and let go of, held for one
+  ; simulated second.
+  (:goal
+    (once
+      (hold-for 1.0
+        (and
+          (>= (containment cube tray_inside) 1.0)
+          (on cube tray)
+          (> (hands-clear cube) 0.10)
+        )
+      )
+    )
+  )
+
+  (:reward (progress (containment cube tray_inside) (:gate 1.0)))
+
+  (:observe
+    (height cube)
+    (speed cube)
+    (tcp-distance cube)
+    (hands-clear cube)
+    (containment cube tray_inside)
+    (on cube tray)
+  )
+
+  (:provenance
+    (:tier original)
+    (:source "Authored for the agentic-self-learning example. No upstream
+              benchmark; the cube and the tray are this task's own primitives.")
+  )
+)

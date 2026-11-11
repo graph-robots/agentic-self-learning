@@ -1,0 +1,132 @@
+/* Finding 6 · Curriculum (DESIGN_SPEC §3.9). The two roads keep one colour pair everywhere: with the curriculum is a
+   --cause dot, camera only a --ctx dot with an ink ring; the privileged phase is the --cause-wash segment. */
+[data-section="f6"] svg { display: block; width: 100%; overflow: visible; }
+[data-section="f6"] svg text { font-family: var(--sans); }
+
+/* ---- shared marks: the two dots, the switch, glyphs */
+[data-section="f6"] .dot.curr { fill: var(--cause); stroke: var(--card); stroke-width: 1.5; }
+[data-section="f6"] .dot.perc { fill: var(--ctx); stroke: var(--ink); stroke-width: 1.5; }
+[data-section="f6"] .switch { stroke: var(--ink); stroke-width: 1.3; stroke-dasharray: 2 3; stroke-linecap: round; }
+[data-section="f6"] .switch-label { font: 700 11px var(--sans); fill: var(--ink); paint-order: stroke; stroke: var(--card); stroke-width: 4px; stroke-linejoin: round; }
+[data-section="f6"] use.ico { color: var(--ink); }
+[data-section="f6"] use.ico.priv { color: var(--cause); }
+
+/* ---- the fork */
+[data-section="f6"] .fork .start-label { font: 500 12px var(--sans); fill: var(--muted); }
+[data-section="f6"] .fork .start { fill: var(--ink); }
+[data-section="f6"] .fork .branch { fill: none; stroke: var(--muted); stroke-width: 1.4; }
+[data-section="f6"] .fork .seg rect { stroke-width: 1.2; }
+[data-section="f6"] .fork .seg.priv rect { fill: var(--cause-wash); stroke: var(--cause); }
+[data-section="f6"] .fork .seg.cam.curr rect { fill: var(--card); stroke: var(--cause); }
+[data-section="f6"] .fork .seg.cam.perc rect { fill: var(--card); stroke: var(--muted); }
+[data-section="f6"] .fork .seg.priv use.ico { color: var(--cause); }
+[data-section="f6"] .fork .seg-label { font: 600 12.5px var(--sans); fill: var(--ink); }
+[data-section="f6"] .fork .seg-sub { font: 500 11.5px var(--sans); fill: var(--muted); }
+[data-section="f6"] .fork .end-label { font: 700 12.5px var(--sans); fill: var(--ink); }
+[data-section="f6"] .fork .axis-note { font: 500 11px var(--sans); fill: var(--faint); }
+@media (max-width: 600px) { [data-section="f6"] .fork .seg-label { font-size: 12px; } }
+
+/* ---- the dumbbells */
+[data-section="f6"] .bells { position: relative; min-width: 0; }
+[data-section="f6"] .dumbbells .grid line { stroke: var(--grid); stroke-width: 1; }
+[data-section="f6"] .dumbbells .grid line.mid { stroke: var(--line); }
+[data-section="f6"] .dumbbells .tick { font: 500 10.5px var(--mono); fill: var(--faint); }
+[data-section="f6"] .dumbbells .axis-title { font: 600 11px var(--sans); fill: var(--muted); }
+[data-section="f6"] .dumbbells .ghead { font: 700 10.5px var(--sans); letter-spacing: 0.08em; fill: var(--muted); }
+[data-section="f6"] .dumbbells .rule { stroke: var(--ink); stroke-width: 1; }
+[data-section="f6"] .dumbbells .row { cursor: pointer; }
+/* a clicked row takes focus; only keyboard focus gets a ring (base strokes the row's first child in --cause) */
+[data-section="f6"] .dumbbells .row:focus { outline: none; }
+[data-section="f6"] .dumbbells .row-bg { fill: transparent; transition: fill var(--t-fog); }
+[data-section="f6"] .dumbbells .row:hover .row-bg { fill: var(--soft); }
+[data-section="f6"] .dumbbells .row[aria-checked="true"] .row-bg { fill: var(--cause-wash); }
+[data-section="f6"] .dumbbells .accent { fill: var(--cause); opacity: 0; }
+[data-section="f6"] .dumbbells .row[aria-checked="true"] .accent { opacity: 1; }
+[data-section="f6"] .dumbbells .name { font: 700 13.5px var(--sans); fill: var(--ink); }
+[data-section="f6"] .dumbbells .total .name { font-weight: 800; }
+[data-section="f6"] .dumbbells .bench { font: 500 9.5px var(--mono); letter-spacing: 0.06em; fill: var(--muted); }
+[data-section="f6"] .dumbbells .bar { stroke: var(--ctx); stroke-width: 4; stroke-linecap: round; }
+[data-section="f6"] .dumbbells .row[aria-checked="true"] .bar { stroke: var(--muted); }
+[data-section="f6"] .dumbbells .val { font: 600 16px var(--num); font-variant-numeric: tabular-nums; }
+[data-section="f6"] .dumbbells .val.curr { fill: var(--cause); }
+[data-section="f6"] .dumbbells .val.perc { fill: var(--ink); }
+[data-section="f6"] .dumbbells .dlabel { font: 600 10.5px var(--sans); }
+[data-section="f6"] .dumbbells .dlabel.curr { fill: var(--cause); }
+[data-section="f6"] .dumbbells .dlabel.perc { fill: var(--muted); }
+@media (max-width: 600px) { [data-section="f6"] .dumbbells .name { font-size: 12.5px; } }
+
+/* ---- program size: the inspector beside the dumbbells */
+[data-section="f6"] .sizes { gap: 14px; align-content: start; }
+[data-section="f6"] .sizes-head { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 14px; align-items: start; }
+[data-section="f6"] .thumb-slot { width: 160px; height: 120px; border-radius: 8px; overflow: hidden; background: var(--card); border: 1px solid var(--line); }
+[data-section="f6"] .thumb { display: block; width: 100%; height: 100%; object-fit: cover; }
+[data-section="f6"] .thumb[hidden] { display: none; }
+/* Overall's slot: the seven task scenes, four over three */
+[data-section="f6"] .thumb-all { height: 100%; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 2px; background: var(--line); }
+[data-section="f6"] .thumb-all[hidden] { display: none; }
+[data-section="f6"] .thumb-all img { display: block; width: 100%; height: 100%; object-fit: cover; grid-column: span 4; min-width: 0; }
+[data-section="f6"] .thumb-all img:nth-child(-n+4) { grid-column: span 3; }
+[data-section="f6"] .sizes-id { display: grid; gap: 4px; min-width: 0; }
+[data-section="f6"] .sizes-task { font: 800 19px/1.2 var(--sans); letter-spacing: -0.01em; display: grid; gap: 2px; }
+[data-section="f6"] .sizes-task .bench { font: 500 10.5px/1.3 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+[data-section="f6"] .sizes-succ { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; margin-top: 6px; }
+[data-section="f6"] .succ-item { display: inline-flex; align-items: baseline; gap: 5px; font: 600 var(--fs-num-m)/1 var(--num); font-variant-numeric: tabular-nums; }
+[data-section="f6"] .succ-item.curr { color: var(--cause); }
+[data-section="f6"] .succ-item .pct { font-size: 0.5em; margin-left: -3px; }
+[data-section="f6"] .succ-item .key { width: 10px; height: 10px; border-radius: 50%; display: inline-block; align-self: center; flex: none; }
+[data-section="f6"] .succ-item .key.curr { background: var(--cause); }
+[data-section="f6"] .succ-item .key.perc { background: var(--ctx); box-shadow: inset 0 0 0 1.5px var(--ink); }
+[data-section="f6"] .succ-label { font: 700 11px/1.2 var(--sans); letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+[data-section="f6"] .chips .cr-label { font: 600 12px var(--sans); fill: var(--ink); }
+[data-section="f6"] .chips .cr-num { font: 600 18px var(--num); font-variant-numeric: tabular-nums; fill: var(--ink); }
+[data-section="f6"] .chips .curr .cr-num { fill: var(--cause); }
+[data-section="f6"] .chips .cr-note { font: 600 11px var(--sans); fill: var(--cause); }
+[data-section="f6"] .chips .sq.curr { fill: var(--cause); }
+[data-section="f6"] .chips .sq.perc { fill: var(--ctx); stroke: var(--ink); stroke-width: 1; }
+[data-section="f6"] .chips .sq.inc { fill: var(--card); stroke: var(--cause); stroke-width: 1.5; }
+[data-section="f6"] .chips .sq-slot { fill: none; stroke: var(--faint); stroke-width: 1; stroke-dasharray: 2 2; }
+[data-section="f6"] .sizes .readout { border-top: 1px dashed var(--line); padding-top: 10px; }
+[data-section="f6"] .sizes-take { font: 700 15px/1.35 var(--sans); color: var(--ink); margin: 2px 0 0; text-wrap: balance; }
+[data-section="f6"] .sizes-take[hidden] { display: none; }
+/* the rows' answer, repeated under them where the panel stacks a screen below (not announced; the panel's readout is) */
+[data-section="f6"] .bells-echo { display: none; }
+@media (max-width: 860px) {
+  [data-section="f6"] .bells-echo { display: block; margin: 8px 0 0; padding: 8px 12px; border-left: 3px solid var(--cause); background: var(--cause-wash); border-radius: 0 6px 6px 0; font: 500 var(--fs-small)/1.45 var(--sans); color: var(--ink); }
+}
+@media (max-width: 600px) {
+  [data-section="f6"] .sizes-head { grid-template-columns: 120px minmax(0, 1fr); gap: 12px; }
+  [data-section="f6"] .thumb-slot { width: 120px; height: 90px; }
+  [data-section="f6"] .sizes-task { font-size: 17px; }
+}
+
+/* ---- the lock-in cards */
+[data-section="f6"] .locks-wrap { display: grid; gap: 12px; }
+[data-section="f6"] .locks { align-items: stretch; }
+[data-section="f6"] .nw { white-space: nowrap; }
+[data-section="f6"] .lock { border: 1px solid var(--line); border-radius: var(--r-card); padding: 18px 20px; gap: 12px; align-content: start; }
+[data-section="f6"] .lock-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; }
+[data-section="f6"] .lock-title { font: 800 18px/1.25 var(--sans); letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+[data-section="f6"] .lock-text { font-size: 14.5px; line-height: 1.55; }
+[data-section="f6"] .lock-then { font-size: 14px; line-height: 1.5; color: var(--muted); }
+[data-section="f6"] .lock .lens { justify-self: start; }
+[data-section="f6"] .lock .readout { min-height: 2.9em; }
+[data-section="f6"] .tab .pot { fill: var(--card); stroke: var(--muted); stroke-width: 1.2; }
+[data-section="f6"] .tab .pot-in { fill: var(--stage); stroke: var(--line); stroke-width: 1; }
+[data-section="f6"] .tab .tabpart { fill: var(--ctx); stroke: var(--ink); stroke-width: 1.2; }
+[data-section="f6"] .tab .hand { fill: none; stroke: var(--ink); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+[data-section="f6"] .tab .dimension path { fill: none; stroke: var(--cause); stroke-width: 1.3; }
+[data-section="f6"] .tab .dimension text { font: 700 11.5px var(--sans); fill: var(--cause); paint-order: stroke; stroke: var(--stage-inset); stroke-width: 4px; stroke-linejoin: round; }
+[data-section="f6"] .tab .caption { font: 600 12px var(--sans); fill: var(--ink); }
+[data-section="f6"] .lock .switch-label { stroke: var(--stage-inset); }
+[data-section="f6"] .lock .geo-label, [data-section="f6"] .lock .arc-label { stroke: var(--stage-inset); }
+[data-section="f6"] .pixels .plate-side { fill: var(--ctx); stroke: var(--muted); stroke-width: 1; }
+[data-section="f6"] .pixels .peg { fill: var(--cause); }
+[data-section="f6"] .pixels .ray { stroke: var(--cause); stroke-width: 1.3; stroke-dasharray: 3 3; }
+[data-section="f6"] .pixels .cam { transition: opacity var(--t-fog); }
+[data-section="f6"] .pixels[data-view="front"] .cam[data-cam="overhead"],
+[data-section="f6"] .pixels[data-view="overhead"] .cam[data-cam="front"] { opacity: 0; }
+[data-section="f6"] .pixels .px { fill: var(--card); stroke: var(--line); stroke-width: 1; transition: fill var(--t-fog), stroke var(--t-fog); }
+[data-section="f6"] .pixels .px.plate { fill: var(--ctx); stroke: var(--ctx); }
+[data-section="f6"] .pixels .px.lit { fill: var(--cause); stroke: var(--cause); }
+[data-section="f6"] .pixels .px-key { font: 500 11.5px var(--sans); fill: var(--muted); }
+@media (max-width: 600px) { [data-section="f6"] .lock { padding: 14px; } }

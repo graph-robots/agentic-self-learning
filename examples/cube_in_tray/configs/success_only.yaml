@@ -1,0 +1,5 @@
+# Outcome only: success, steps, how each episode ended, the error the policy's graph raised.
+base: ../config.yaml
+name: cube_in_tray_success_only
+feedback:
+  form: []

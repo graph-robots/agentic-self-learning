@@ -1,0 +1,116 @@
+/* Finding 1 (Model): the slopegraph with its repair rows, and the USB-C pair. */
+[data-section="f1"] {
+  /* the four edit classes (Figure 4), shared by the squares, their key and the tooltip */
+  --edit-fixed: var(--ok); --edit-cleared: var(--ok); --edit-same: var(--ctx); --edit-moved: var(--seen);
+  /* the tooltip's swatches are backgrounds: a hollow class is its colour with a --card centre */
+  --sw-fixed: var(--edit-fixed); --sw-same: var(--edit-same);
+  --sw-cleared: linear-gradient(var(--card), var(--card)) center / 7px 7px no-repeat var(--edit-cleared);
+  --sw-moved: linear-gradient(var(--card), var(--card)) center / 7px 7px no-repeat var(--edit-moved);
+}
+
+/* the stepper's buttons name their round in words too */
+[data-section="f1"] #f1-round .k-sub { font-weight: 500; font-size: 12.5px; margin-left: 2px; }
+
+/* ---- the slopegraph */
+[data-section="f1"] .slope-wrap { position: relative; min-width: 0; }
+[data-section="f1"] svg.slope { display: block; width: 100%; overflow: visible; }
+[data-section="f1"] .slope .grid { stroke: var(--grid); stroke-width: 1; }
+[data-section="f1"] .slope .colline { stroke: var(--line); stroke-width: 1; }
+[data-section="f1"] .slope .axis-label { font: 500 11px var(--sans); fill: var(--faint); }
+[data-section="f1"] .slope .col-k { font: 800 14px var(--sans); fill: var(--ink); }
+[data-section="f1"] .slope .col-sub { font: 500 11.5px var(--sans); fill: var(--muted); }
+[data-section="f1"] .slope .col { transition: opacity var(--t-step) var(--ease); }
+[data-section="f1"] .slope .col.later { opacity: 0.35; }
+[data-section="f1"] .human { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 5 4; fill: none; }
+[data-section="f1"] .slope .human-tag { font: 700 11.5px var(--sans); fill: var(--ink); paint-order: stroke; stroke: var(--card); stroke-width: 4px; stroke-linejoin: round; }
+[data-section="f1"] .slope .bracket { fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+[data-section="f1"] .slope .bracket-label { font: 600 19px var(--num); fill: var(--ink); font-variant-numeric: tabular-nums; }
+
+[data-section="f1"] .slope .model { cursor: default; }
+[data-section="f1"] .slope .hit { fill: none; stroke: transparent; stroke-width: 14; stroke-linecap: round; stroke-linejoin: round; }
+[data-section="f1"] .slope .model[data-group="repairs"] { color: var(--cause); --w: 2.5px; }
+[data-section="f1"] .slope .model[data-group="flat"] { color: var(--ink); --w: 2px; }
+[data-section="f1"] .slope .model[data-group="context"] { color: var(--ctx); --w: 1.5px; }
+[data-section="f1"] .slope .model .slope { fill: none; stroke: currentColor; stroke-width: var(--w); stroke-linecap: round; stroke-linejoin: round; transition: stroke-width 120ms; }
+[data-section="f1"] .slope .model.hot .slope { stroke-width: calc(var(--w) + 1.5px); }
+[data-section="f1"] .slope .pt { fill: currentColor; stroke: var(--card); stroke-width: 2; transition: opacity 120ms; }
+[data-section="f1"] .slope .pt.off { opacity: 0; }
+
+[data-section="f1"] .slope .label text { font: 700 12.5px var(--sans); paint-order: stroke; stroke: var(--card); stroke-width: 4px; stroke-linejoin: round; }
+[data-section="f1"] .slope .label .v { font: 600 17px var(--num); font-variant-numeric: tabular-nums; fill: var(--ink); }
+[data-section="f1"] .slope .label .n { fill: var(--ink); }
+[data-section="f1"] .slope .label[data-group="context"] .v, [data-section="f1"] .slope .label[data-group="context"] .n { fill: var(--muted); }
+[data-section="f1"] svg.slope.phone .label text { font-size: 11.5px; }
+[data-section="f1"] svg.slope.phone .label .v { font-size: 15px; }
+[data-section="f1"] .slope .leader { stroke: var(--line); stroke-width: 1; }
+[data-section="f1"] .slope .leader.dots { stroke: var(--faint); stroke-dasharray: 1 3; stroke-linecap: round; opacity: 0.8; }
+
+/* repair rows: before @2 each row's squares wait under a fog bar; from @2 the squares and their leaders show */
+[data-section="f1"] .slope .repairs .row .sq, [data-section="f1"] .slope .repairs .row .leader.dots {
+  opacity: 0; visibility: hidden; transition: opacity var(--t-step) var(--ease), visibility 0s linear var(--t-step);
+}
+[data-section="f1"] .slope .repairs.shown .row .sq, [data-section="f1"] .slope .repairs.shown .row .leader.dots {
+  opacity: 1; visibility: visible; transition: opacity var(--t-step) var(--ease), visibility 0s;
+}
+[data-section="f1"] .slope .repairs .fogbar { fill: url(#fog); stroke: var(--fog-ink); stroke-width: 1; transition: opacity var(--t-step) var(--ease); }
+[data-section="f1"] .slope .repairs.shown .fogbar { opacity: 0; }
+[data-section="f1"] .slope .rows-head { font: 700 12px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; fill: var(--cause); }
+[data-section="f1"] .slope .key-lead { font: 500 12px var(--sans); fill: var(--ink); }
+[data-section="f1"] .slope .key-item { font: 500 12px var(--sans); fill: var(--muted); }
+[data-section="f1"] .slope .rows-note { font: italic 500 13px var(--sans); fill: var(--muted); opacity: 0; transition: opacity var(--t-step); }
+[data-section="f1"] .slope .rows-note.shown { opacity: 1; }
+[data-section="f1"] .slope .row-name { font: 700 12px var(--sans); fill: var(--ink); }
+[data-section="f1"] .slope .row[data-group="context"] .row-name { fill: var(--muted); }
+[data-section="f1"] .slope .row-none { font: italic 500 11.5px var(--sans); fill: var(--faint); }
+[data-section="f1"] .slope .row-hit { fill: transparent; }
+[data-section="f1"] .edit.fixed { fill: var(--edit-fixed); }
+[data-section="f1"] .edit.cleared { fill: var(--card); stroke: var(--edit-cleared); stroke-width: 1.5; }
+[data-section="f1"] .edit.same { fill: var(--edit-same); }
+[data-section="f1"] .edit.moved { fill: var(--card); stroke: var(--edit-moved); stroke-width: 1.5; }
+[data-section="f1"] .key { stroke-linecap: round; }
+[data-section="f1"] .key[data-group="repairs"] { stroke: var(--cause); stroke-width: 2.5; }
+[data-section="f1"] .key[data-group="flat"] { stroke: var(--ink); stroke-width: 2; }
+[data-section="f1"] .key[data-group="context"] { stroke: var(--ctx); stroke-width: 2; }
+
+/* the context models' rows recede; hover or focus on a line, its label or its row: that model stays, the rest step
+   back */
+[data-section="f1"] svg.slope .repairs .row[data-group="context"] { opacity: 0.5; }
+[data-section="f1"] .slope .model, [data-section="f1"] .slope .label, [data-section="f1"] .slope .repairs .row { transition: opacity 120ms; }
+[data-section="f1"] svg.slope[data-hot] .model:not(.hot), [data-section="f1"] svg.slope[data-hot] .label:not(.hot),
+[data-section="f1"] svg.slope[data-hot] .repairs .row:not(.hot) { opacity: 0.22; }
+[data-section="f1"] svg.slope .repairs .row.hot { opacity: 1; }
+[data-section="f1"] svg.slope [tabindex]:focus-visible .slope { stroke-width: calc(var(--w) + 1.5px); }
+
+/* the line key under the chart; the tooltip's class swatches are squares like the rows' */
+[data-section="f1"] #f1-legend { display: grid; gap: 6px; }
+[data-section="f1"] .legend-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; font-size: 13px; line-height: 1.4; color: var(--muted); }
+[data-section="f1"] .legend-row .legend-item { display: inline-flex; align-items: center; gap: 6px; }
+[data-section="f1"] .legend-row svg.sw { flex: none; overflow: visible; }
+[data-section="f1"] .tip .row i { height: 10px; border-radius: 1.5px; }
+
+/* ---- the USB-C pair */
+[data-section="f1"] figure.usbc { margin: 0; display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); padding: 14px; border: 1px solid var(--line); border-radius: var(--r-card); background: var(--card); }
+[data-section="f1"] figure.usbc > * { min-width: 0; }
+[data-section="f1"] .pair-col { display: grid; gap: 6px; align-content: start; min-width: 0; }
+[data-section="f1"] .clip-out { font: 600 13px/1.35 var(--sans); color: var(--ink); gap: 6px; }
+[data-section="f1"] .clip-out .legend-item { align-items: flex-start; }
+[data-section="f1"] .clip-out svg.glyph { margin-top: 1px; }
+[data-section="f1"] .usbc-ribs { display: grid; gap: 4px; grid-template-columns: minmax(0, 1fr); }
+[data-section="f1"] .usbc-ribs > * { min-width: 0; }
+[data-section="f1"] .rib-name { font: 700 12px/1.2 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+[data-section="f1"] .usbc-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; border-top: 1px dashed var(--line); padding-top: 12px; }
+[data-section="f1"] .usbc-foot .run-tag { margin-left: auto; }
+[data-section="f1"] .usbc-foot .readout { flex-basis: 100%; order: 3; }
+[data-section="f1"] .usbc-foot .btn svg { width: 12px; height: 12px; }
+/* a step too brief to hold a glyph is a solid sliver, not an empty box */
+[data-section="f1"] .usbc .ribbon .lane-steps .chip:not(:has(.chip-kind)) .chip-box { fill: var(--line); stroke: var(--muted); }
+[data-section="f1"] .usbc .time-tick { stroke: var(--line); }
+[data-section="f1"] .usbc .time-label { font: 500 11px var(--sans); fill: var(--muted); font-variant-numeric: tabular-nums; }
+[data-section="f1"] .usbc .time-label.time-end { font-weight: 700; fill: var(--ink); }
+[data-section="f1"] figure.usbc figcaption { margin: 0; }
+@media (max-width: 600px) {
+  [data-section="f1"] figure.usbc { padding: 10px; }
+}
+
+/* the drawer: the paper's figure at about its printed size, not blown up to the card's width */
+[data-section="f1"] .drawer-body .paperfig { max-width: 520px; }

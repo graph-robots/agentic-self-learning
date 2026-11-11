@@ -1,0 +1,111 @@
+/* Resources (DESIGN_SPEC §3.12): three cards, the "Built on" pills, the clip strip, the provenance switch, BibTeX. */
+
+/* ---- the three cards */
+[data-section="resources"] .res { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto auto 1fr auto; column-gap: 14px; }
+/* the cards share the grid's rows, so titles, texts and link lines align across the three */
+[data-section="resources"] .res-card {
+  display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 6px; min-width: 0; padding: 20px 22px 16px;
+  border: 1px solid var(--line); border-radius: var(--r-card); background: var(--card); color: var(--ink); text-decoration: none;
+  transition: border-color var(--t-fog) var(--ease);
+}
+[data-section="resources"] .res-card:hover { border-color: var(--ink); }
+[data-section="resources"] .res-mark {
+  justify-self: start; display: grid; place-items: center; width: 108px; height: 54px; margin-bottom: 10px;
+  border-radius: var(--r-panel); background: var(--stage-inset); border: 1px solid var(--line);
+}
+[data-section="resources"] .res-glyph { display: block; height: 30px; width: auto; overflow: visible; }
+[data-section="resources"] .res-glyph[data-glyph="code"] { height: 44px; }
+[data-section="resources"] .loop-circuit { fill: none; stroke: var(--ink); stroke-width: 1.6; }
+[data-section="resources"] .loop-head { fill: var(--ink); stroke: var(--ink); stroke-width: 1; stroke-linejoin: round; }
+[data-section="resources"] .loop-stop { fill: var(--card); stroke: var(--ink); stroke-width: 1.6; }
+[data-section="resources"] .nw { white-space: nowrap; }
+[data-section="resources"] .res-card b { font: 800 19px/1.2 var(--sans); letter-spacing: -0.01em; }
+[data-section="resources"] .res-text { font-size: var(--fs-small); line-height: 1.5; color: var(--muted); }
+[data-section="resources"] .res-dest {
+  display: flex; gap: 7px; align-items: baseline; margin-top: 10px; padding-top: 11px; border-top: 1px dashed var(--line);
+  font: 500 11.5px/1.45 var(--mono); color: var(--muted); overflow-wrap: anywhere;
+}
+[data-section="resources"] .res-dest .glyph { width: 12px; height: 12px; vertical-align: 0; transform: translateY(1.5px); color: var(--muted); }
+[data-section="resources"] .res-card:hover .res-dest, [data-section="resources"] .res-card:hover .res-dest .glyph { color: var(--ink); }
+
+/* ---- built on */
+[data-section="resources"] .built { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+[data-section="resources"] .built-k { font: 700 12.5px/1.2 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-right: 6px; }
+
+/* ---- the clip strip. A run's width is its clips' widths plus the gaps between them, so every thumbnail is the
+   same size whether its run has one clip or two; the wider gap between runs keeps the runs apart. */
+[data-section="resources"] .res-strip { display: grid; gap: 6px; padding-top: 30px; border-top: 1px solid var(--line); }
+[data-section="resources"] .res-strip h3 { font: 800 21px/1.3 var(--sans); letter-spacing: -0.015em; }
+[data-section="resources"] .res-strip .figcap { max-width: 72ch; }
+[data-section="resources"] .clipstrip {
+  --gg: 28px; --tg: 8px;
+  --t: calc((100% - (var(--groups, 1) - 1) * var(--gg) - (var(--tiles, 1) - var(--groups, 1)) * var(--tg)) / var(--tiles, 1) - 0.5px);
+  display: flex; flex-wrap: wrap; gap: 22px var(--gg); margin-top: 16px; min-width: 0;
+}
+[data-section="resources"] .res-run { flex: none; width: calc(var(--n) * var(--t) + (var(--n) - 1) * var(--tg)); display: grid; align-content: start; min-width: 0; }
+[data-section="resources"] .res-tiles { display: flex; gap: var(--tg); }
+[data-section="resources"] .res-tile {
+  position: relative; flex: 1 1 0; min-width: 0; margin: 0; aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden;
+  background: var(--stage); cursor: help;
+}
+[data-section="resources"] .res-tile.jump { cursor: pointer; }
+@media (hover: none) { [data-section="resources"] .res-tile.jump { cursor: help; } }
+[data-section="resources"] .res-tile img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* the ring is drawn over the poster, which covers the tile and, zoomed, overflows it */
+[data-section="resources"] .res-tile::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px var(--line); pointer-events: none; }
+[data-section="resources"] .res-tile .clip-tag { left: 6px; top: 6px; padding: 4px 6px; font-size: 10px; gap: 5px; }
+[data-section="resources"] .res-tile .clip-tag i { width: 7px; height: 7px; }
+[data-section="resources"] .res-tile:focus-visible { outline: 2px solid var(--cause); outline-offset: 2px; }
+[data-section="resources"] .res-bracket { display: block; height: 8px; margin: 8px 3px 0; border: 1.5px solid var(--ctx); border-top: 0; border-radius: 0 0 5px 5px; }
+/* every run's caption has the same lines (task, model, then the id's condition and its task/draw), so the strip's
+   captions end level whether a run has one clip or two */
+[data-section="resources"] .res-run-cap { display: grid; margin-top: 8px; font-size: 12.5px; line-height: 1.35; color: var(--muted); }
+[data-section="resources"] .res-run-cap b { font: 700 13.5px/1.35 var(--sans); color: var(--ink); }
+[data-section="resources"] a.res-run-id {
+  justify-self: start; display: grid; margin-top: 3px; font: 500 10.5px/1.45 var(--mono); color: var(--link); text-decoration: none;
+}
+[data-section="resources"] a.res-run-id:hover { text-decoration: underline; }
+[data-section="resources"] .tip.ep-last .row:last-child { font: 500 11px/1.45 var(--mono); color: var(--ink); overflow-wrap: anywhere; }
+
+/* ---- provenance switch */
+[data-section="resources"] .res-src { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; }
+[data-section="resources"] .res-src .toggle { color: var(--ink); }
+[data-section="resources"] .res-src .readout { color: var(--muted); font-size: var(--fs-small); }
+[data-section="resources"] .res-src-sample { white-space: nowrap; }
+[data-section="resources"] .res-src-sample b { color: var(--ink); font-weight: 700; margin-right: 10px; }
+[data-section="resources"] .res-src-sample a { color: var(--link); font-weight: 700; text-decoration: none; }
+[data-section="resources"] .res-src-sample a:hover { text-decoration: underline; }
+
+/* ---- citation */
+[data-section="resources"] .cite { border: 1px solid var(--line); border-radius: var(--r-panel); overflow: hidden; background: var(--card); min-width: 0; }
+[data-section="resources"] .cite-bar {
+  display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--soft); border-bottom: 1px solid var(--line);
+  font: 700 13px/1 var(--sans); color: var(--muted);
+}
+[data-section="resources"] .cite-bar button {
+  border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 8px; padding: 6px 12px; min-width: 72px;
+  font: 700 12px/1 var(--sans); cursor: pointer;
+}
+[data-section="resources"] .cite-bar button:hover { border-color: var(--ink); }
+[data-section="resources"] .cite pre {
+  margin: 0; padding: 14px 16px; font: 500 12.5px/1.6 var(--mono); color: var(--ink); background: var(--card);
+  white-space: pre-wrap; overflow-wrap: anywhere; text-indent: 12ch hanging each-line;
+}
+
+@media (max-width: 860px) {
+  [data-section="resources"] .res { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; gap: 10px; }
+  [data-section="resources"] .res-card { grid-row: auto; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: none; column-gap: 18px; row-gap: 4px; padding: 16px 18px; }
+  [data-section="resources"] .res-mark { grid-row: 1 / span 3; margin: 2px 0 0; }
+  [data-section="resources"] .res-dest { margin-top: 6px; padding-top: 8px; }
+  /* four clips a row; runs then sit as far apart as clips do, and the bracket alone groups them */
+  [data-section="resources"] .clipstrip { --gg: 12px; --tg: 12px; --t: calc((100% - 36px) / 4 - 0.5px); }
+}
+@media (max-width: 600px) {
+  [data-section="resources"] .res-card { grid-template-columns: minmax(0, 1fr); }
+  [data-section="resources"] .res-mark { grid-row: auto; margin-bottom: 8px; width: 96px; height: 48px; }
+  [data-section="resources"] .res-glyph { height: 28px; }
+  [data-section="resources"] .res-glyph[data-glyph="code"] { height: 40px; }
+  [data-section="resources"] .clipstrip { --t: calc((100% - 12px) / 2 - 0.5px); row-gap: 18px; }
+  [data-section="resources"] .res-strip h3 { font-size: 19px; }
+  [data-section="resources"] .cite pre { font-size: 11.5px; padding: 12px; }
+}

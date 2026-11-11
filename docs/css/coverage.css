@@ -1,0 +1,151 @@
+/* Part 3 · Coverage (DESIGN_SPEC §3.10): the paper's Figure 11 as a stepped sankey, a coverage meter, and an index
+   that ties each capability and lever back to the part of the page that studies it. */
+
+/* the lever ramp, keyed off data-route on flows, nodes, meter segments, lens keys and index swatches */
+[data-section="coverage"] [data-route="zero_shot"] { --lever: var(--ink); }
+[data-section="coverage"] [data-route="self_learning"] { --lever: var(--o1); }
+[data-section="coverage"] [data-route="sim_feedback"] { --lever: var(--o2); }
+[data-section="coverage"] [data-route="task_skills"] { --lever: var(--o3); }
+[data-section="coverage"] [data-route="newer_model"] { --lever: var(--lever-model); }
+[data-section="coverage"] [data-route="unsolved"] { --lever: var(--faint); }
+/* flow opacities: the paper's .32, a little higher on the dark card, where the light end of the ramp is the dark one.
+   A lever may set its own pair on its flows: zero-shot's colour is the ink, which at .32 reads as one more grey feed; on
+   the dark card the newer model's violet, on the widest route, would swamp the chart at the common value and the navy
+   --o1 would sink into the card. */
+[data-section="coverage"] { --flow-op: 0.32; --flow-new: 0.62; --feed-op: 0.6; }
+[data-section="coverage"] .flow[data-route="zero_shot"] { --flow-op: 0.6; --flow-new: 0.85; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-section="coverage"] { --flow-op: 0.42; --flow-new: 0.75; --feed-op: 0.7; }
+  :root:not([data-theme="light"]) [data-section="coverage"] .flow[data-route="zero_shot"] { --flow-op: 0.5; --flow-new: 0.75; }
+  :root:not([data-theme="light"]) [data-section="coverage"] .flow[data-route="self_learning"] { --flow-op: 0.55; --flow-new: 0.85; }
+  :root:not([data-theme="light"]) [data-section="coverage"] .flow[data-route="newer_model"] { --flow-op: 0.3; --flow-new: 0.55; }
+}
+:root[data-theme="dark"] [data-section="coverage"] { --flow-op: 0.42; --flow-new: 0.75; --feed-op: 0.7; }
+:root[data-theme="dark"] [data-section="coverage"] .flow[data-route="zero_shot"] { --flow-op: 0.5; --flow-new: 0.75; }
+:root[data-theme="dark"] [data-section="coverage"] .flow[data-route="self_learning"] { --flow-op: 0.55; --flow-new: 0.85; }
+:root[data-theme="dark"] [data-section="coverage"] .flow[data-route="newer_model"] { --flow-op: 0.3; --flow-new: 0.55; }
+
+/* ---- head: the prompt with the answer in numerals on its right, then the five levers and Replay */
+[data-section="coverage"] #coverage-stage .stage-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px 20px; align-items: end; }
+[data-section="coverage"] #coverage-stage .try { grid-column: 1; grid-row: 1; }
+[data-section="coverage"] #coverage-stage .cov-nums { grid-column: 2; grid-row: 1; gap: 8px 30px; }
+[data-section="coverage"] #coverage-stage .stage-head .controls { grid-column: 1 / -1; grid-row: 2; }
+[data-section="coverage"] .cov-num { display: grid; justify-items: start; }
+[data-section="coverage"] .cov-num .numlabel { max-width: 14ch; }
+[data-section="coverage"] .lens .key { width: 10px; height: 10px; border-radius: 3px; background: var(--lever); margin-right: 8px; vertical-align: -1px; }
+[data-section="coverage"] #coverage-replay svg { width: 14px; height: 14px; }
+
+/* ---- sankey. Badges keep proportional digits: their widths are measured on a canvas, which ignores tabular-nums. */
+[data-section="coverage"] .chart { position: relative; width: 100%; min-width: 0; }
+[data-section="coverage"] svg.sankey { display: block; width: 100%; overflow: visible; }
+[data-section="coverage"] .flow { fill: none; stroke-opacity: var(--flow-op); transition: stroke-opacity var(--t-fog) var(--ease), stroke var(--t-fog) var(--ease); }
+[data-section="coverage"] .flow.feed { stroke: var(--ctx); stroke-opacity: var(--feed-op); }
+[data-section="coverage"] .flow.route { stroke: var(--lever); }
+[data-section="coverage"] .flow[data-route="unsolved"] { stroke: var(--faint); }
+[data-section="coverage"] .flow.new { stroke-opacity: var(--flow-new); }
+[data-section="coverage"] .flow.dim { stroke: var(--ctx); stroke-opacity: 0.15; }
+[data-section="coverage"] .isolating .flow { stroke-opacity: 0.05; }
+[data-section="coverage"] .isolating .flow.iso { stroke-opacity: var(--flow-new); }
+[data-section="coverage"] .isolating .flow.iso.dim { stroke-opacity: 0.3; }
+[data-section="coverage"] .isolating .flow.feed.iso { stroke: var(--muted); stroke-opacity: 0.3; }
+[data-section="coverage"] .snode { fill: var(--ink); }
+[data-section="coverage"] .cap-node { fill: var(--muted); }
+[data-section="coverage"] .rnode { fill: var(--lever); transition: fill var(--t-fog), opacity var(--t-fog); }
+[data-section="coverage"] .route[data-route="unsolved"] .rnode { fill: url(#hatch-ctx); stroke: var(--muted); stroke-width: 1; }
+[data-section="coverage"] .route.later .rnode { fill: var(--ctx); opacity: 0.6; }
+[data-section="coverage"] .route.later text { fill: var(--faint); }
+[data-section="coverage"] .route text { transition: fill var(--t-fog); }
+/* a focused route: --cause would vanish on the --o2 bar, so the bar takes an ink ring and the name the --cause colour */
+[data-section="coverage"] svg .route:focus-visible > .rnode { stroke: var(--ink); stroke-width: 2px; }
+[data-section="coverage"] .route:focus-visible .route-name { fill: var(--cause); text-decoration: underline; }
+[data-section="coverage"] .col-head { font: 700 11px var(--sans); letter-spacing: 0.07em; text-transform: uppercase; fill: var(--muted); paint-order: stroke; stroke: var(--card); stroke-width: 4px; stroke-linejoin: round; }
+[data-section="coverage"] .start-num { font: 600 44px var(--num); fill: var(--ink); }
+[data-section="coverage"] .start-text { font: 500 12.5px var(--sans); fill: var(--muted); }
+[data-section="coverage"] .route-name { font: 700 13px var(--sans); fill: var(--ink); }
+[data-section="coverage"] .route-badge, [data-section="coverage"] .cap-badge, [data-section="coverage"] .seg-badge { font-family: var(--num); font-weight: 600; fill: var(--ink); }
+[data-section="coverage"] .route-badge { font-size: 17px; }
+[data-section="coverage"] .cap-badge { font-size: 16px; }
+[data-section="coverage"] .vertical .cap-badge, [data-section="coverage"] .vertical .route-badge { font-size: 15px; }
+[data-section="coverage"] .route-badge, [data-section="coverage"] .cap-badge { paint-order: stroke; stroke: var(--card); stroke-width: 3px; stroke-linejoin: round; }
+
+/* a capability is a chip, as on the episode ribbons; hovering, focusing or tapping it isolates its flows */
+[data-section="coverage"] .cap { cursor: pointer; }
+[data-section="coverage"] .cap .chip-box { fill: var(--card); stroke: var(--line); stroke-width: 1; transition: stroke var(--t-fog); }
+[data-section="coverage"] .cap .cap-glyph { color: var(--muted); }
+[data-section="coverage"] .cap .cap-name { font: 600 12.5px var(--sans); fill: var(--ink); }
+[data-section="coverage"] .vertical .cap .cap-name { font-size: 11.5px; }
+[data-section="coverage"] .cap:hover .chip-box, [data-section="coverage"] .cap.on .chip-box { stroke: var(--ink); stroke-width: 1.4; }
+[data-section="coverage"] .cap.on .cap-glyph, [data-section="coverage"] .cap:hover .cap-glyph { color: var(--ink); }
+[data-section="coverage"] .cap:focus-visible .chip-box { stroke: var(--cause); stroke-width: 2px; }
+[data-section="coverage"] .callout { pointer-events: none; }
+[data-section="coverage"] .callout rect { fill: var(--card); stroke: var(--ink); stroke-width: 1.2; }
+[data-section="coverage"] .callout text { font: 600 12.5px var(--sans); fill: var(--ink); }
+
+/* ---- the meter */
+[data-section="coverage"] .meter-wrap { min-width: 0; background: var(--card); }
+[data-section="coverage"] svg.meter { display: block; width: 100%; overflow: visible; }
+[data-section="coverage"] .meter-wrap .meter-cap { font-size: 11px; margin-bottom: 4px; }
+[data-section="coverage"] .meter-track { fill: var(--stage-inset); stroke: var(--line); stroke-dasharray: 3 3; }
+[data-section="coverage"] .seg-bar { fill: var(--lever); }
+[data-section="coverage"] .seg[data-route="unsolved"] .seg-bar { fill: url(#hatch-ctx); stroke: var(--muted); stroke-width: 1; }
+[data-section="coverage"] .seg-badge { font-size: 17px; }
+[data-section="coverage"] .seg-tick { fill: none; stroke: var(--muted); stroke-width: 1; }
+[data-section="coverage"] .seg .seg-badge, [data-section="coverage"] .seg .seg-tick { opacity: 0; transition: opacity var(--t-step) var(--ease); }
+[data-section="coverage"] .seg.on .seg-badge, [data-section="coverage"] .seg.on .seg-tick { opacity: 1; }
+
+/* ---- the index: each capability and lever, and where the page studies it */
+[data-section="coverage"] .cov-index { gap: 12px; }
+[data-section="coverage"] .cov-index .panel { gap: 6px; padding: 14px 16px 10px; }
+[data-section="coverage"] .cov-rows { list-style: none; margin: 0; padding: 0; display: grid; }
+[data-section="coverage"] .cov-rows li {
+  display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; align-items: center; gap: 10px; min-height: 34px; padding: 3px 6px;
+  margin: 0 -6px; border-radius: 8px; transition: background var(--t-fog);
+}
+[data-section="coverage"] .cov-rows li + li { border-top: 1px solid var(--line); border-radius: 0; }
+[data-section="coverage"] .cov-rows li.on { background: var(--cause-wash); }
+[data-section="coverage"] .cov-rows .glyph { width: 15px; height: 15px; color: var(--muted); }
+[data-section="coverage"] .cov-rows li.on .glyph { color: var(--ink); }
+[data-section="coverage"] .cov-rows .sw { width: 12px; height: 12px; border-radius: 3px; background: var(--lever); justify-self: center; }
+[data-section="coverage"] .cov-rows li[data-route="unsolved"] .sw { background: repeating-linear-gradient(135deg, var(--fog-ink) 0 1px, var(--fog-bg) 1px 4px); box-shadow: inset 0 0 0 1px var(--muted); }
+[data-section="coverage"] .cov-name { font: 600 14px/1.3 var(--sans); color: var(--ink); }
+[data-section="coverage"] .cov-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px; }
+[data-section="coverage"] .cov-links a {
+  display: inline-flex; align-items: center; gap: 4px; padding: 2px 9px; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--card); font: 700 12px/1.5 var(--sans); color: var(--ink); text-decoration: none; white-space: nowrap;
+}
+[data-section="coverage"] .cov-links a::after { content: "→"; color: var(--muted); font-weight: 600; }
+[data-section="coverage"] .cov-links a:hover { border-color: var(--ink); }
+
+/* the paper's own sentence, quoted, under the figure that sums the page up */
+[data-section="coverage"] blockquote.pull { margin: 8px 0 0; max-width: 54ch; }
+[data-section="coverage"] blockquote.pull p { margin: 0; }
+[data-section="coverage"] blockquote.pull cite { display: block; margin-top: 10px; font: 500 var(--fs-small)/1.4 var(--sans); font-style: normal; letter-spacing: 0; color: var(--muted); }
+
+/* ---- narrower than the five levers in a row: Replay joins the prompt's line, and the levers become equal tiles, five
+   across, then three (two rows) on a phone */
+@media (max-width: 860px) {
+  [data-section="coverage"] #coverage-stage .stage-head { gap: 12px 16px; align-items: center; }
+  [data-section="coverage"] #coverage-stage .stage-head .controls { display: contents; }
+  [data-section="coverage"] #coverage-stage .cov-nums { grid-column: 1 / -1; grid-row: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0 0 4px; }
+  [data-section="coverage"] #coverage-stage .try { grid-column: 1; grid-row: 2; }
+  [data-section="coverage"] #coverage-replay { grid-column: 2; grid-row: 2; }
+  [data-section="coverage"] #coverage-step { grid-column: 1 / -1; grid-row: 3; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  [data-section="coverage"] #coverage-step button { display: flex; align-items: center; gap: 7px; text-align: left; padding: 7px 8px; font-size: 12.5px; line-height: 1.25; }
+  [data-section="coverage"] #coverage-step .key { margin: 0; flex: none; }
+}
+
+/* ---- phone: the meter moves above the sankey; on a touch phone it stays at the top of the card (under the rail) while
+   the tall sankey scrolls past */
+@media (max-width: 600px) {
+  [data-section="coverage"] #coverage-stage > * { order: 2; }
+  [data-section="coverage"] #coverage-stage > .stage-head { order: 0; }
+  [data-section="coverage"] #coverage-stage > .meter-wrap { order: 1; margin: -6px -16px 0; padding: 8px 16px 10px; border-bottom: 1px solid var(--line); }
+  [data-section="coverage"] #coverage-step { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  [data-section="coverage"] .cov-name { font-size: 13.5px; }
+}
+@media (max-width: 600px) and (hover: none) {
+  [data-section="coverage"] #coverage-stage > .meter-wrap { position: sticky; top: 44px; z-index: 3; }
+}
+@media (max-width: 359px) {
+  [data-section="coverage"] #coverage-step { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

@@ -1,0 +1,5 @@
+{
+  "cube": "cube",
+  "tray": "tray_inside",
+  "summary": "objects=[('cube', 'red_cube', False)] regions=[('tray_inside', 'tray')] cube=cube obb={'center': {'x': 0.5900657773017883, 'y': -0.2003234624862671, 'z': 0.7695952653884888}, 'extent': {'x': 0.019999999552965164, 'y': 0.019999999552965164, 'z': 0.019999999552965164}, 'orientation': {'w': 0.9698840975761414, 'x': 4.96819425876982e-11, 'y': 1.6644813305433104e-10, 'z': 0.24356694519519806}} grasp_position={'x': 0.5900657773017883, 'y': -0.2003234624862671, 'z': 0.7695952653884888} heading=118.1943206282309 width=0.03999999910593033 fits=True top_z=0.7895952649509764 bottom_z=0.7495952658260011 tray=tray_inside obb={'center': {'x': 0.4932778819148955, 'y': -0.018843065513002962, 'z': 0.793}, 'extent': {'x': 0.065, 'y': 0.045, 'z': 0.025}, 'orientation': {'w': 1.0, 'x': 0.0, 'y': 0.0, 'z': 0.0}} workspace={'surface_z': 0.75, 'transport_z': 1.102692069159966, 'align_clearance_m': 0.05500000000000001, 'pregrasp_standoff_m': 0.1, 'margin_m': 0.02} gripper={'span_m': 0.09396, 'min_grasp_width_m': 0.0, 'max_grasp_width_m': 0.08596000000000001, 'kind': 'prismatic'}"
+}
